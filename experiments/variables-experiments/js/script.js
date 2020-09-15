@@ -7,11 +7,11 @@ Here is a description of this template p5 project.
 
 let backgroundShade = 0;
 let circle = {
-  x: 250,
+  x: 0,
   y: 250,
   size: 100,
   speed: 1,
-  fill: 0
+  fill: 255
 }
 
 // setup()
@@ -27,11 +27,12 @@ function setup() {
 function draw() {
   background(backgroundShade);
 
-  circle.speed = random(-5, 5);
   circle.x = circle.x + circle.speed; //kept it simple for myself.
-  circle.size = random(10, 100);
 
-  circle.fill = random(0,255);
+  circle.size = map(mouseY, height, 0, 50, 500);
+  circle.x = constrain(circle.x, 0, width);
+
+  circle.fill = map(circle.x, 0, width, 0, 255);
   fill(circle.fill);
   ellipse(circle.x, circle.y, circle.size);
 }
