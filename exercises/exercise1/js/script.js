@@ -99,7 +99,6 @@ function draw() {
   square1.r = map(square1.x, 0, width, 0, 255);
   square1.b = map(square1.x, 0, width, 255, 0);
   square1.g = map(square1.x, 0, width, 255, 0);
-
   fill(square1.r, square1.b, square1.g);
   rectMode(CENTER);
   rect(square1.x, height - square1.y, square1.size);
@@ -112,7 +111,6 @@ function draw() {
   square2.r = map(square2.x, 0, width, 0, 255);
   square2.b = map(square2.x, 0, width, 255, 0);
   square2.g = map(square2.x, 0, width, 255, 0);
-
   fill(square2.r, square2.b, square2.g);
   rectMode(CENTER);
   rect(square2.x, square2.y, square2.size);
