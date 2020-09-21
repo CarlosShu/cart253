@@ -5,12 +5,12 @@ Carlos-Enrique Salazar Aguilar
 Learning variables and using maps and constrains.
 **************************************************/
 
-// Assining Variables to the Background.
+// Assigning Variables to the Background.
 let bg = {
 value: 0,
 }
 
-// Assining Variables to the Circle.
+// Assigning Variables to the Circle.
 let circle = {
   x: 0,
   y: 0,
