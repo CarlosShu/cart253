@@ -16,13 +16,6 @@ function draw() {
 
   circle.x = circle.x + circle.speed;
 
-  if (circle.x > width) {
-  circle.speed = -circle.speed;
-  }
-
-  if (circle.x < 0) {
-  circle.speed = -circle.speed;
-  }
 
   if (mouseY < height/2) {
     fill(255, 0, 0);

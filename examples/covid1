@@ -1,0 +1,85 @@
+/**************************************************
+Activity 04: Dodging Covid-19
+Carlos-Enrique Salazar Aguilar
+
+Here is a description of this template p5 project.
+**************************************************/
+
+// setup()
+//
+// Description of setup() goes here.
+let covid19 = {
+  x: 0,
+  y: 0,
+  size: 150,
+  vx: 0,
+  vy: 0,
+  speed: 10,
+};
+
+let user = {
+  x: 250,
+  y: 250,
+  size: 100,
+}
+
+let numStatic = 100;
+
+function preload() {
+  imgCell = loadImage('assets/images/cell.png');
+  imgVirus = loadImage('assets/images/Virus2.png');
+}
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+
+  noCursor(); // No cursor.
+
+  covid19.y = random(0, height);
+  covid19.vx = covid19.speed;
+}
+
+// draw()
+//
+// Description of draw() goes here.
+function draw() {
+  background (0);
+
+  // Display static
+  for (let i = 0; i < numStatic; i++) {
+    let x = random(0, width);
+    let y = random(0, height);
+    stroke(255);
+    point(x, y);
+  }
+
+  // Covid-19 Movement.
+  covid19.x = covid19.x + covid19.vx;
+  covid19.y = covid19.y + covid19.vy;
+
+  if (covid19.x > width) {
+    covid19.x = 0;
+    covid19.y = random(0, height);
+  }
+
+  // User Movement.
+  user.x = mouseX;
+  user.y = mouseY;
+
+  // Check for catching Covid-19.
+  let d = dist(user.x, user.y, covid19.x, covid19.y);
+  if (d < covid19.size/3 + user.size/3) {
+    noLoop(); // Stop drawing frame, movie stops, game is over.
+  }
+
+  // Display Covid-19.
+  push();
+  imageMode(CENTER);
+  image(imgVirus, covid19.x, covid19.y, covid19.size, covid19.size);
+  pop();
+
+  // Display User.
+  imageMode(CENTER);
+  image(imgCell, user.x, user.y, user.size, user.size);
+
+}
