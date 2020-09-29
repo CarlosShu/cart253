@@ -29,8 +29,13 @@ let circle2 = {
 
 let state = `title`; // Can be title, simulation, love, sadness.
 
+function preload() {
+  titleName = loadImage("assets/images/Title.png");
+  titleEnter = loadImage("assets/images/Enter.png");
+}
+
 function setup() {
-  createCanvas(500, 500);
+  createCanvas(windowWidth, windowHeight);
 
   // Postiion circles seperated from one another.
   circle1.x = width/ 3;
@@ -62,11 +67,16 @@ function draw() {
 
 // Title Function.
 function title() {
+// Title Text.
   push();
-  textSize(64);
-  fill(200, 100, 100);
-  textAlign(CENTER, CENTER);
-  text(`LOVE?`, width/2, height/2)
+  imageMode(CENTER);
+  image(titleName, windowWidth/2, windowHeight/2, windowWidth/2, windowWidth/3);
+  pop();
+
+// Press Enter text.
+  push();
+  imageMode(CENTER);
+  image(titleEnter, windowWidth/2, windowHeight/1.5, windowWidth/4, windowWidth/8);
   pop();
 }
 // Runs simulation.
@@ -136,10 +146,12 @@ function sadness() {
   }
 
   // Mouse press function that switches title state to simulation.
-  function mousePressed() {
+  function keyPressed() {
+    if (keyCode === 13) {
     if (state === `title`) {
       state = `simulation`;
     }
+}
 }
 
 // // Check if the circles have gone offscreen.
