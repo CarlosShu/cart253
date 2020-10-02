@@ -41,7 +41,6 @@ function preload() {
   bg = loadImage("assets/images/background.png");
   titleName = loadImage("assets/images/Title.png");
   titleEnter = loadImage("assets/images/Enter.png");
-  textInstructions = loadImage("assets/images/Instructions.png");
   textLoveIsFound = loadImage("assets/images/LoveIsFound.png");
   textLoveIsLost = loadImage("assets/images/LoveIsLost.png");
   textLoveIsIgnored = loadImage("assets/images/LoveIsIgnored.png");
@@ -67,14 +66,18 @@ function setup() {
   circle2.vy = random(circle2.ySpeed, -circle2.ySpeed);
   }
 
+ //  // Start circle moving in a random direction.
+ // circle1.vx = random(circle1.xSpeed);
+ // circle1.vy = random(circle1.ySpeed);
+ // circle2.vx = random(circle2.xSpeed);
+ // circle2.vy = random(circle2.ySpeed);
+ // }
+
 function draw() {
   background(bg);
 
   if (state === `title`) {
     title();
-  }
-  else if (state === `instructions`) {
-    instructions();
   }
   else if (state === `simulation`) {
     simulation();
@@ -92,6 +95,7 @@ function draw() {
 
 // Title Function.
 function title() {
+// Title Image.
   push();
   imageMode(CENTER);
   image(titleName, windowWidth/2, windowHeight/2, windowWidth/2, windowWidth/3);
@@ -103,15 +107,6 @@ function title() {
   image(titleEnter, windowWidth/2, windowHeight/1.5, windowWidth/4, windowWidth/8);
   pop();
 }
-
-// Instructions Function.
-function instructions() {
-  push();
-  imageMode(CENTER);
-  image(textInstructions, windowWidth/2, windowHeight/2, windowWidth/2, windowWidth/3);
-  pop();
-}
-
 // Runs simulation.
 function simulation() {
   move();
@@ -166,6 +161,12 @@ function move() {
   else {
     circle1.vy = 0;
     }
+
+  // if (keyIsDown(32)) {
+  //   circle1.xSpeed = circle1.xSpeed + 1;
+  //   circle1.ySpeed = circle1.ySpeed + 1;
+  // }
+
 
   // Velocity of the Fairies.
   circle1.x = circle1.x + circle1.vx;
@@ -238,16 +239,21 @@ function move() {
   }
     pop();
 
-}
+  }
 
   // Key press function that switches title state to simulation.
   function keyPressed() {
     if (keyCode === 13) {
     if (state === `title`) {
-      state = `instructions`;
-        }
-    }
-    else if (state === `instructions`) {
-        state = `simulation`;
+      state = `simulation`;
     }
   }
+}
+
+
+// // Check if the circles have gone offscreen.
+// function checkOffscreen() {
+//   if (circle1.x < 0 || circle1.x > width || circle1.y < 0 || circle1.y > height || circle2.x < 0 || circle2.x > width || circle2.y < 0 || circle2.y > height) {
+//       state = `sadness`;
+//     }
+//   }
