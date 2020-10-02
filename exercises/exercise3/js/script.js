@@ -29,12 +29,6 @@ let circle2 = {
   ySpeed: 3,
 }
 
-let points = {
-  score: 0,
-  size: 70,
-}
-
-
 let state = `title`; // Can be title, simulation, love, sadness.
 
 function preload() {
