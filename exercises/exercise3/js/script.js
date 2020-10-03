@@ -45,12 +45,12 @@ function preload() {
   textLoveIsFound = loadImage("assets/images/loveisfound.png");
   textLoveIsLost = loadImage("assets/images/loveislost.png");
   textLoveIsIgnored = loadImage("assets/images/loveisignored.png");
-  fairyBlue = loadImage("assets/images/fairyblue.png");
-  fairyPink = loadImage("assets/images/fairypink.png");
-  fairyBlueLeft = loadImage("assets/images/fairyblueleft.png");
-  fairyBlueRight = loadImage("assets/images/fairyblueright.png");
-  fairyPinkLeft = loadImage("assets/images/fairypinkleft.png");
-  fairyPinkRight = loadImage("assets/images/fairypinkright.png");
+  fairyBlue = loadImage("assets/images/fairyblue.gif");
+  fairyPink = loadImage("assets/images/fairypink.gif");
+  fairyBlueLeft = loadImage("assets/images/fairyblueleft.gif");
+  fairyBlueRight = loadImage("assets/images/fairyblueright.gif");
+  fairyPinkLeft = loadImage("assets/images/fairypinkleft.gif");
+  fairyPinkRight = loadImage("assets/images/fairypinkright.gif");
 }
 
 function setup() {
