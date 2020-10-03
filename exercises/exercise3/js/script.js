@@ -39,18 +39,18 @@ let state = `title`; // Can be title, simulation, love, sadness.
 
 function preload() {
   bg = loadImage("assets/images/background.png");
-  titleName = loadImage("assets/images/Title.png");
-  titleEnter = loadImage("assets/images/Enter.png");
-  textInstructions = loadImage("assets/images/Instructions.png");
-  textLoveIsFound = loadImage("assets/images/LoveIsFound.png");
-  textLoveIsLost = loadImage("assets/images/LoveIsLost.png");
-  textLoveIsIgnored = loadImage("assets/images/LoveIsIgnored.png");
-  fairyBlue = loadImage("assets/images/FairyBlue.png");
-  fairyPink = loadImage("assets/images/FairyPink.png");
-  fairyBlueLeft = loadImage("assets/images/FairyBlueLeft.png");
-  fairyBlueRight = loadImage("assets/images/fairyBlueRight.png");
-  fairyPinkLeft = loadImage("assets/images/fairyPinkLeft.png");
-  fairyPinkRight = loadImage("assets/images/fairyPinkRight.png");
+  titleName = loadImage("assets/images/title.png");
+  titleEnter = loadImage("assets/images/enter.png");
+  textInstructions = loadImage("assets/images/instructions.png");
+  textLoveIsFound = loadImage("assets/images/loveisfound.png");
+  textLoveIsLost = loadImage("assets/images/loveislost.png");
+  textLoveIsIgnored = loadImage("assets/images/loveisignored.png");
+  fairyBlue = loadImage("assets/images/fairyblue.png");
+  fairyPink = loadImage("assets/images/fairypink.png");
+  fairyBlueLeft = loadImage("assets/images/fairyblueleft.png");
+  fairyBlueRight = loadImage("assets/images/fairyblueright.png");
+  fairyPinkLeft = loadImage("assets/images/fairypinkleft.png");
+  fairyPinkRight = loadImage("assets/images/fairypinkright.png");
 }
 
 function setup() {
@@ -240,11 +240,19 @@ function move() {
 
 }
 
-  // Key press function that switches title state to simulation.
-  function keyPressed() {
-    if (keyCode === 13) {
-    if (state === `title`) {
-      state = `simulation`;
-        }
-    }
-  }
+// // Key press function that switches title state to simulation.
+// function keyPressed() {
+//   if (state === `title` && keyCode === 13) {
+//     state = `simulation`;
+//       }
+//   }
+// }
+
+ // Key press function that switches title state to simulation.
+ function keyPressed() {
+  if (keyCode === 13) {
+ if (state === `title`) {
+   state = `simulation`;
+      }
+}
+}
