@@ -166,9 +166,6 @@ function move() {
   circle1.y = circle1.y + circle1.vy;
   circle2.x = circle2.x + circle2.vx;
   circle2.y = circle2.y + circle2.vy;
-
-  points.x = width/8;
-  points.y = height/8;
 }
 
   // Check if the circles have gone offscreen.
