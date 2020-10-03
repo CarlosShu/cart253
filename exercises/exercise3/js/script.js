@@ -1,15 +1,13 @@
 /**************************************************
-Template p5 project
-Pippin Barr
+Exercise 03: Love, Actually
+Carlos-Enrique Salazar Aguilar
 
-Here is a description of this template p5 project.
+Learning functions.
 **************************************************/
 
 // setup()
-//
-// Description of setup() goes here.
 
-let circle1 = {
+let blueFairy = {
   x: undefined,
   y: undefined,
   size: 200,
@@ -19,7 +17,7 @@ let circle1 = {
   ySpeed: 3,
 }
 
-let circle2 = {
+let pinkFairy = {
   x: undefined,
   y: undefined,
   size: 200,
@@ -51,14 +49,14 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
 
   // Postiion circles seperated from one another.
-  circle1.x = width/ 3;
-  circle1.y = height/ 2;
-  circle2.x = 2 * width / 3;
-  circle2.y = height/ 2;
+  blueFairy.x = width/ 3;
+  blueFairy.y = height/ 2;
+  pinkFairy.x = 2 * width / 3;
+  pinkFairy.y = height/ 2;
 
   // Start circle moving in a random direction.
-  circle2.vx = random(circle2.xSpeed, -circle2.xSpeed);
-  circle2.vy = random(circle2.ySpeed, -circle2.ySpeed);
+  pinkFairy.vx = random(pinkFairy.xSpeed, -pinkFairy.xSpeed);
+  pinkFairy.vy = random(pinkFairy.ySpeed, -pinkFairy.ySpeed);
   }
 
 function draw() {
@@ -143,40 +141,40 @@ function move() {
 
   // Blue Fairy Controls.
   if (keyIsDown(65)) {
-    circle1.vx = -circle1.xSpeed;
+    blueFairy.vx = -blueFairy.xSpeed;
   }
   else if (keyIsDown(68)) {
-    circle1.vx = circle1.xSpeed;
+    blueFairy.vx = blueFairy.xSpeed;
   }
   else {
-    circle1.vx = 0;
+    blueFairy.vx = 0;
   }
   if (keyIsDown(87)) {
-    circle1.vy = -circle1.ySpeed;
+    blueFairy.vy = -blueFairy.ySpeed;
   }
   else if (keyIsDown(83)) {
-    circle1.vy = circle1.ySpeed;
+    blueFairy.vy = blueFairy.ySpeed;
   }
   else {
-    circle1.vy = 0;
+    blueFairy.vy = 0;
     }
 
   // Velocity of the Fairies.
-  circle1.x = circle1.x + circle1.vx;
-  circle1.y = circle1.y + circle1.vy;
-  circle2.x = circle2.x + circle2.vx;
-  circle2.y = circle2.y + circle2.vy;
+  blueFairy.x = blueFairy.x + blueFairy.vx;
+  blueFairy.y = blueFairy.y + blueFairy.vy;
+  pinkFairy.x = pinkFairy.x + pinkFairy.vx;
+  pinkFairy.y = pinkFairy.y + pinkFairy.vy;
 }
 
   // Check if the circles have gone offscreen.
   function checkOffscreenBlue() {
-    if (isOffscreen(circle1)) {
+    if (isOffscreen(blueFairy)) {
       state = `ignored`;
     }
   }
 
   function checkOffscreenPink() {
-    if (isOffscreen(circle2)) {
+    if (isOffscreen(pinkFairy)) {
       state = `sadness`;
     }
   }
@@ -192,8 +190,8 @@ function move() {
 
   // Check if the circles overlap.
   function checkOverlap() {
-    let d = dist(circle1.x, circle1.y, circle2.x, circle2.y);
-    if (d < circle1.size/3 + circle2.size/3) {
+    let d = dist(blueFairy.x, blueFairy.y, pinkFairy.x, pinkFairy.y);
+    if (d < blueFairy.size/3 + pinkFairy.size/3) {
       state = `love`;
     }
   }
@@ -204,28 +202,28 @@ function move() {
     // Draw Blue Fairy.
     push();
     imageMode(CENTER);
-    if (circle1.vx < 0) {
-      image(fairyBlueLeft, circle1.x, circle1.y, circle1.size, circle1.size);
+    if (blueFairy.vx < 0) {
+      image(fairyBlueLeft, blueFairy.x, blueFairy.y, blueFairy.size, blueFairy.size);
   }
-    else if (circle1.vx > 0) {
-      image(fairyBlueRight, circle1.x, circle1.y, circle1.size, circle1.size);
+    else if (blueFairy.vx > 0) {
+      image(fairyBlueRight, blueFairy.x, blueFairy.y, blueFairy.size, blueFairy.size);
   }
     else {
-      image(fairyBlue, circle1.x, circle1.y, circle1.size, circle1.size);
+      image(fairyBlue, blueFairy.x, blueFairy.y, blueFairy.size, blueFairy.size);
   }
     pop();
 
     // Draw Pink Fairy.
     push();
     imageMode(CENTER);
-    if (circle2.vx < 0) {
-      image(fairyPinkLeft, circle2.x, circle2.y, circle2.size, circle2.size);
+    if (pinkFairy.vx < 0) {
+      image(fairyPinkLeft, pinkFairy.x, pinkFairy.y, pinkFairy.size, pinkFairy.size);
   }
-    else if (circle2.vx > 0) {
-      image(fairyPinkRight, circle2.x, circle2.y, circle2.size, circle2.size);
+    else if (pinkFairy.vx > 0) {
+      image(fairyPinkRight, pinkFairy.x, pinkFairy.y, pinkFairy.size, pinkFairy.size);
   }
     else {
-      image(fairyPink, circle1.x, circle1.y, circle1.size, circle1.size);
+      image(fairyPink, pinkFairy.x, pinkFairy.y, pinkFairy.size, pinkFairy.size);
   }
     pop();
 
@@ -240,12 +238,3 @@ function keyPressed() {
        state = 'simulation';
      }
   }
-
-//  // Key press function that switches title state to simulation.
-//  function keyPressed() {
-//   if (keyCode === 13) {
-//  if (state === `title`) {
-//    state = `simulation`;
-//       }
-// }
-// }
