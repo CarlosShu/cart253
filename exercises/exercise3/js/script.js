@@ -240,19 +240,21 @@ function move() {
 
 }
 
-// // Key press function that switches title state to simulation.
-// function keyPressed() {
-//   if (state === `title` && keyCode === 13) {
-//     state = `simulation`;
-//       }
-//   }
-// }
+// Key press function that switches title state to simulation.
+function keyPressed() {
+  if (state === `title` && keyCode === 13) {
+   state = `instructions`;
+     }
+     else if (state === 'instructions') {
+       state = 'simulation';
+     }
+  }
 
- // Key press function that switches title state to simulation.
- function keyPressed() {
-  if (keyCode === 13) {
- if (state === `title`) {
-   state = `simulation`;
-      }
-}
-}
+//  // Key press function that switches title state to simulation.
+//  function keyPressed() {
+//   if (keyCode === 13) {
+//  if (state === `title`) {
+//    state = `simulation`;
+//       }
+// }
+// }
