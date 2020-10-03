@@ -29,6 +29,12 @@ let circle2 = {
   ySpeed: 3,
 }
 
+let points = {
+  score: 0,
+  size: 70,
+}
+
+
 let state = `title`; // Can be title, simulation, love, sadness.
 
 function preload() {
@@ -39,12 +45,12 @@ function preload() {
   textLoveIsFound = loadImage("assets/images/LoveIsFound.png");
   textLoveIsLost = loadImage("assets/images/LoveIsLost.png");
   textLoveIsIgnored = loadImage("assets/images/LoveIsIgnored.png");
-  fairyBlue = loadImage("assets/images/FairyBlue.gif");
-  fairyPink = loadImage("assets/images/FairyPink.gif");
-  fairyBlueLeft = loadImage("assets/images/FairyBlueLeft.gif");
-  fairyBlueRight = loadImage("assets/images/fairyBlueRight.gif");
-  fairyPinkLeft = loadImage("assets/images/fairyPinkLeft.gif");
-  fairyPinkRight = loadImage("assets/images/fairyPinkRight.gif");
+  fairyBlue = loadImage("assets/images/FairyBlue.png");
+  fairyPink = loadImage("assets/images/FairyPink.png");
+  fairyBlueLeft = loadImage("assets/images/FairyBlueLeft.png");
+  fairyBlueRight = loadImage("assets/images/fairyBlueRight.png");
+  fairyPinkLeft = loadImage("assets/images/fairyPinkLeft.png");
+  fairyPinkRight = loadImage("assets/images/fairyPinkRight.png");
 }
 
 function setup() {
@@ -238,10 +244,7 @@ function move() {
   function keyPressed() {
     if (keyCode === 13) {
     if (state === `title`) {
-      state = `instructions`;
+      state = `simulation`;
         }
-    }
-    else if (state === `instructions`) {
-        state = `simulation`;
     }
   }
