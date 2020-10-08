@@ -5,8 +5,14 @@ Carlos-Enrique Salazar Aguilar
 A cummulation of everything that I have learned so far.
 **************************************************/
 let pipe = {
-  x: undefined,
-  y: undefined,
+  x: 0,
+  y: 0,
+  position: undefined,
+  capture: 5,
+}
+
+let grid = {
+  position: undefined,
 }
 
 let counter = 0; // Samuel (TA) helped me out with this.
@@ -18,13 +24,22 @@ function preload() {
   titlescreen = loadImage("assets/images/title.png");
   keystart = loadImage("assets/images/keystart.png");
   instructionsscreen = loadImage("assets/images/instructions.png");
-  onewaypipe1 = loadImage("assets/images/onewaypipe1.png");
-  onewaypipe2 = loadImage("assets/images/onewaypipe2.png");
+  levelone = loadImage("assets/images/level1.png");
+  leveltwo = loadImage("assets/images/level2.png");
+  images[0] = loadImage("assets/images/onewaypipe.png");
+  images[1] = loadImage("assets/images/twowaypipe.png");
+  images[2] = loadImage("assets/images/threewaypipe.png");
+  images[3] = loadImage("assets/images/fourwaypipe.png");
 }
+
+var angle = 0.0;
+var images = [];
+var imageSwitcher = 0;
 
 // Setup Function.
 function setup() {
   createCanvas(windowHeight, windowHeight);
+  noCursor();
 }
 
 function windowResized() {
@@ -35,22 +50,24 @@ function windowResized() {
 function draw() {
   background(0);
 
-
   if (state === `title`) {
     title();
   }
   else if (state === `instructions`) {
     instructions();
   }
-  else if (state === `simulation`) {
+  else if (state === `simulation1`) {
     simulation();
+    level1();
+  }
+  else if (state === `simulation2`) {
+    simulation();
+    level2();
   }
 }
 
 // Title Function.
 function title() {
-
-
 
   // Title Image.
   if (counter >= 60){
@@ -72,16 +89,16 @@ function title() {
 
   // Key Start Image.
   // Samuel (TA) helped me out with this.
-   if (counter >= 30){
-    push();
-    imageMode(CENTER);
-    image(keystart, windowHeight/2, windowHeight/1.1, windowHeight/1.7, windowHeight/3.5);
-    pop();
-    }
-    if (counter == 60) { // This only happens every second.
-    counter = 0;
-    }
-    counter++;
+  if (counter >= 30){
+  push();
+  imageMode(CENTER);
+  image(keystart, windowHeight/2, windowHeight/1.1, windowHeight/1.7, windowHeight/3.5);
+  pop();
+  }
+  if (counter == 60) { // This only happens every second.
+  counter = 0;
+  }
+  counter++;
 }
 
 // Instructions function.
@@ -102,16 +119,42 @@ move();
 
 function display() {
 
-  // 1-Way Pipe.
+  // Pipe
   push();
   imageMode(CENTER);
-  if (keyCode === 82) {
-    image(onewaypipe1, pipe.x, pipe.y, windowHeight/3, windowHeight/3);
-    } else {
-      image(onewaypipe2, pipe.x, pipe.y, windowHeight/3, windowHeight/3);
-    }
-    pop();
+  translate(pipe.x, pipe.y);
+  rotate(angle);
+  image(images[abs(imageSwitcher) % 4], pipe.position, pipe.position, windowHeight/3, windowHeight/3); angle;
+  pop();
+
+  // Pipe Cursor.
+  push();
+  imageMode(CENTER);
+  translate(mouseX, mouseY);
+  rotate(angle);
+  image(images[abs(imageSwitcher) % 4], 0, 0, windowHeight/6, windowHeight/6); angle;
+  pop();
   }
+
+  function level1() {
+  // // Level 1.
+  push();
+  imageMode(CENTER);
+  image(levelone, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+  pop();
+
+  if (grid.position = 5) {
+    state = 'simulation2';
+  }
+}
+
+function level2() {
+// // Level 1.
+push();
+imageMode(CENTER);
+image(leveltwo, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+}
 
 function move() {
 
@@ -121,8 +164,12 @@ function move() {
       if (mouseX >= windowHeight/3) {
         if (mouseY >= windowHeight/3) {
           if (mouseIsPressed) {
-            pipe.x = windowHeight/2;
-            pipe.y = windowHeight/2;
+            if(state === 'simulation1', 'simulation2') {
+              pipe.x = windowHeight/2;
+              pipe.y = windowHeight/2;
+              pipe.position = 0;
+              grid.position = 5;
+            }
           }
         }
       }
@@ -134,8 +181,11 @@ function move() {
     if (mouseY <= windowHeight/1.5) {
       if (mouseY >= windowHeight/3) {
         if (mouseIsPressed) {
-          pipe.x = windowHeight/6;
-          pipe.y = windowHeight/2;
+          if(state === 'simulation1') {
+            pipe.x = windowHeight/6;
+            pipe.y = windowHeight/2;
+            pipe.position = 0;
+          }
         }
       }
     }
@@ -146,8 +196,11 @@ function move() {
     if (mouseY <= windowHeight/1.5) {
       if (mouseY >= windowHeight/3) {
         if (mouseIsPressed) {
-          pipe.x = windowHeight/1.2;
-          pipe.y = windowHeight/2;
+          if(state === 'simulation1') {
+            pipe.x = windowHeight/1.2;
+            pipe.y = windowHeight/2;
+            pipe.position = 0;
+          }
         }
       }
     }
@@ -158,8 +211,11 @@ function move() {
     if (mouseX >= windowHeight/3) {
       if (mouseY <= windowHeight/3) {
         if (mouseIsPressed) {
-          pipe.x = windowHeight/2;
-          pipe.y = windowHeight/6;
+          if(state === 'simulation3') {
+            pipe.x = windowHeight/2;
+            pipe.y = windowHeight/6;
+            pipe.position = 0;
+          }
         }
       }
     }
@@ -170,20 +226,26 @@ function move() {
     if (mouseY <= windowHeight/1.5) {
       if (mouseY <= windowHeight/3) {
         if (mouseIsPressed) {
-          pipe.x = windowHeight/6;
-          pipe.y = windowHeight/6;
+          if(state === 'simulation1') {
+            pipe.x = windowHeight/6;
+              pipe.y = windowHeight/6;
+                pipe.position = 0;
+              }
+            }
+          }
         }
       }
-    }
-  }
 
   // Top Right Square.
   if (mouseX > windowHeight/1.5) {
     if (mouseY <= windowHeight/1.5) {
       if (mouseY <= windowHeight/3) {
         if (mouseIsPressed) {
-          pipe.x = windowHeight/1.2;
-          pipe.y = windowHeight/6;
+          if(state === 'simulation1') {
+            pipe.x = windowHeight/1.2;
+            pipe.y = windowHeight/6;
+            pipe.position = 0;
+          }
         }
       }
     }
@@ -194,8 +256,11 @@ function move() {
     if (mouseY >= windowHeight/1.5) {
       if (mouseX >= windowHeight/3) {
         if (mouseIsPressed) {
-          pipe.x = windowHeight/2;
-          pipe.y = windowHeight/1.2;
+          if(state === 'simulation3') {
+            pipe.x = windowHeight/2;
+            pipe.y = windowHeight/1.2;
+            pipe.position = 0;
+          }
         }
       }
     }
@@ -206,8 +271,11 @@ function move() {
     if (mouseY >= windowHeight/1.5) {
       if (mouseY >= windowHeight/3) {
         if (mouseIsPressed) {
-          pipe.x = windowHeight/6;
-          pipe.y = windowHeight/1.2;
+          if(state === 'simulation2') {
+            pipe.x = windowHeight/6;
+            pipe.y = windowHeight/1.2;
+            pipe.position = 0;
+          }
         }
       }
     }
@@ -218,13 +286,15 @@ function move() {
     if (mouseY >= windowHeight/1.5) {
       if (mouseY >= windowHeight/3) {
         if (mouseIsPressed) {
-          pipe.x = windowHeight/1.2;
-          pipe.y = windowHeight/1.2;
+          if(state === 'simulation1', 'simulation2') {
+            pipe.x = windowHeight/1.2;
+            pipe.y = windowHeight/1.2;
+            pipe.position = 0;
+          }
         }
       }
     }
   }
-
 }
 
 
@@ -234,9 +304,20 @@ function keyPressed() {
    state = `instructions`;
      }
      else if (state === 'instructions') {
-       state = 'simulation';
+       state = 'simulation1';
      }
+  if (keyCode == 65) {
+    imageSwitcher--;
+    } else if (keyCode == 68) {
+      imageSwitcher++;
+      } else if (keyCode == 69) {
+        angle = angle + (PI / 2.0);
+        } else if (keyCode == 81) {
+          angle = angle - (PI / 2.0);
+          }
   }
+
+
 
   // // Vertical 1-Way Pipe.
   // push();
