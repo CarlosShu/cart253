@@ -105,9 +105,9 @@ function display() {
   // 1-Way Pipe.
   push();
   imageMode(CENTER);
-  if (key === 'r') {
+  if (keyCode === 82) {
     image(onewaypipe1, pipe.x, pipe.y, windowHeight/3, windowHeight/3);
-  } else {
+    } else {
       image(onewaypipe2, pipe.x, pipe.y, windowHeight/3, windowHeight/3);
     }
     pop();
