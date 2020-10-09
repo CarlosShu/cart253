@@ -8,11 +8,12 @@ let pipe = {
   x: 0,
   y: 0,
   position: undefined,
+  angle: 0,
   capture: 5,
 }
 
 let grid = {
-  position: undefined,
+  position: 0,
 }
 
 let counter = 0; // Samuel (TA) helped me out with this.
@@ -32,6 +33,7 @@ function preload() {
   images[3] = loadImage("assets/images/fourwaypipe.png");
 }
 
+// I got this ImageSwitcher and Rotating Function from StackOverflow. https://stackoverflow.com/questions/63331653/how-could-i-make-a-rotating-image-alternate-in-p5-js
 var angle = 0.0;
 var images = [];
 var imageSwitcher = 0;
@@ -143,10 +145,10 @@ function display() {
   image(levelone, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
   pop();
 
-  if (grid.position = 5) {
-    state = 'simulation2';
+    if (grid.position === 5) {
+      state = 'simulation2';
+    }
   }
-}
 
 function level2() {
 // // Level 1.
@@ -168,7 +170,9 @@ function move() {
               pipe.x = windowHeight/2;
               pipe.y = windowHeight/2;
               pipe.position = 0;
-              grid.position = 5;
+                if (state === 'simulation1') {
+                  grid.position = 5;
+                }
             }
           }
         }
@@ -317,34 +321,4 @@ function keyPressed() {
           }
   }
 
-
-
-  // // Vertical 1-Way Pipe.
-  // push();
-  // imageMode(CENTER);
-  // image(onewaypipe1, windowHeight/2, windowHeight/1.2, windowHeight/3, windowHeight/3);
-  // pop();
-  //
-  // // Vertical 1-Way Pipe.
-  // push();
-  // imageMode(CENTER);
-  // image(onewaypipe1, windowHeight/2, windowHeight/6, windowHeight/3, windowHeight/3);
-  // pop();
-
-  // function move() {
-  //   if (keyCode === 87) {
-  //     pipe.y = pipe.y - windowHeight/6;
-  //   }
-  //   else if (keyCode === 83) {
-  //     pipe.y = pipe.y + windowHeight/1.2;
-  //   }
-  // }
-
-  // // 1-Way Pipe.
-  //   imageMode(CENTER);
-  //     if (key === 'r') {
-  //     image(onewaypipe1, pipe.x, pipe.y, windowHeight/3, windowHeight/3);
-  //     } else {
-  //     image(onewaypipe2, pipe.x, pipe.y, windowHeight/3, windowHeight/3);
-  //     }
-  //   }
+  // pipe.angle = 1;
