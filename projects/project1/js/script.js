@@ -36,6 +36,10 @@ function preload() {
 // I got this ImageSwitcher and Rotating Function from StackOverflow. https://stackoverflow.com/questions/63331653/how-could-i-make-a-rotating-image-alternate-in-p5-js
 var angle = 0.0;
 var images = [];
+// 0: One-Way Pipe.
+// 1: Two-Way Pipe.
+// 2: Three-Way Pipe.
+// 3: Four-Way Pipe.
 var imageSwitcher = 0;
 
 // Setup Function.
@@ -66,6 +70,7 @@ function draw() {
     simulation();
     level2();
   }
+
 }
 
 // Title Function.
@@ -126,7 +131,7 @@ function display() {
   imageMode(CENTER);
   translate(pipe.x, pipe.y);
   rotate(angle);
-  image(images[abs(imageSwitcher) % 4], pipe.position, pipe.position, windowHeight/3, windowHeight/3); angle;
+  image(images[abs(imageSwitcher)], pipe.position, pipe.position, windowHeight/3, windowHeight/3); angle;
   pop();
 
   // Pipe Cursor.
@@ -134,7 +139,7 @@ function display() {
   imageMode(CENTER);
   translate(mouseX, mouseY);
   rotate(angle);
-  image(images[abs(imageSwitcher) % 4], 0, 0, windowHeight/6, windowHeight/6); angle;
+  image(images[abs(imageSwitcher)], 0, 0, windowHeight/6, windowHeight/6); angle;
   pop();
   }
 
@@ -145,7 +150,7 @@ function display() {
   image(levelone, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
   pop();
 
-    if (grid.position === 5) {
+    if (grid.position === 5 && imageSwitcher === 0) {
       state = 'simulation2';
     }
   }
@@ -312,8 +317,14 @@ function keyPressed() {
      }
   if (keyCode == 65) {
     imageSwitcher--;
+      if (imageSwitcher < 0) {
+        imageSwitcher = 3;
+      }
     } else if (keyCode == 68) {
       imageSwitcher++;
+        if (imageSwitcher > 3) {
+          imageSwitcher = 0;
+        }
       } else if (keyCode == 69) {
         angle = angle + (PI / 2.0);
         } else if (keyCode == 81) {
