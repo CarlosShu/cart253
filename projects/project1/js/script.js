@@ -679,7 +679,7 @@ pop();
   }
 }
 
-// Ending.
+// Ending Function.
 function ending() {
 
   // Total Score image.
