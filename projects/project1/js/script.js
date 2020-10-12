@@ -65,6 +65,14 @@ function preload() {
   leveleightbackground = loadImage("assets/images/level8.png");
   levelninebackground = loadImage("assets/images/level9.png");
   leveltenbackground = loadImage("assets/images/level10.png");
+  levelelevenbackground = loadImage("assets/images/level11.png");
+  leveltwelvebackground = loadImage("assets/images/level12.png");
+  levelthirteenbackground = loadImage("assets/images/level13.png");
+  levelfourteenbackground = loadImage("assets/images/level14.png");
+  levelfifteenbackground = loadImage("assets/images/level15.png");
+  levelsixteenbackground = loadImage("assets/images/level16.png");
+  levelseventeenbackground = loadImage("assets/images/level17.png");
+  leveleighteenbackground = loadImage("assets/images/level18.png");
   images[0] = loadImage("assets/images/onewaypipe.png");
   images[1] = loadImage("assets/images/twowaypipe.png");
   images[2] = loadImage("assets/images/threewaypipe.png");
@@ -160,6 +168,34 @@ function draw() {
   else if (state === 'simulation11') {
     simulation();
     level11();
+  }
+  else if (state === 'simulation12') {
+    simulation();
+    level12();
+  }
+  else if (state === 'simulation13') {
+    simulation();
+    level13();
+  }
+  else if (state === 'simulation14') {
+    simulation();
+    level14();
+  }
+  else if (state === 'simulation15') {
+    simulation();
+    level15();
+  }
+  else if (state === 'simulation16') {
+    simulation();
+    level16();
+  }
+  else if (state === 'simulation17') {
+    simulation();
+    level17();
+  }
+  else if (state === 'simulation18') {
+    simulation();
+    level18();
   }
   else if (state === `ending`) {
     ending();
@@ -346,7 +382,7 @@ imageMode(CENTER);
 image(levelonebackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
 pop();
 
-  // If the right conditions are met then it proceeds to level 2.
+// If the right conditions are met then it proceeds to the next level.
   if (grid.position === 5 && imageSwitcher === 0 && angle === 0 || grid.position === 5 && imageSwitcher === 0 && angle === 180) {
     state = 'simulation2';
     proceed.play(); // Plays a sound indicating success.
@@ -363,7 +399,7 @@ imageMode(CENTER);
 image(leveltwobackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
 pop();
 
-// If the right conditions are met then it proceeds to level 3.
+// If the right conditions are met then it proceeds to the next level.
   if (grid.position === 5 && imageSwitcher === 1 && angle === 270) {
     state = 'simulation3';
     proceed.play(); // Plays a sound indicating success.
@@ -380,7 +416,7 @@ imageMode(CENTER);
 image(levelthreebackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
 pop();
 
-// If the right conditions are met then it proceeds to level 3.
+// If the right conditions are met then it proceeds to the next level.
   if (grid.position === 4 && imageSwitcher === 1 && angle === 90) {
     state = 'simulation4';
     proceed.play(); // Plays a sound indicating success.
@@ -397,8 +433,8 @@ imageMode(CENTER);
 image(levelfourbackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
 pop();
 
-// If the right conditions are met then it proceeds to level 3.
-  if (grid.position === 2 && imageSwitcher === 0 && angle === 90 || grid.position === 5 && imageSwitcher === 0 && angle === 270) {
+// If the right conditions are met then it proceeds to the next level.
+  if (grid.position === 2 && imageSwitcher === 0 && angle === 90 || grid.position === 2 && imageSwitcher === 0 && angle === 270) {
     state = 'simulation5';
     proceed.play(); // Plays a sound indicating success.
     score++;
@@ -414,9 +450,230 @@ imageMode(CENTER);
 image(levelfivebackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
 pop();
 
-// If the right conditions are met then it proceeds to level 3.
-  if (grid.position === 6 && imageSwitcher === 0 && angle === 0 || grid.position === 5 && imageSwitcher === 0 && angle === 180) {
-    state = 'simulation5';
+// If the right conditions are met then it proceeds to the next level.
+  if (grid.position === 6 && imageSwitcher === 0 && angle === 0 || grid.position === 6 && imageSwitcher === 0 && angle === 180) {
+    state = 'simulation6';
+    proceed.play(); // Plays a sound indicating success.
+    score++;
+  }
+}
+
+// Level 6.
+function level6() {
+
+// Level background.
+push();
+imageMode(CENTER);
+image(levelsixbackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+
+// If the right conditions are met then it proceeds to the next level.
+  if (grid.position === 4 && imageSwitcher === 2 && angle === 90) {
+    state = 'simulation7';
+    proceed.play(); // Plays a sound indicating success.
+    score++;
+  }
+}
+
+// Level 7.
+function level7() {
+
+// Level background.
+push();
+imageMode(CENTER);
+image(levelsevenbackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+
+// If the right conditions are met then it proceeds to the next level.
+  if (grid.position === 6 && imageSwitcher === 0 && angle === 0 || grid.position === 6 && imageSwitcher === 0 && angle === 180) {
+    state = 'simulation8';
+    proceed.play(); // Plays a sound indicating success.
+    score++;
+  }
+}
+
+// Level 8.
+function level8() {
+
+// Level background.
+push();
+imageMode(CENTER);
+image(leveleightbackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+
+// If the right conditions are met then it proceeds to the next level.
+  if (grid.position === 4 && imageSwitcher === 0 && angle === 0 || grid.position === 4 && imageSwitcher === 0 && angle === 180) {
+    state = 'simulation9';
+    proceed.play(); // Plays a sound indicating success.
+    score++;
+  }
+}
+
+// Level 9.
+function level9() {
+
+// Level background.
+push();
+imageMode(CENTER);
+image(levelninebackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+
+// If the right conditions are met then it proceeds to the next level.
+  if (grid.position === 6 && imageSwitcher === 0 && angle === 0 || grid.position === 6 && imageSwitcher === 0 && angle === 180) {
+    state = 'simulation10';
+    proceed.play(); // Plays a sound indicating success.
+    score++;
+  }
+}
+
+// Level 10.
+function level10() {
+
+// Level background.
+push();
+imageMode(CENTER);
+image(leveltenbackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+
+// If the right conditions are met then it proceeds to the next level.
+  if (grid.position === 5 && imageSwitcher === 3 && angle === 0 || grid.position === 5 && imageSwitcher === 3 && angle === 90 || grid.position === 5 && imageSwitcher === 3 && angle === 180 || grid.position === 5 && imageSwitcher === 3 && angle === 270) {
+    state = 'simulation11';
+    proceed.play(); // Plays a sound indicating success.
+    score++;
+  }
+}
+
+// Level 11.
+function level11() {
+
+// Level background.
+push();
+imageMode(CENTER);
+image(levelelevenbackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+
+// If the right conditions are met then it proceeds to the next level.
+  if (grid.position === 2 && imageSwitcher === 0 && angle === 90 || grid.position === 2 && imageSwitcher === 0 && angle === 270) {
+    state = 'simulation12';
+    proceed.play(); // Plays a sound indicating success.
+    score++;
+  }
+}
+
+// Level 12.
+function level12() {
+
+// Level background.
+push();
+imageMode(CENTER);
+image(leveltwelvebackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+
+// If the right conditions are met then it proceeds to the next level.
+  if (grid.position === 5 && imageSwitcher === 3 && angle === 0 || grid.position === 5 && imageSwitcher === 3 && angle === 90 || grid.position === 5 && imageSwitcher === 3 && angle === 180 || grid.position === 5 && imageSwitcher === 3 && angle === 270) {
+    state = 'simulation13';
+    proceed.play(); // Plays a sound indicating success.
+    score++;
+  }
+}
+
+// Level 13.
+function level13() {
+
+// Level background.
+push();
+imageMode(CENTER);
+image(levelthirteenbackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+
+// If the right conditions are met then it proceeds to the next level.
+  if (grid.position === 4 && imageSwitcher === 2 && angle === 90) {
+    state = 'simulation14';
+    proceed.play(); // Plays a sound indicating success.
+    score++;
+  }
+}
+
+// Level 14.
+function level14() {
+
+// Level background.
+push();
+imageMode(CENTER);
+image(levelfourteenbackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+
+// If the right conditions are met then it proceeds to the next level.
+  if (grid.position === 6 && imageSwitcher === 0 && angle === 0 || grid.position === 6 && imageSwitcher === 0 && angle === 180) {
+    state = 'simulation15';
+    proceed.play(); // Plays a sound indicating success.
+    score++;
+  }
+}
+
+// Level 15.
+function level15() {
+
+// Level background.
+push();
+imageMode(CENTER);
+image(levelfifteenbackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+
+// If the right conditions are met then it proceeds to the next level.
+  if (grid.position === 2 && imageSwitcher === 1 && angle === 180) {
+    state = 'simulation16';
+    proceed.play(); // Plays a sound indicating success.
+    score++;
+  }
+}
+
+// Level 16.
+function level16() {
+
+// Level background.
+push();
+imageMode(CENTER);
+image(levelsixteenbackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+
+// If the right conditions are met then it proceeds to the next level.
+  if (grid.position === 8 && imageSwitcher === 2 && angle === 0) {
+    state = 'simulation17';
+    proceed.play(); // Plays a sound indicating success.
+    score++;
+  }
+}
+
+// Level 17.
+function level17() {
+
+// Level background.
+push();
+imageMode(CENTER);
+image(levelseventeenbackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+
+// If the right conditions are met then it proceeds to the next level.
+  if (grid.position === 6 && imageSwitcher === 0 && angle === 0 || grid.position === 6 && imageSwitcher === 0 && angle === 180) {
+    state = 'simulation18';
+    proceed.play(); // Plays a sound indicating success.
+    score++;
+  }
+}
+
+// Level 16.
+function level18() {
+
+// Level background.
+push();
+imageMode(CENTER);
+image(leveleighteenbackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+
+// If the right conditions are met then it proceeds to the next level.
+  if (grid.position === 8 && imageSwitcher === 2 && angle === 0) {
+    state = 'simulation1';
     proceed.play(); // Plays a sound indicating success.
     score++;
   }
@@ -450,7 +707,7 @@ function move() {
     if (mouseY <= windowHeight/1.5) {
       if (mouseX >= windowHeight/3) {
         if (mouseY >= windowHeight/3) {
-          if(state === 'simulation1' || state === 'simulation2' || state === 'simulation6' || state === 'simulation9' || state === 'simulation10') {
+          if(state === 'simulation1' || state === 'simulation2' || state === 'simulation9' || state === 'simulation10' || state === 'simulation11' || state === 'simulation12') {
             pipe.x = windowHeight/2;
             pipe.y = windowHeight/2;
             pipe.position = 0;
@@ -471,7 +728,7 @@ function move() {
   if (mouseX < windowHeight/3) {
     if (mouseY <= windowHeight/1.5) {
       if (mouseY >= windowHeight/3) {
-        if(state === 'simulation1' || state === 'simulation3' || state === 'simulation6' || state === 'simulation8') {
+        if(state === 'simulation1' || state === 'simulation3' || state === 'simulation6' || state === 'simulation8' || state === 'simulation13' || state === 'simulation17') {
           pipe.x = windowHeight/6;
           pipe.y = windowHeight/2;
           pipe.position = 0;
@@ -491,7 +748,7 @@ function move() {
   if (mouseX > windowHeight/1.5) {
     if (mouseY <= windowHeight/1.5) {
       if (mouseY >= windowHeight/3) {
-        if(state === 'simulation1' || state === 'simulation5' || state === 'simulation7' || state === 'simulation8' || state === 'simulation9') {
+        if(state === 'simulation1' || state === 'simulation5' || state === 'simulation7' || state === 'simulation8' || state === 'simulation9' || state === 'simulation14' || state === 'simulation15' || state === 'simulation17') {
           pipe.x = windowHeight/1.2;
           pipe.y = windowHeight/2;
           pipe.position = 0;
@@ -511,7 +768,7 @@ function move() {
   if (mouseX <= windowHeight/1.5) {
     if (mouseX >= windowHeight/3) {
       if (mouseY <= windowHeight/3) {
-        if(state === 'simulation4') {
+        if(state === 'simulation4' || state === 'simulation11' || state === 'simulation15' || state === 'simulation18') {
           pipe.x = windowHeight/2;
           pipe.y = windowHeight/6;
           pipe.position = 0;
@@ -531,7 +788,7 @@ function move() {
   if (mouseX < windowHeight/3) {
     if (mouseY <= windowHeight/1.5) {
       if (mouseY <= windowHeight/3) {
-        if(state === 'simulation1' || state === 'simulation4' || state === 'simulation5') {
+        if(state === 'simulation1' || state === 'simulation4' || state === 'simulation5' || state === 'simulation12' || state === 'simulation17' || state === 'simulation18') {
           pipe.x = windowHeight/6;
             pipe.y = windowHeight/6;
               pipe.position = 0;
@@ -551,7 +808,7 @@ function move() {
   if (mouseX > windowHeight/1.5) {
     if (mouseY <= windowHeight/1.5) {
       if (mouseY <= windowHeight/3) {
-        if(state === 'simulation1' || state === 'simulation8') {
+        if(state === 'simulation1' || state === 'simulation8' || state === 'simulation13' || state === 'simulation18') {
           pipe.x = windowHeight/1.2;
           pipe.y = windowHeight/6;
           pipe.position = 0;
@@ -571,7 +828,7 @@ function move() {
   if (mouseX <= windowHeight/1.5) {
     if (mouseY >= windowHeight/1.5) {
       if (mouseX >= windowHeight/3) {
-        if(state === 'simulation4') {
+        if(state === 'simulation4' || state === 'simulation16' || state === 'simulation18') {
           pipe.x = windowHeight/2;
           pipe.y = windowHeight/1.2;
           pipe.position = 0;
@@ -591,7 +848,7 @@ function move() {
   if (mouseX < windowHeight/3) {
     if (mouseY >= windowHeight/1.5) {
       if (mouseY >= windowHeight/3) {
-        if(state === 'simulation2' || state === 'simulation3' || state === 'simulation4' || state === 'simulation5' || state === 'simulation7' ) {
+        if(state === 'simulation2' || state === 'simulation3' || state === 'simulation4' || state === 'simulation5' || state === 'simulation7' || state === 'simulation12' || state === 'simulation17') {
           pipe.x = windowHeight/6;
           pipe.y = windowHeight/1.2;
           pipe.position = 0;
@@ -611,7 +868,7 @@ function move() {
   if (mouseX > windowHeight/1.5) {
     if (mouseY >= windowHeight/1.5) {
       if (mouseY >= windowHeight/3) {
-        if(state === 'simulation1' || state === 'simulation2' || state === 'simulation3') {
+        if(state === 'simulation1' || state === 'simulation2' || state === 'simulation3' || state === 'simulation13') {
           pipe.x = windowHeight/1.2;
           pipe.y = windowHeight/1.2;
           pipe.position = 0;
@@ -687,10 +944,3 @@ function keyPressed() {
 
   }
 }
-
-  // // Music loop function.
-  // function tryMusic() {
-  //   if (!music.isPlaying()) {
-  //     music.loop();
-  //   }
-  // }
