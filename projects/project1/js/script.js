@@ -58,6 +58,13 @@ function preload() {
   levelonebackground = loadImage("assets/images/level1.png");
   leveltwobackground = loadImage("assets/images/level2.png");
   levelthreebackground = loadImage("assets/images/level3.png");
+  levelfourbackground = loadImage("assets/images/level4.png");
+  levelfivebackground = loadImage("assets/images/level5.png");
+  levelsixbackground = loadImage("assets/images/level6.png");
+  levelsevenbackground = loadImage("assets/images/level7.png");
+  leveleightbackground = loadImage("assets/images/level8.png");
+  levelninebackground = loadImage("assets/images/level9.png");
+  leveltenbackground = loadImage("assets/images/level10.png");
   images[0] = loadImage("assets/images/onewaypipe.png");
   images[1] = loadImage("assets/images/twowaypipe.png");
   images[2] = loadImage("assets/images/threewaypipe.png");
@@ -124,6 +131,35 @@ function draw() {
   }
   else if (state === 'simulation4') {
     simulation();
+    level4();
+  }
+  else if (state === 'simulation5') {
+    simulation();
+    level5();
+  }
+  else if (state === 'simulation6') {
+    simulation();
+    level6();
+  }
+  else if (state === 'simulation7') {
+    simulation();
+    level7();
+  }
+  else if (state === 'simulation8') {
+    simulation();
+    level8();
+  }
+  else if (state === 'simulation9') {
+    simulation();
+    level9();
+  }
+  else if (state === 'simulation10') {
+    simulation();
+    level10();
+  }
+  else if (state === 'simulation11') {
+    simulation();
+    level11();
   }
   else if (state === `ending`) {
     ending();
@@ -304,7 +340,7 @@ function display() {
 // Level 1.
 function level1() {
 
-// Level 1 background.
+// Level background.
 push();
 imageMode(CENTER);
 image(levelonebackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
@@ -321,7 +357,7 @@ pop();
 // Level 2.
 function level2() {
 
-// Level 2 background.
+// Level background.
 push();
 imageMode(CENTER);
 image(leveltwobackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
@@ -338,7 +374,7 @@ pop();
 // Level 3.
 function level3() {
 
-// Level 3 background.
+// Level background.
 push();
 imageMode(CENTER);
 image(levelthreebackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
@@ -347,6 +383,40 @@ pop();
 // If the right conditions are met then it proceeds to level 3.
   if (grid.position === 4 && imageSwitcher === 1 && angle === 90) {
     state = 'simulation4';
+    proceed.play(); // Plays a sound indicating success.
+    score++;
+  }
+}
+
+// Level 4.
+function level4() {
+
+// Level background.
+push();
+imageMode(CENTER);
+image(levelfourbackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+
+// If the right conditions are met then it proceeds to level 3.
+  if (grid.position === 2 && imageSwitcher === 0 && angle === 90 || grid.position === 5 && imageSwitcher === 0 && angle === 270) {
+    state = 'simulation5';
+    proceed.play(); // Plays a sound indicating success.
+    score++;
+  }
+}
+
+// Level 5.
+function level5() {
+
+// Level background.
+push();
+imageMode(CENTER);
+image(levelfivebackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+
+// If the right conditions are met then it proceeds to level 3.
+  if (grid.position === 6 && imageSwitcher === 0 && angle === 0 || grid.position === 5 && imageSwitcher === 0 && angle === 180) {
+    state = 'simulation5';
     proceed.play(); // Plays a sound indicating success.
     score++;
   }
@@ -380,7 +450,7 @@ function move() {
     if (mouseY <= windowHeight/1.5) {
       if (mouseX >= windowHeight/3) {
         if (mouseY >= windowHeight/3) {
-          if(state === 'simulation1' || state === 'simulation2' || state === 'simulation4') {
+          if(state === 'simulation1' || state === 'simulation2' || state === 'simulation6' || state === 'simulation9' || state === 'simulation10') {
             pipe.x = windowHeight/2;
             pipe.y = windowHeight/2;
             pipe.position = 0;
@@ -401,7 +471,7 @@ function move() {
   if (mouseX < windowHeight/3) {
     if (mouseY <= windowHeight/1.5) {
       if (mouseY >= windowHeight/3) {
-        if(state === 'simulation1' || state === 'simulation3') {
+        if(state === 'simulation1' || state === 'simulation3' || state === 'simulation6' || state === 'simulation8') {
           pipe.x = windowHeight/6;
           pipe.y = windowHeight/2;
           pipe.position = 0;
@@ -421,7 +491,7 @@ function move() {
   if (mouseX > windowHeight/1.5) {
     if (mouseY <= windowHeight/1.5) {
       if (mouseY >= windowHeight/3) {
-        if(state === 'simulation1') {
+        if(state === 'simulation1' || state === 'simulation5' || state === 'simulation7' || state === 'simulation8' || state === 'simulation9') {
           pipe.x = windowHeight/1.2;
           pipe.y = windowHeight/2;
           pipe.position = 0;
@@ -461,7 +531,7 @@ function move() {
   if (mouseX < windowHeight/3) {
     if (mouseY <= windowHeight/1.5) {
       if (mouseY <= windowHeight/3) {
-        if(state === 'simulation1' || state === 'simulation4') {
+        if(state === 'simulation1' || state === 'simulation4' || state === 'simulation5') {
           pipe.x = windowHeight/6;
             pipe.y = windowHeight/6;
               pipe.position = 0;
@@ -481,7 +551,7 @@ function move() {
   if (mouseX > windowHeight/1.5) {
     if (mouseY <= windowHeight/1.5) {
       if (mouseY <= windowHeight/3) {
-        if(state === 'simulation1') {
+        if(state === 'simulation1' || state === 'simulation8') {
           pipe.x = windowHeight/1.2;
           pipe.y = windowHeight/6;
           pipe.position = 0;
@@ -521,7 +591,7 @@ function move() {
   if (mouseX < windowHeight/3) {
     if (mouseY >= windowHeight/1.5) {
       if (mouseY >= windowHeight/3) {
-        if(state === 'simulation2' || state === 'simulation3') {
+        if(state === 'simulation2' || state === 'simulation3' || state === 'simulation4' || state === 'simulation5' || state === 'simulation7' ) {
           pipe.x = windowHeight/6;
           pipe.y = windowHeight/1.2;
           pipe.position = 0;
