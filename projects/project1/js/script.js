@@ -3,6 +3,8 @@ Project 01: Simulation
 Carlos-Enrique Salazar Aguilar
 
 A cummulation of everything that I have learned so far.
+
+Received helped from Etienne, Paola, Cassandra, Dana (TA) and Samuel (TA).
 **************************************************/
 // Font variable.
 let gametext = {
