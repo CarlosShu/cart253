@@ -26,6 +26,8 @@ let grid = {
 
 let counter = 0; // Samuel (TA) helped me out with this.
 
+let timecounter = 0; // Samuel (TA) helped me out with this. Time counter.
+
 let state = `title`; // Can be title, instructions, simulation, ending.
 
 // Preload Function.
@@ -49,6 +51,7 @@ function preload() {
   keystart = loadImage("assets/images/keystart.png");
   keycontinue = loadImage("assets/images/keycontinue.png");
   keybegin = loadImage("assets/images/keybegin.png");
+  keyplayagain = loadImage("assets/images/playagain.png");
   instructionsscreen = loadImage("assets/images/instructions.png");
   keyboardinstruction = loadImage("assets/images/instruction1.png");
   mouseinstruction = loadImage("assets/images/instruction2.png");
@@ -73,6 +76,10 @@ function preload() {
   levelsixteenbackground = loadImage("assets/images/level16.png");
   levelseventeenbackground = loadImage("assets/images/level17.png");
   leveleighteenbackground = loadImage("assets/images/level18.png");
+  levelnineteenbackground = loadImage("assets/images/level19.png");
+  leveltwentybackground = loadImage("assets/images/level20.png");
+  leveltwentyonebackground = loadImage("assets/images/level21.png");
+  leveltwentytwobackground = loadImage("assets/images/level22.png");
   images[0] = loadImage("assets/images/onewaypipe.png");
   images[1] = loadImage("assets/images/twowaypipe.png");
   images[2] = loadImage("assets/images/threewaypipe.png");
@@ -104,7 +111,6 @@ var imageSwitcher = 0;
 function setup() {
   createCanvas(windowHeight, windowHeight);
   angleMode(DEGREES);
-
 }
 
 // Re-sizes the canvas to stretch along the window.
@@ -196,6 +202,22 @@ function draw() {
   else if (state === 'simulation18') {
     simulation();
     level18();
+  }
+  else if (state === 'simulation19') {
+    simulation();
+    level19();
+  }
+  else if (state === 'simulation20') {
+    simulation();
+    level20();
+  }
+  else if (state === 'simulation21') {
+    simulation();
+    level21();
+  }
+  else if (state === 'simulation22') {
+    simulation();
+    level22();
   }
   else if (state === `ending`) {
     ending();
@@ -324,6 +346,7 @@ function objective() {
 
 // Global simulation function.
 function simulation() {
+
 display();
 move();
 
@@ -359,11 +382,11 @@ function display() {
   pop();
 
   // 60 second timer.
-  if (counter == 120) { // This only happens every second.
-    counter = 60;
+  if (timecounter == 120) { // This only happens every second.
+    timecounter = 60;
     timeleft--;
   }
-  counter++;
+  timecounter++;
 
   if (timeleft === 0) {
     state = 'ending'
@@ -662,7 +685,7 @@ pop();
   }
 }
 
-// Level 16.
+// Level 18.
 function level18() {
 
 // Level background.
@@ -673,6 +696,74 @@ pop();
 
 // If the right conditions are met then it proceeds to the next level.
   if (grid.position === 8 && imageSwitcher === 2 && angle === 0) {
+    state = 'simulation19';
+    proceed.play(); // Plays a sound indicating success.
+    score++;
+  }
+}
+
+// Level 19.
+function level19() {
+
+// Level background.
+push();
+imageMode(CENTER);
+image(levelnineteenbackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+
+// If the right conditions are met then it proceeds to the next level.
+  if (grid.position === 5 && imageSwitcher === 2 && angle === 270) {
+    state = 'simulation20';
+    proceed.play(); // Plays a sound indicating success.
+    score++;
+  }
+}
+
+// Level 20.
+function level20() {
+
+// Level background.
+push();
+imageMode(CENTER);
+image(leveltwentybackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+
+// If the right conditions are met then it proceeds to the next level.
+  if (grid.position === 2 && imageSwitcher === 0 && angle === 90 || grid.position === 2 && imageSwitcher === 0 && angle === 270) {
+    state = 'simulation21';
+    proceed.play(); // Plays a sound indicating success.
+    score++;
+  }
+}
+
+// Level 21.
+function level21() {
+
+// Level background.
+push();
+imageMode(CENTER);
+image(leveltwentyonebackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+
+// If the right conditions are met then it proceeds to the next level.
+  if (grid.position === 8 && imageSwitcher === 2 && angle === 0) {
+    state = 'simulation22';
+    proceed.play(); // Plays a sound indicating success.
+    score++;
+  }
+}
+
+// Level 22.
+function level22() {
+
+// Level background.
+push();
+imageMode(CENTER);
+image(leveltwentytwobackground, windowHeight/2, windowHeight/2, windowHeight/1, windowHeight/1);
+pop();
+
+// If the right conditions are met then it proceeds to the next level.
+  if (grid.position === 4 && imageSwitcher === 1 && angle === 90) {
     state = 'simulation1';
     proceed.play(); // Plays a sound indicating success.
     score++;
@@ -697,6 +788,24 @@ function ending() {
   text(score+" POINTS", windowHeight/2, windowHeight/2);
   pop();
 
+  if (counter == 120) { // This only happens every second.
+    counter = 0;
+  }
+  counter++;
+
+  // Key Play Again.
+  // Samuel (TA) helped me out with this.
+  if (counter >= 30){
+  push();
+  imageMode(CENTER);
+  image(keyplayagain, windowHeight/2, windowHeight/1.1, windowHeight/1.7, windowHeight/3.5);
+  pop();
+  }
+
+  if (counter == 60) { // This only happens every second.
+  counter = 0;
+  }
+  counter++;
 }
 
 // Moves the user's pipe along the grid.
@@ -707,13 +816,13 @@ function move() {
     if (mouseY <= windowHeight/1.5) {
       if (mouseX >= windowHeight/3) {
         if (mouseY >= windowHeight/3) {
-          if(state === 'simulation1' || state === 'simulation2' || state === 'simulation9' || state === 'simulation10' || state === 'simulation11' || state === 'simulation12') {
+          if(state === 'simulation1' || state === 'simulation2' || state === 'simulation9' || state === 'simulation10' || state === 'simulation11' || state === 'simulation12' || state === 'simulation19' || state === 'simulation20') {
             pipe.x = windowHeight/2;
             pipe.y = windowHeight/2;
             pipe.position = 0;
           }
           if (mouseIsPressed) {
-            if(state === 'simulation1', 'simulation2', 'simulation3', 'simulation4', 'simulation5', 'simulation6', 'simulation7', 'simulation8', 'simulation9', 'simulation10', 'simulation11', 'simulation12', 'simulation13', 'simulation14', 'simulation15', 'simulation16', 'simulation17', 'simulation18') {
+            if(state === 'simulation1', 'simulation2', 'simulation3', 'simulation4', 'simulation5', 'simulation6', 'simulation7', 'simulation8', 'simulation9', 'simulation10', 'simulation11', 'simulation12', 'simulation13', 'simulation14', 'simulation15', 'simulation16', 'simulation17', 'simulation18', 'simulation19', 'simulation20', 'simulation21', 'simulation22') {
               pipe.x = windowHeight/2;
               pipe.y = windowHeight/2;
               grid.position = 5;
@@ -728,13 +837,13 @@ function move() {
   if (mouseX < windowHeight/3) {
     if (mouseY <= windowHeight/1.5) {
       if (mouseY >= windowHeight/3) {
-        if(state === 'simulation1' || state === 'simulation3' || state === 'simulation6' || state === 'simulation8' || state === 'simulation13' || state === 'simulation17') {
+        if(state === 'simulation1' || state === 'simulation3' || state === 'simulation6' || state === 'simulation8' || state === 'simulation13' || state === 'simulation17' || state === 'simulation22') {
           pipe.x = windowHeight/6;
           pipe.y = windowHeight/2;
           pipe.position = 0;
         }
         if (mouseIsPressed) {
-          if(state === 'simulation1', 'simulation2', 'simulation3', 'simulation4', 'simulation5', 'simulation6', 'simulation7', 'simulation8', 'simulation9', 'simulation10', 'simulation11', 'simulation12', 'simulation13', 'simulation14', 'simulation15', 'simulation16', 'simulation17', 'simulation18') {
+          if(state === 'simulation1', 'simulation2', 'simulation3', 'simulation4', 'simulation5', 'simulation6', 'simulation7', 'simulation8', 'simulation9', 'simulation10', 'simulation11', 'simulation12', 'simulation13', 'simulation14', 'simulation15', 'simulation16', 'simulation17', 'simulation18', 'simulation19', 'simulation20', 'simulation21', 'simulation22') {
             pipe.x = windowHeight/6;
             pipe.y = windowHeight/2;
             grid.position = 4;
@@ -748,13 +857,13 @@ function move() {
   if (mouseX > windowHeight/1.5) {
     if (mouseY <= windowHeight/1.5) {
       if (mouseY >= windowHeight/3) {
-        if(state === 'simulation1' || state === 'simulation5' || state === 'simulation7' || state === 'simulation8' || state === 'simulation9' || state === 'simulation14' || state === 'simulation15' || state === 'simulation17') {
+        if(state === 'simulation1' || state === 'simulation5' || state === 'simulation7' || state === 'simulation8' || state === 'simulation9' || state === 'simulation14' || state === 'simulation15' || state === 'simulation17' || state === 'simulation20' || state === 'simulation21') {
           pipe.x = windowHeight/1.2;
           pipe.y = windowHeight/2;
           pipe.position = 0;
         }
         if (mouseIsPressed) {
-          if(state === 'simulation1', 'simulation2', 'simulation3', 'simulation4', 'simulation5', 'simulation6', 'simulation7', 'simulation8', 'simulation9', 'simulation10', 'simulation11', 'simulation12', 'simulation13', 'simulation14', 'simulation15', 'simulation16', 'simulation17', 'simulation18') {
+          if(state === 'simulation1', 'simulation2', 'simulation3', 'simulation4', 'simulation5', 'simulation6', 'simulation7', 'simulation8', 'simulation9', 'simulation10', 'simulation11', 'simulation12', 'simulation13', 'simulation14', 'simulation15', 'simulation16', 'simulation17', 'simulation18', 'simulation19', 'simulation20', 'simulation21', 'simulation22') {
             pipe.x = windowHeight/1.2;
             pipe.y = windowHeight/2;
             grid.position = 6;
@@ -768,13 +877,13 @@ function move() {
   if (mouseX <= windowHeight/1.5) {
     if (mouseX >= windowHeight/3) {
       if (mouseY <= windowHeight/3) {
-        if(state === 'simulation4' || state === 'simulation11' || state === 'simulation15' || state === 'simulation18') {
+        if(state === 'simulation4' || state === 'simulation11' || state === 'simulation15' || state === 'simulation18' || state === 'simulation20') {
           pipe.x = windowHeight/2;
           pipe.y = windowHeight/6;
           pipe.position = 0;
         }
         if (mouseIsPressed) {
-          if(state === 'simulation1', 'simulation2', 'simulation3', 'simulation4', 'simulation5', 'simulation6', 'simulation7', 'simulation8', 'simulation9', 'simulation10', 'simulation11', 'simulation12', 'simulation13', 'simulation14', 'simulation15', 'simulation16', 'simulation17', 'simulation18') {
+          if(state === 'simulation1', 'simulation2', 'simulation3', 'simulation4', 'simulation5', 'simulation6', 'simulation7', 'simulation8', 'simulation9', 'simulation10', 'simulation11', 'simulation12', 'simulation13', 'simulation14', 'simulation15', 'simulation16', 'simulation17', 'simulation18', 'simulation19', 'simulation20', 'simulation21', 'simulation22') {
             pipe.x = windowHeight/2;
             pipe.y = windowHeight/6;
             grid.position = 2;
@@ -788,13 +897,13 @@ function move() {
   if (mouseX < windowHeight/3) {
     if (mouseY <= windowHeight/1.5) {
       if (mouseY <= windowHeight/3) {
-        if(state === 'simulation1' || state === 'simulation4' || state === 'simulation5' || state === 'simulation12' || state === 'simulation17' || state === 'simulation18') {
+        if(state === 'simulation1' || state === 'simulation4' || state === 'simulation5' || state === 'simulation12' || state === 'simulation17' || state === 'simulation18' || state === 'simulation19') {
           pipe.x = windowHeight/6;
             pipe.y = windowHeight/6;
               pipe.position = 0;
             }
         if (mouseIsPressed) {
-          if(state === 'simulation1', 'simulation2', 'simulation3', 'simulation4', 'simulation5', 'simulation6', 'simulation7', 'simulation8', 'simulation9', 'simulation10', 'simulation11', 'simulation12', 'simulation13', 'simulation14', 'simulation15', 'simulation16', 'simulation17', 'simulation18') {
+          if(state === 'simulation1', 'simulation2', 'simulation3', 'simulation4', 'simulation5', 'simulation6', 'simulation7', 'simulation8', 'simulation9', 'simulation10', 'simulation11', 'simulation12', 'simulation13', 'simulation14', 'simulation15', 'simulation16', 'simulation17', 'simulation18', 'simulation19', 'simulation20', 'simulation21', 'simulation22') {
             pipe.x = windowHeight/6;
               pipe.y = windowHeight/6;
                 grid.position = 1;
@@ -808,13 +917,13 @@ function move() {
   if (mouseX > windowHeight/1.5) {
     if (mouseY <= windowHeight/1.5) {
       if (mouseY <= windowHeight/3) {
-        if(state === 'simulation1' || state === 'simulation8' || state === 'simulation13' || state === 'simulation18') {
+        if(state === 'simulation1' || state === 'simulation8' || state === 'simulation13' || state === 'simulation18' || state === 'simulation22') {
           pipe.x = windowHeight/1.2;
           pipe.y = windowHeight/6;
           pipe.position = 0;
         }
         if (mouseIsPressed) {
-          if(state === 'simulation1', 'simulation2', 'simulation3', 'simulation4', 'simulation5', 'simulation6', 'simulation7', 'simulation8', 'simulation9', 'simulation10', 'simulation11', 'simulation12', 'simulation13', 'simulation14', 'simulation15', 'simulation16', 'simulation17', 'simulation18') {
+          if(state === 'simulation1', 'simulation2', 'simulation3', 'simulation4', 'simulation5', 'simulation6', 'simulation7', 'simulation8', 'simulation9', 'simulation10', 'simulation11', 'simulation12', 'simulation13', 'simulation14', 'simulation15', 'simulation16', 'simulation17', 'simulation18', 'simulation19', 'simulation20', 'simulation21', 'simulation22') {
             pipe.x = windowHeight/1.2;
             pipe.y = windowHeight/6;
             grid.position = 3;
@@ -828,13 +937,13 @@ function move() {
   if (mouseX <= windowHeight/1.5) {
     if (mouseY >= windowHeight/1.5) {
       if (mouseX >= windowHeight/3) {
-        if(state === 'simulation4' || state === 'simulation16' || state === 'simulation18') {
+        if(state === 'simulation4' || state === 'simulation16' || state === 'simulation18' || state === 'simulation20' || state === 'simulation21') {
           pipe.x = windowHeight/2;
           pipe.y = windowHeight/1.2;
           pipe.position = 0;
         }
         if (mouseIsPressed) {
-          if(state === 'simulation1', 'simulation2', 'simulation3', 'simulation4', 'simulation5', 'simulation6', 'simulation7', 'simulation8', 'simulation9', 'simulation10', 'simulation11', 'simulation12', 'simulation13', 'simulation14', 'simulation15', 'simulation16', 'simulation17', 'simulation18') {
+          if(state === 'simulation1', 'simulation2', 'simulation3', 'simulation4', 'simulation5', 'simulation6', 'simulation7', 'simulation8', 'simulation9', 'simulation10', 'simulation11', 'simulation12', 'simulation13', 'simulation14', 'simulation15', 'simulation16', 'simulation17', 'simulation18', 'simulation19', 'simulation20', 'simulation21', 'simulation22') {
             pipe.x = windowHeight/2;
             pipe.y = windowHeight/1.2;
             grid.position = 8;
@@ -854,7 +963,7 @@ function move() {
           pipe.position = 0;
         }
         if (mouseIsPressed) {
-          if(state === 'simulation1', 'simulation2', 'simulation3', 'simulation4', 'simulation5', 'simulation6', 'simulation7', 'simulation8', 'simulation9', 'simulation10', 'simulation11', 'simulation12', 'simulation13', 'simulation14', 'simulation15', 'simulation16', 'simulation17', 'simulation18') {
+          if(state === 'simulation1', 'simulation2', 'simulation3', 'simulation4', 'simulation5', 'simulation6', 'simulation7', 'simulation8', 'simulation9', 'simulation10', 'simulation11', 'simulation12', 'simulation13', 'simulation14', 'simulation15', 'simulation16', 'simulation17', 'simulation18', 'simulation19', 'simulation20', 'simulation21', 'simulation22') {
             pipe.x = windowHeight/6;
             pipe.y = windowHeight/1.2;
             grid.position = 7;
@@ -868,13 +977,13 @@ function move() {
   if (mouseX > windowHeight/1.5) {
     if (mouseY >= windowHeight/1.5) {
       if (mouseY >= windowHeight/3) {
-        if(state === 'simulation1' || state === 'simulation2' || state === 'simulation3' || state === 'simulation13') {
+        if(state === 'simulation1' || state === 'simulation2' || state === 'simulation3' || state === 'simulation13' || state === 'simulation20') {
           pipe.x = windowHeight/1.2;
           pipe.y = windowHeight/1.2;
           pipe.position = 0;
         }
         if (mouseIsPressed) {
-          if(state === 'simulation1', 'simulation2', 'simulation3', 'simulation4', 'simulation5', 'simulation6', 'simulation7', 'simulation8', 'simulation9', 'simulation10', 'simulation11', 'simulation12', 'simulation13', 'simulation14', 'simulation15', 'simulation16', 'simulation17', 'simulation18') {
+          if(state === 'simulation1', 'simulation2', 'simulation3', 'simulation4', 'simulation5', 'simulation6', 'simulation7', 'simulation8', 'simulation9', 'simulation10', 'simulation11', 'simulation12', 'simulation13', 'simulation14', 'simulation15', 'simulation16', 'simulation17', 'simulation18', 'simulation19', 'simulation20', 'simulation21', 'simulation22') {
             pipe.x = windowHeight/1.2;
             pipe.y = windowHeight/1.2;
             grid.position = 9;
@@ -906,6 +1015,19 @@ function keyPressed() {
   else if (state === 'objective') {
     state = 'simulation1';
     next.play(); // Plays a sound that indicates going to the next screen.
+  }
+  else if (state === 'ending') { // Play again feature.
+    if (keyCode == 27) { // Hitting "ESC" goes back to the title page and resets everything.
+      state = 'title';
+      counter = 0;
+      counter = 0;
+      pipe.position = undefined;
+      grid.position = undefined;
+      score = 0;
+      timeleft = 60;
+      imageSwitcher = 0;
+      angle = 0;
+    }
   }
 
 // Switching and rorating pipes is only allowed if the user is within the simulations.
@@ -941,6 +1063,6 @@ function keyPressed() {
         angle = 270;
         }
     }
-
   }
+
 }
