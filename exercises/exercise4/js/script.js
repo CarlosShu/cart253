@@ -17,6 +17,8 @@ let bubbleamountSize = 20; // Bubble amount size.
 let smallbubbleamount = []; // Calling card of the array.
 let smallbubbleamountSize = 40; // Bubble amount size.
 
+let timecounter = 0;
+
 // Fonts variables.
 let lemonfont;
 
@@ -26,11 +28,14 @@ let waterimage;
 let lightimage;
 let bgimage;
 let titleimage;
-let enterimage;
 let instructionsimage;
-
 let bubbleimage;
 let smallbubbleimage;
+
+// Audio variables.
+let underwater;
+let bubblepop;
+let highbubblepop;
 
 // State.
 let state = "title";
@@ -44,13 +49,20 @@ function preload() {
   cursorimage = loadImage("assets/images/cursor.png");
   bgimage = loadImage("assets/images/background.png");
   titleimage = loadImage("assets/images/title.png");
-  enterimage = loadImage("assets/images/enter.png");
   instructionsimage = loadImage("assets/images/instructions.png");
   waterimage = loadImage("assets/images/water.png");
   lightimage = loadImage("assets/images/light.png");
   bubbleimage = loadImage("assets/images/bubble.png");
   smallbubbleimage = loadImage("assets/images/smallbubble.png");
+
+  // Audio.
+  underwater = loadSound("assets/sounds/underwater.wav");
+  bubblepop = loadSound("assets/sounds/pop.wav");
+  highbubblepop = loadSound("assets/sounds/highpop.wav");
 }
+
+// Score variable.
+var score = 0;
 
 // Time left variable.
 var timeleft = 10;
@@ -83,11 +95,6 @@ function windowResized() {
 function draw() {
   background(bgimage);
 
-  push();
-  imageMode(CENTER);
-  image(cursorimage, mouseX, mouseY, 1000, 1000);
-  pop();
-
   if (state === "title") {
     smallbubbleAppear();
     bubbleAppear();
@@ -103,6 +110,11 @@ function draw() {
     bubbleAppear();
     waterOverlay();
     simulation();
+  } else if (state === "ending") {
+    smallbubbleAppear();
+    bubbleAppear();
+    waterOverlay();
+    ending();
   }
 }
 
@@ -131,6 +143,11 @@ function waterOverlay() {
   blendMode(OVERLAY);
   image(lightimage, width / 2, height / 2, width, height);
   pop();
+
+  push();
+  imageMode(CENTER);
+  image(cursorimage, mouseX, mouseY, 1000, 1000);
+  pop();
 }
 
 // Title function.
@@ -140,9 +157,13 @@ function title() {
   image(titleimage, width / 2, height / 2, width, height);
   pop();
 
+  // Play again.
   push();
-  imageMode(CENTER);
-  image(enterimage, width / 2, height / 1.1, width / 4, height / 4);
+  textAlign(CENTER, CENTER);
+  textFont(lemonfont);
+  textSize(15);
+  fill(255, 255, 255);
+  text("Press ENTER to play.", width / 2, height / 1.1);
   pop();
 }
 
@@ -159,12 +180,42 @@ function simulation() {
   push();
   textAlign(CENTER, CENTER);
   textFont(lemonfont);
-  textSize(windowHeight / 30);
+  textSize(15);
   fill(255, 255, 255);
-  text("Time: " + timeleft, width / 2, height / 2);
+  text("Time: " + timeleft, width / 2, height / 1.1);
   pop();
+
+  // 10 second timer.
+  if (timecounter == 70) {
+    // This only happens every second.
+    timecounter = 10;
+    timeleft--;
+  }
+  timecounter++;
+
+  if (timeleft === 0) {
+    state = "ending";
+  }
 }
 
+function ending() {
+  // Score.
+  push();
+  textAlign(CENTER, CENTER);
+  textFont(lemonfont);
+  textSize(50);
+  fill(255, 255, 255);
+  text("Your Score: " + score, width / 2, height / 2);
+  pop();
+  // Play again.
+  push();
+  textAlign(CENTER, CENTER);
+  textFont(lemonfont);
+  textSize(15);
+  fill(255, 255, 255);
+  text("Press ESC to play again.", width / 2, height / 1.1);
+  pop();
+}
 function bubbleAppear() {
   // Counter for arrays. Less than four moving bubble.
   for (let i = 0; i < bubbleamount.length; i++) {
@@ -220,6 +271,18 @@ function movebubble(bubble) {
   if (bubble.y === -bubble.marginy) {
     bubble.x = random(-bubble.marginx, width + bubble.marginx);
     bubble.y = height + bubble.marginy;
+  }
+
+  let bubbled = dist(bubble.x, bubble.y, mouseX, mouseY);
+  if (state === "simulation") {
+    if (mouseIsPressed) {
+      if (bubbled < bubble.size / 1.5) {
+        score = score + 1;
+        bubble.x = random(-bubble.marginx, width + bubble.marginx);
+        bubble.y = height + bubble.marginy;
+        bubblepop.play();
+      }
+    }
   }
 }
 
@@ -280,6 +343,21 @@ function movesmallbubble(smallbubble) {
     smallbubble.x = random(-smallbubble.marginx, width + smallbubble.marginx);
     smallbubble.y = height + smallbubble.marginy;
   }
+
+  let smallbubbled = dist(smallbubble.x, smallbubble.y, mouseX, mouseY);
+  if (state === "simulation") {
+    if (mouseIsPressed) {
+      if (smallbubbled < smallbubble.size) {
+        score = score + 1;
+        smallbubble.x = random(
+          -smallbubble.marginx,
+          width + smallbubble.marginx
+        );
+        smallbubble.y = height + smallbubble.marginy;
+        highbubblepop.play();
+      }
+    }
+  }
 }
 
 // Displays the smallbubbles.
@@ -299,11 +377,19 @@ function displaysmallbubble(smallbubble) {
 // Key press function.
 function keyPressed() {
   // Switch from title to instructions.
-  if (keyCode == 13) {
-    if (state === "title") {
+  if (state === "title") {
+    if (keyCode == 13) {
       state = "instructions";
-    } else if (state === "instructions") {
+    }
+  } else if (state === "instructions") {
+    if (keyCode == 13) {
       state = "simulation";
+    }
+  } else if (state === "ending") {
+    if (keyCode == 27) {
+      state = "title";
+      score = 0;
+      timeleft = 10;
     }
   }
 }
