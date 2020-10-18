@@ -28,7 +28,6 @@ let waterimage;
 let lightimage;
 let bgimage;
 let titleimage;
-let instructionsimage;
 let bubbleimage;
 let smallbubbleimage;
 
@@ -49,7 +48,6 @@ function preload() {
   cursorimage = loadImage("assets/images/cursor.png");
   bgimage = loadImage("assets/images/background.png");
   titleimage = loadImage("assets/images/title.png");
-  instructionsimage = loadImage("assets/images/instructions.png");
   waterimage = loadImage("assets/images/water.png");
   lightimage = loadImage("assets/images/light.png");
   bubbleimage = loadImage("assets/images/bubble.png");
@@ -120,30 +118,35 @@ function draw() {
 
 // Global lighting.
 function waterOverlay() {
+  // Color overlay.
   push();
   imageMode(CENTER);
   blendMode(OVERLAY);
   image(waterimage, width / 2, height / 2, width, height);
   pop();
 
+  // Light overlay.
   push();
   imageMode(CENTER);
   blendMode(OVERLAY);
   image(lightimage, width / 2, height / 2, width, height);
   pop();
 
+  // Color overlay.
   push();
   imageMode(CENTER);
   blendMode(OVERLAY);
   image(waterimage, width / 2, height / 2, width, height);
   pop();
 
+  // Light overlay.
   push();
   imageMode(CENTER);
   blendMode(OVERLAY);
   image(lightimage, width / 2, height / 2, width, height);
   pop();
 
+  // Cursor Image.
   push();
   imageMode(CENTER);
   image(cursorimage, mouseX, mouseY, 1000, 1000);
@@ -167,11 +170,15 @@ function title() {
   pop();
 }
 
-// Title function.
+// Instructions function.
 function instructions() {
+  // Instructions
   push();
-  imageMode(CENTER);
-  image(instructionsimage, width / 2, height / 2, width, height);
+  textAlign(CENTER, CENTER);
+  textFont(lemonfont);
+  textSize(30);
+  fill(255, 255, 255);
+  text("Pop as many bubbles as you can in 10 seconds!", width / 2, height / 2);
   pop();
 }
 
@@ -193,11 +200,13 @@ function simulation() {
   }
   timecounter++;
 
+  // Goes to ending state once 10 seconds have passed.
   if (timeleft === 0) {
     state = "ending";
   }
 }
 
+// Ending function.
 function ending() {
   // Score.
   push();
@@ -237,7 +246,7 @@ function createbubble(x, y) {
   let bubble = {
     x: x,
     y: y,
-    size: undefined,
+    size: 50,
     vx: 0,
     vy: 0,
     marginx: 30,
@@ -259,9 +268,6 @@ function movebubble(bubble) {
   // Move the bubble
   bubble.x = bubble.x + bubble.vx;
   bubble.y = bubble.y + bubble.vy;
-
-  // Bubble size.
-  bubble.size = 50;
 
   // Constrain the bubble to the canvas
   bubble.x = constrain(bubble.x, -bubble.marginx, width + bubble.marginx);
@@ -300,7 +306,7 @@ function createsmallbubble(x, y) {
   let smallbubble = {
     x: x,
     y: y,
-    size: undefined,
+    size: 25,
     vx: 0,
     vy: 0,
     marginx: 20,
@@ -322,9 +328,6 @@ function movesmallbubble(smallbubble) {
   // Move the smallbubble
   smallbubble.x = smallbubble.x + smallbubble.vx;
   smallbubble.y = smallbubble.y + smallbubble.vy;
-
-  // smallbubble size.
-  smallbubble.size = 25;
 
   // Constrain the smallbubble to the canvas
   smallbubble.x = constrain(
