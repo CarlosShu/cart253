@@ -30,6 +30,8 @@ let avatarrunningrightimage;
 let avatarrunningleftimage;
 let avatarcrouchedrightimage;
 let avatarcrouchedleftimage;
+let avatarjumprightimage;
+let avatarjumpleftimage;
 
 // State Variables.
 let state = "titlemenu";
@@ -49,6 +51,7 @@ let avatar = {
   maxHeight: 15,
   face: 0,
   crouched: 0,
+  jump: 0,
 };
 
 // Preload Function.
@@ -84,6 +87,8 @@ function preload() {
   avatarcrouchedleftimage = loadImage(
     "assets/images/avatar/avatarcrouchedleft.png"
   );
+  avatarjumprightimage = loadImage("assets/images/avatar/avatarjumpright.png");
+  avatarjumpleftimage = loadImage("assets/images/avatar/avatarjumpleft.png");
 }
 
 // Setup Function.
@@ -136,7 +141,7 @@ function titlemenu() {
     push();
     textAlign(CENTER, CENTER);
     textFont(blockfont);
-    textSize(20);
+    textSize(15);
     fill(255, 255, 255);
     text("PRESS ENTER TO PLAY", 650, 600);
     pop();
@@ -173,6 +178,15 @@ function game() {
   imageMode(CENTER);
   image(headerimage, width / 2, height / 2, 1300, 650);
   pop();
+
+  // Instructions.
+  push();
+  textAlign(CENTER, CENTER);
+  textFont(blockfont);
+  textSize(15);
+  fill(255, 255, 255);
+  text("USE THE WASD KEYS TO MOVE, JUMP, AND CROUCH.", 650, 600);
+  pop();
 }
 
 function player() {
@@ -184,9 +198,9 @@ function player() {
   avatar.x = constrain(avatar.x, 0, 1300);
   avatar.y = constrain(avatar.y, 300, 400);
 
-  if (avatar.vx < 0) {
+  if (avatar.vx < 0 && avatar.jump == 0) {
     image(avatarrunningleftimage, avatar.x, avatar.y, avatar.size, avatar.size);
-  } else if (avatar.vx > 0) {
+  } else if (avatar.vx > 0 && avatar.jump == 0) {
     image(
       avatarrunningrightimage,
       avatar.x,
@@ -194,9 +208,19 @@ function player() {
       avatar.size,
       avatar.size
     );
-  } else if (avatar.vx == 0 && avatar.face == 0 && avatar.crouched == 0) {
+  } else if (
+    avatar.vx == 0 &&
+    avatar.face == 0 &&
+    avatar.crouched == 0 &&
+    avatar.jump == 0
+  ) {
     image(avataridlerightimage, avatar.x, avatar.y, avatar.size, avatar.size);
-  } else if (avatar.vx == 0 && avatar.face == 1 && avatar.crouched == 0) {
+  } else if (
+    avatar.vx == 0 &&
+    avatar.face == 1 &&
+    avatar.crouched == 0 &&
+    avatar.jump == 0
+  ) {
     image(avataridleleftimage, avatar.x, avatar.y, avatar.size, avatar.size);
   } else if (avatar.vx == 0 && avatar.face == 0 && avatar.crouched == 1) {
     image(
@@ -214,6 +238,10 @@ function player() {
       avatar.size,
       avatar.size
     );
+  } else if (avatar.face == 0 && avatar.crouched == 0 && avatar.jump == 1) {
+    image(avatarjumprightimage, avatar.x, avatar.y, avatar.size, avatar.size);
+  } else if (avatar.face == 1 && avatar.crouched == 0 && avatar.jump == 1) {
+    image(avatarjumpleftimage, avatar.x, avatar.y, avatar.size, avatar.size);
   }
   pop();
 
@@ -230,6 +258,7 @@ function player() {
   } else {
     avatar.vx = 0;
     avatar.crouched = 0;
+    avatar.jump = 0;
   }
 
   // Avatar Running Velocity.
@@ -243,6 +272,12 @@ function player() {
   if (avatar.y >= 400) {
     avatar.vy = 0;
     avatar.y = 400;
+  }
+  if (avatar.y < 400) {
+    avatar.jump = 1;
+  }
+  if (avatar.y == 400) {
+    avatar.jump = 0;
   }
 }
 
