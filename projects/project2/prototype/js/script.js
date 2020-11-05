@@ -30,8 +30,13 @@ let avatarrunningrightimage;
 let avatarrunningleftimage;
 let avatarcrouchedrightimage;
 let avatarcrouchedleftimage;
-let avatarjumprightimage;
-let avatarjumpleftimage;
+let avatarjumpright1image;
+let avatarjumpright2image;
+let avatarjumpleft1image;
+let avatarjumpleft2image;
+
+// Shapes variables.
+let cubeimage;
 
 // State Variables.
 let state = "titlemenu";
@@ -39,7 +44,7 @@ let state = "titlemenu";
 // Number Variables.
 let counter = 0;
 
-// avatar Variable
+// Avatar Variable.
 let avatar = {
   x: undefined,
   y: undefined,
@@ -52,6 +57,13 @@ let avatar = {
   face: 0,
   crouched: 0,
   jump: 0,
+};
+
+// Cube Variable.
+let cube = {
+  x: 690,
+  y: 393,
+  size: 80,
 };
 
 // Preload Function.
@@ -87,14 +99,23 @@ function preload() {
   avatarcrouchedleftimage = loadImage(
     "assets/images/avatar/avatarcrouchedleft.png"
   );
-  avatarjumprightimage = loadImage("assets/images/avatar/avatarjumpright.png");
-  avatarjumpleftimage = loadImage("assets/images/avatar/avatarjumpleft.png");
+  avatarjumpright1image = loadImage(
+    "assets/images/avatar/avatarjumpright1.png"
+  );
+  avatarjumpright2image = loadImage(
+    "assets/images/avatar/avatarjumpright2.png"
+  );
+  avatarjumpleft1image = loadImage("assets/images/avatar/avatarjumpleft1.png");
+  avatarjumpleft2image = loadImage("assets/images/avatar/avatarjumpleft2.png");
+
+  // Shapes visuals.
+  cubeimage = loadImage("assets/images/shapes/cube.png");
 }
 
 // Setup Function.
 function setup() {
   // Avatar starts in this position.
-  avatar.x = 650;
+  avatar.x = 350;
   avatar.y = 400;
 }
 
@@ -113,6 +134,7 @@ function draw() {
     titlemenu();
   } else if (state === "game") {
     game();
+    level1();
     player();
   }
 }
@@ -166,13 +188,6 @@ function game() {
   image(gamegroundimage, width / 2, height / 2, 1300, 650);
   pop();
 
-  // Global Overlay.
-  push();
-  imageMode(CENTER);
-  blendMode(OVERLAY);
-  image(overlayimage, width / 2, height / 2, 1300, 650);
-  pop();
-
   // Global Header.
   push();
   imageMode(CENTER);
@@ -189,6 +204,13 @@ function game() {
   pop();
 }
 
+function level1() {
+  // Cube.
+  push();
+  imageMode(CENTER);
+  image(cubeimage, cube.x, cube.y, cube.size, cube.size);
+  pop();
+}
 function player() {
   // Avatar Idle Animation.
   push();
@@ -239,9 +261,13 @@ function player() {
       avatar.size
     );
   } else if (avatar.face == 0 && avatar.crouched == 0 && avatar.jump == 1) {
-    image(avatarjumprightimage, avatar.x, avatar.y, avatar.size, avatar.size);
+    image(avatarjumpright1image, avatar.x, avatar.y, avatar.size, avatar.size);
+  } else if (avatar.face == 0 && avatar.crouched == 0 && avatar.jump == 2) {
+    image(avatarjumpright2image, avatar.x, avatar.y, avatar.size, avatar.size);
   } else if (avatar.face == 1 && avatar.crouched == 0 && avatar.jump == 1) {
-    image(avatarjumpleftimage, avatar.x, avatar.y, avatar.size, avatar.size);
+    image(avatarjumpleft1image, avatar.x, avatar.y, avatar.size, avatar.size);
+  } else if (avatar.face == 1 && avatar.crouched == 0 && avatar.jump == 2) {
+    image(avatarjumpleft2image, avatar.x, avatar.y, avatar.size, avatar.size);
   }
   pop();
 
@@ -276,8 +302,21 @@ function player() {
   if (avatar.y < 400) {
     avatar.jump = 1;
   }
+  if (avatar.y < 350) {
+    avatar.jump = 2;
+  }
   if (avatar.y == 400) {
     avatar.jump = 0;
+  }
+  if (
+    avatar.x > cube.x - cube.size / 1.5 &&
+    avatar.x < cube.x + cube.size / 1.5 &&
+    avatar.y + avatar.size / 2 > cube.y - cube.size / 1.8 &&
+    avatar.y - avatar.size / 2 < cube.y + cube.size / 1.8
+  ) {
+    let dy = avatar.y - cube.y;
+    avatar.vy = avatar.vy + map(dy, -cube.size / 2, cube.size / 2, -1, 1);
+    avatar.x = avatar.x - 4;
   }
 }
 
