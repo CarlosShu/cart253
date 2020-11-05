@@ -1,0 +1,19 @@
+// Avatar idle animation.
+if (counter >= 30) {
+  // Avatar Idle.
+  push();
+  imageMode(CENTER);
+  image(avataridle1image, avatar.x, avatar.y, avatar.size, avatar.size);
+  pop();
+}
+if (counter < 30) {
+  push();
+  imageMode(CENTER);
+  image(avataridle2image, avatar.x, avatar.y, avatar.size, avatar.size);
+  pop();
+}
+if (counter == 60) {
+  // This only happens every second.
+  counter = 0;
+}
+counter++;
