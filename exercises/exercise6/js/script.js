@@ -6,6 +6,8 @@ Exercise that makes use of the p5 sound library in order to further the bigger p
 **************************************************/
 // Strict command.
 "use strict";
+// Fonts variables.
+let blockfont;
 
 // Global Visuals variables.
 let headerimage;
@@ -50,6 +52,9 @@ let notes = ["F3", "G3", "Ab4", " Bb4", "C4", "Db4", "Eb4", "F4"];
 
 // Preload Function.
 function preload() {
+  // Fonts.
+  blockfont = loadFont("assets/block.ttf"); // Practically the Nintendo Logo Font.
+
   // Global Visuals.
   headerimage = loadImage("assets/images/global/header.png");
   overlayimage = loadImage("assets/images/global/overlay.png");
@@ -141,6 +146,15 @@ function global() {
   push();
   imageMode(CENTER);
   image(headerimage, width / 2, height / 2, 1300, 650);
+  pop();
+
+  // Instructions.
+  push();
+  textAlign(CENTER, CENTER);
+  textFont(blockfont);
+  textSize(15);
+  fill(255, 255, 255);
+  text("USE THE WASD KEYS TO MOVE, JUMP, AND CROUCH.", 650, 600);
   pop();
 }
 
