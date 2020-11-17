@@ -13,15 +13,14 @@ let blockfont;
 
 // Global Visuals variables.
 let headerimage;
-let overlayimage;
+let lightoverlayimage;
 
 // Title Menu Visuals variables.
-let titlemenubgimage;
 let titlemenulogoimage;
 
 // Game Visuals variables.
 let gamebackgroundimage;
-let gamebackgroundelementsimage;
+let gamedistanceshadowimage;
 let gamegroundimage;
 
 // Avatar Visuals variables.
@@ -36,8 +35,14 @@ let avatarjumpright2image;
 let avatarjumpleft1image;
 let avatarjumpleft2image;
 
-// State Variable.
-let state = "game";
+// Starting State Variable.
+let state = "titlemenu";
+
+// FPS variable.
+let fr = 60;
+
+// Number Variables.
+let counter = 0;
 
 // Gravity variable.
 let gravityForce = 0.025;
@@ -57,16 +62,15 @@ function preload() {
 
   // Global Visuals.
   headerimage = loadImage("assets/images/global/header.png");
-  overlayimage = loadImage("assets/images/global/overlay.png");
+  lightoverlayimage = loadImage("assets/images/global/overlay.png");
 
   // Title Menu Visuals.
-  titlemenubgimage = loadImage("assets/images/titlemenu/titlemenubg.png");
   titlemenulogoimage = loadImage("assets/images/titlemenu/titlemenulogo.png");
 
   // Game Visuals.
   gamebackgroundimage = loadImage("assets/images/game/gamebackground.png");
-  gamebackgroundelementsimage = loadImage(
-    "assets/images/game/gamebackgroundelments.png"
+  gamedistanceshadowimage = loadImage(
+    "assets/images/game/gamedistanceshadow.png"
   );
   gamegroundimage = loadImage("assets/images/game/gameground.png");
 
@@ -95,13 +99,16 @@ function preload() {
 
 // Setup function.
 function setup() {
+  // FPS.
+  frameRate(fr);
+  // Audio.
   userStartAudio();
-  ground = new Ground(650, 425, 1300, 10);
-  ground2 = new Ground(400, 350, 400, 10);
+  ground = new Ground(650, 425, 1300, 0);
+  ground2 = new Ground(400, 375, 100, 100);
 
   for (let i = 0; i < numavatars; i++) {
     // Avatar X and Y spawn.
-    let x = 650;
+    let x = 800;
     let y = -100;
 
     let avatar = new Avatar(x, y);
@@ -119,8 +126,10 @@ function draw() {
   createCanvas(1300, 650);
   background(0);
 
-  // States.
-  if (state === "game") {
+  if (state === "titlemenu") {
+    titlemenu();
+    global();
+  } else if (state === "game") {
     game();
     avatar();
     global();
@@ -129,19 +138,57 @@ function draw() {
 
 // Global function.
 function global() {
+  // Light Overlay.
+  push();
+  imageMode(CENTER);
+  image(lightoverlayimage, width / 2, height / 2, 1300, 650);
+  pop();
+
   // Global Header.
   push();
   imageMode(CENTER);
   image(headerimage, width / 2, height / 2, 1300, 650);
   pop();
 
-  // Instructions.
+  if (state === "titlemenu") {
+    if (counter >= 30) {
+      // Press Enter.
+      push();
+      textAlign(CENTER, CENTER);
+      textFont(blockfont);
+      textSize(15);
+      fill(255, 255, 255);
+      text("PRESS ENTER TO PLAY", 650, 600);
+      pop();
+    }
+    if (counter == 60) {
+      // This only happens every second.
+      counter = 0;
+    }
+    counter++;
+  } else if (state === "game") {
+    // Instructions.
+    push();
+    textAlign(CENTER, CENTER);
+    textFont(blockfont);
+    textSize(15);
+    fill(255, 255, 255);
+    text("USE THE WASD KEYS TO MOVE, JUMP, AND CROUCH.", 650, 600);
+    pop();
+  }
+}
+
+function titlemenu() {
+  // Game Background.
   push();
-  textAlign(CENTER, CENTER);
-  textFont(blockfont);
-  textSize(15);
-  fill(255, 255, 255);
-  text("USE THE WASD KEYS TO MOVE, JUMP, AND CROUCH.", 650, 600);
+  imageMode(CENTER);
+  image(gamebackgroundimage, width / 2, height / 2, 2600, 1300);
+  pop();
+
+  // Title Menu Logo.
+  push();
+  imageMode(CENTER);
+  image(titlemenulogoimage, width / 2, height / 2, 1300, 650);
   pop();
 }
 
@@ -150,13 +197,19 @@ function game() {
   // Game Background.
   push();
   imageMode(CENTER);
-  image(gamebackgroundimage, width / 2, height / 2, 1300, 650);
+  image(gamebackgroundimage, width / 2, height / 2, 2600, 1300);
   pop();
 
   // Game Ground.
   push();
   imageMode(CENTER);
-  image(gamegroundimage, width / 2, height / 2, 1300, 650);
+  image(gamegroundimage, width / 2, height / 2, 2600, 1300);
+  pop();
+
+  // Game Distance Shadow.
+  push();
+  imageMode(CENTER);
+  image(gamedistanceshadowimage, width / 2, height / 2, 1300, 650);
   pop();
 }
 
@@ -173,6 +226,16 @@ function avatar() {
       avatar.move();
       avatar.collide(ground);
       avatar.display();
+    }
+  }
+}
+
+// Keypress function.
+function keyPressed() {
+  // Switch from titlemenu to game.
+  if (state === "titlemenu") {
+    if (keyCode == 13) {
+      state = "game";
     }
   }
 }

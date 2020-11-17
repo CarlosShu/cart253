@@ -13,6 +13,7 @@ class Avatar {
     this.face = 0;
     this.crouched = 0;
     this.jump = 0;
+    this.run = 0;
   }
 
   gravity(force) {
@@ -33,9 +34,11 @@ class Avatar {
     if (keyIsDown(65)) {
       this.vx = -this.speed;
       this.face = 1;
+      this.run = 1;
     } else if (keyIsDown(68)) {
       this.vx = this.speed;
       this.face = 0;
+      this.run = 2;
     } else if (keyIsDown(83)) {
       this.vx = 0;
       this.crouched = 1;
@@ -43,6 +46,7 @@ class Avatar {
       this.vx = 0;
       this.crouched = 0;
       this.jump = 0;
+      this.run = 0;
     }
 
     if (this.y - this.size / 2 > height) {
@@ -52,14 +56,10 @@ class Avatar {
 
   collide(ground) {
     if (
-      (this.x > ground.x - ground.width / 2 &&
-        this.x < ground.x + ground.width / 2 &&
-        this.y + this.size / 2 > ground.y - ground.height / 2 &&
-        this.y - this.size / 2 < ground.y + ground.height / 2) ||
-      (this.x > ground2.x - ground2.width / 2 &&
-        this.x < ground2.x + ground2.width / 2 &&
-        this.y + this.size / 2 > ground2.y - ground2.height &&
-        this.y - this.size / 2 < ground2.y + ground2.height)
+      this.x > ground.x - ground.width / 2 &&
+      this.x < ground.x + ground.width / 2 &&
+      this.y + this.size / 2 > ground.y - ground.height / 2 &&
+      this.y - this.size / 2 < ground.y + ground.height / 2
     ) {
       this.vy = 0;
       this.ay = 0;
@@ -67,17 +67,15 @@ class Avatar {
       this.jump = 0;
 
       // Jump.
-      if (keyIsPressed === true) {
-        if (keyCode === 87) {
-          this.vy = -7;
-          this.ay = 0;
-          gravityForce = 0;
-          this.jump = 2;
-        }
+      if (keyIsDown(87)) {
+        this.vy = -7;
+        this.ay = 0;
+        gravityForce = 0;
+        this.jump = 2;
       }
-
-      // If avatar leaves the ground the gravity goes back to normal.
-    } else {
+    }
+    // If avatar leaves the ground the gravity goes back to normal.
+    else {
       gravityForce = 0.025;
       this.jump = 2;
 
@@ -86,14 +84,45 @@ class Avatar {
         gravityForce = gravityForce + 0.1;
       }
     }
+
+    // // Solid block test.
+    // if (
+    //   this.x > ground2.x - ground2.width / 2 &&
+    //   this.x < ground2.x + ground2.width / 2
+    // ) {
+    //   this.vx = -this.speed;
+    // } else if (
+    //   this.x > ground2.x - ground2.width / 2 &&
+    //   this.x < ground2.x + ground2.width / 2
+    // ) {
+    //   this.vx = this.speed;
+    // }
+
+    let d = dist(this.x, this.y, ground2.x, ground2.y);
+    if (
+      this.x < ground2.x - ground2.width / 2 &&
+      this.x < ground2.x + ground2.width / 2 &&
+      d < this.size / 2 + ground2.width / 2 &&
+      d < this.size + ground2.height
+    ) {
+      this.vx = -this.speed;
+    }
+    if (
+      this.x > ground2.x - ground2.width / 2 &&
+      this.x > ground2.x + ground2.width / 2 &&
+      d < this.size / 2 + ground2.width / 2 &&
+      d < this.size + ground2.height
+    ) {
+      this.vx = this.speed;
+    }
   }
 
   display() {
     push();
     imageMode(CENTER);
-    if (this.vx < 0 && this.jump == 0) {
+    if (this.run == 1 && this.jump == 0) {
       image(avatarrunningleftimage, this.x, this.y, this.size, this.size);
-    } else if (this.vx > 0 && this.jump == 0) {
+    } else if (this.run == 2 && this.jump == 0) {
       image(avatarrunningrightimage, this.x, this.y, this.size, this.size);
     } else if (
       this.vx == 0 &&
@@ -103,13 +132,13 @@ class Avatar {
     ) {
       image(avataridlerightimage, this.x, this.y, this.size, this.size);
     } else if (
-      this.vx == 0 &&
+      this.run == 0 &&
       this.face == 1 &&
       this.crouched == 0 &&
       this.jump == 0
     ) {
       image(avataridleleftimage, this.x, this.y, this.size, this.size);
-    } else if (this.vx == 0 && this.face == 0 && this.crouched == 1) {
+    } else if (this.run == 0 && this.face == 0 && this.crouched == 1) {
       image(avatarcrouchedrightimage, this.x, this.y, this.size, this.size);
     } else if (this.vx == 0 && this.face == 1 && this.crouched == 1) {
       image(avatarcrouchedleftimage, this.x, this.y, this.size, this.size);
@@ -117,7 +146,21 @@ class Avatar {
       image(avatarjumpright2image, this.x, this.y, this.size, this.size);
     } else if (this.face == 1 && this.crouched == 0 && this.jump == 2) {
       image(avatarjumpleft2image, this.x, this.y, this.size, this.size);
+    } else if (
+      this.vx > 0 &&
+      this.face == 0 &&
+      this.crouched == 1 &&
+      this.jump == 2
+    ) {
+      image(avatarcrouchedrightimage, this.x, this.y, this.size, this.size);
+    } else if (
+      this.vx < 0 &&
+      this.face == 1 &&
+      this.crouched == 1 &&
+      this.jump == 2
+    ) {
+      image(avatarcrouchedleftimage, this.x, this.y, this.size, this.size);
+      pop();
     }
-    pop();
   }
 }
