@@ -6,9 +6,11 @@ class Avatar {
     this.vy = 0;
     this.ax = 0;
     this.ay = 0;
+    this.jumpheight = 7.5;
     this.maxSpeed = 10;
     this.speed = 4;
-    this.size = 70;
+    this.width = 50;
+    this.height = 75;
     this.active = true;
     this.face = 0;
     this.crouched = 0;
@@ -58,8 +60,8 @@ class Avatar {
     if (
       this.x > ground.x - ground.width / 2 &&
       this.x < ground.x + ground.width / 2 &&
-      this.y + this.size / 2 > ground.y - ground.height / 2 &&
-      this.y - this.size / 2 < ground.y + ground.height / 2
+      this.y + this.height / 2 > ground.y - ground.height / 2 &&
+      this.y - this.height / 2 < ground.y + ground.height / 2
     ) {
       this.vy = 0;
       this.ay = 0;
@@ -68,7 +70,7 @@ class Avatar {
 
       // Jump.
       if (keyIsDown(87)) {
-        this.vy = -7;
+        this.vy = -this.jumpheight;
         this.ay = 0;
         gravityForce = 0;
         this.jump = 2;
@@ -85,35 +87,126 @@ class Avatar {
       }
     }
 
-    // // Solid block test.
-    // if (
-    //   this.x > ground2.x - ground2.width / 2 &&
-    //   this.x < ground2.x + ground2.width / 2
-    // ) {
-    //   this.vx = -this.speed;
-    // } else if (
-    //   this.x > ground2.x - ground2.width / 2 &&
-    //   this.x < ground2.x + ground2.width / 2
-    // ) {
-    //   this.vx = this.speed;
-    // }
+    // Collides with Cube.
+    let dcube = dist(this.x, this.y, cube.x, cube.y);
+    if (
+      this.x < cube.x - cube.width / 1.9 &&
+      this.x < cube.x + cube.width / 1.9 &&
+      dcube < this.width / 1.9 + cube.width / 1.9 &&
+      dcube < this.height + cube.height &&
+      this.vx == this.speed
+    ) {
+      this.vx = 0;
+    } else if (
+      this.x > cube.x - cube.width / 1.9 &&
+      this.x > cube.x + cube.width / 1.9 &&
+      dcube < this.width / 1.9 + cube.width / 1.9 &&
+      dcube < this.height + cube.height &&
+      this.vx == -this.speed
+    ) {
+      this.vx = 0;
+    } else if (
+      this.x > cube.x - cube.width / 1.9 &&
+      this.x < cube.x + cube.width / 1.9 &&
+      this.y + this.height / 2.25 > cube.y - cube.height / 2.25 &&
+      this.y - this.height / 2.25 < cube.y + cube.height / 2.25
+    ) {
+      this.vy = 0;
+      this.ay = 0;
+      gravityForce = 0.0;
+      this.jump = 0;
 
-    let d = dist(this.x, this.y, ground2.x, ground2.y);
-    if (
-      this.x < ground2.x - ground2.width / 2 &&
-      this.x < ground2.x + ground2.width / 2 &&
-      d < this.size / 2 + ground2.width / 2 &&
-      d < this.size + ground2.height
-    ) {
-      this.vx = -this.speed;
+      // Jump.
+      if (keyIsDown(87)) {
+        this.vy = -this.jumpheight;
+        this.ay = 0;
+        gravityForce = 0;
+        this.jump = 2;
+      }
     }
+
+    // Collides with Cubewide.
+    let dcubewide = dist(this.x, this.y, cubewide.x, cubewide.y);
     if (
-      this.x > ground2.x - ground2.width / 2 &&
-      this.x > ground2.x + ground2.width / 2 &&
-      d < this.size / 2 + ground2.width / 2 &&
-      d < this.size + ground2.height
+      this.x < cubewide.x - cubewide.width / 1.9 &&
+      this.x < cubewide.x + cubewide.width / 1.9 &&
+      dcubewide < this.width / 1.9 + cubewide.width / 1.9 &&
+      dcubewide < this.height + cubewide.height &&
+      this.vx == this.speed
     ) {
-      this.vx = this.speed;
+      this.vx = 0;
+    } else if (
+      this.x > cubewide.x - cubewide.width / 1.9 &&
+      this.x > cubewide.x + cubewide.width / 1.9 &&
+      dcubewide < this.width / 1.9 + cubewide.width / 1.9 &&
+      dcubewide < this.height + cubewide.height &&
+      this.vx == -this.speed
+    ) {
+      this.vx = 0;
+    } else if (
+      this.x > cubewide.x - cubewide.width / 1.9 &&
+      this.x < cubewide.x + cubewide.width / 1.9 &&
+      this.y + this.height / 2.25 > cubewide.y - cubewide.height / 2.25 &&
+      this.y - this.height / 2.25 < cubewide.y + cubewide.height / 2.25
+    ) {
+      this.vy = 0;
+      this.ay = 0;
+      gravityForce = 0.0;
+      this.jump = 0;
+
+      // Jump.
+      if (keyIsDown(87)) {
+        this.vy = -this.jumpheight;
+        this.ay = 0;
+        gravityForce = 0;
+        this.jump = 2;
+      }
+    }
+
+    // Collides with Rectangle.
+    let drectangle = dist(this.x, this.y, rectangle.x, rectangle.y);
+    if (
+      this.x < rectangle.x - rectangle.width / 1.9 &&
+      this.x < rectangle.x + rectangle.width / 1.9 &&
+      drectangle < this.width / 1.9 + rectangle.width / 1.9 &&
+      drectangle < this.height + rectangle.height &&
+      this.vx == this.speed
+    ) {
+      this.vx = 0;
+    } else if (
+      this.x > rectangle.x - rectangle.width / 1.9 &&
+      this.x > rectangle.x + rectangle.width / 1.9 &&
+      drectangle < this.width / 1.9 + rectangle.width / 1.9 &&
+      drectangle < this.height + rectangle.height &&
+      this.vx == -this.speed
+    ) {
+      this.vx = 0;
+    } else if (
+      this.x > rectangle.x - rectangle.width / 1.9 &&
+      this.x < rectangle.x + rectangle.width / 1.9 &&
+      this.y + this.height / 2.25 > rectangle.y - rectangle.height / 2.25 &&
+      this.y - this.height / 2.25 < rectangle.y + rectangle.height / 2.25
+    ) {
+      this.vy = 0;
+      this.ay = 0;
+      gravityForce = 0.0;
+      this.jump = 0;
+
+      // Jump.
+      if (keyIsDown(87)) {
+        this.vy = -this.jumpheight;
+        this.ay = 0;
+        gravityForce = 0;
+        this.jump = 2;
+      }
+    }
+  }
+
+  keyReleased() {
+    if (keyCode === 65) {
+      this.run = 0;
+    } else if (keyCode === 68) {
+      this.run = 0;
     }
   }
 
@@ -121,45 +214,45 @@ class Avatar {
     push();
     imageMode(CENTER);
     if (this.run == 1 && this.jump == 0) {
-      image(avatarrunningleftimage, this.x, this.y, this.size, this.size);
+      image(avatarrunningleftimage, this.x, this.y, this.width, this.height);
     } else if (this.run == 2 && this.jump == 0) {
-      image(avatarrunningrightimage, this.x, this.y, this.size, this.size);
+      image(avatarrunningrightimage, this.x, this.y, this.width, this.height);
     } else if (
       this.vx == 0 &&
       this.face == 0 &&
       this.crouched == 0 &&
       this.jump == 0
     ) {
-      image(avataridlerightimage, this.x, this.y, this.size, this.size);
+      image(avataridlerightimage, this.x, this.y, this.width, this.height);
     } else if (
       this.run == 0 &&
       this.face == 1 &&
       this.crouched == 0 &&
       this.jump == 0
     ) {
-      image(avataridleleftimage, this.x, this.y, this.size, this.size);
+      image(avataridleleftimage, this.x, this.y, this.width, this.height);
     } else if (this.run == 0 && this.face == 0 && this.crouched == 1) {
-      image(avatarcrouchedrightimage, this.x, this.y, this.size, this.size);
+      image(avatarcrouchedrightimage, this.x, this.y, this.width, this.height);
     } else if (this.vx == 0 && this.face == 1 && this.crouched == 1) {
-      image(avatarcrouchedleftimage, this.x, this.y, this.size, this.size);
+      image(avatarcrouchedleftimage, this.x, this.y, this.width, this.height);
     } else if (this.face == 0 && this.crouched == 0 && this.jump == 2) {
-      image(avatarjumpright2image, this.x, this.y, this.size, this.size);
+      image(avatarjumpright2image, this.x, this.y, this.width, this.height);
     } else if (this.face == 1 && this.crouched == 0 && this.jump == 2) {
-      image(avatarjumpleft2image, this.x, this.y, this.size, this.size);
+      image(avatarjumpleft2image, this.x, this.y, this.width, this.height);
     } else if (
       this.vx > 0 &&
       this.face == 0 &&
       this.crouched == 1 &&
       this.jump == 2
     ) {
-      image(avatarcrouchedrightimage, this.x, this.y, this.size, this.size);
+      image(avatarcrouchedrightimage, this.x, this.y, this.width, this.heigh);
     } else if (
       this.vx < 0 &&
       this.face == 1 &&
       this.crouched == 1 &&
       this.jump == 2
     ) {
-      image(avatarcrouchedleftimage, this.x, this.y, this.size, this.size);
+      image(avatarcrouchedleftimage, this.x, this.y, this.width, this.height);
       pop();
     }
   }

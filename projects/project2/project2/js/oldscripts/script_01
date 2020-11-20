@@ -25,9 +25,6 @@ let gamegroundimage;
 
 // Game Shapes varaiables;
 let gamecubeimage;
-let gamecubewideimage;
-let gamerectangleimage;
-let gametrianglewideimage;
 
 // Avatar Visuals variables.
 let avataridlerightimage;
@@ -55,12 +52,7 @@ let gravityForce = 0.025;
 
 // Ground variable.
 let ground;
-
-// Shapes variables.
-let cube;
-let cubewide;
-let rectangle;
-let trianglewide;
+let ground2;
 
 // Avatar variables.
 let avatars = [];
@@ -87,11 +79,6 @@ function preload() {
 
   // Game Shape Elements.
   gamecubeimage = loadImage("assets/images/shapes3d/gamecube.png");
-  gamecubewideimage = loadImage("assets/images/shapes3d/gamecubewide.png");
-  gamerectangleimage = loadImage("assets/images/shapes3d/gamerectangle.png");
-  gametrianglewideimage = loadImage(
-    "assets/images/shapes3d/gametrianglewide.png"
-  );
 
   // Avatar Visuals.
   avataridlerightimage = loadImage(
@@ -126,14 +113,12 @@ function setup() {
   frameRate(fr);
   // Audio.
   userStartAudio();
-  ground = new Ground(650, 425, 1500, 0);
-  cube = new Cube(400, 379, 100, 125);
-  cubewide = new Cubewide(200, 404, 200, 75);
-  rectangle = new Rectangle(1300, 331, 100, 220);
+  ground = new Ground(650, 425, 1300, 0);
+  ground2 = new Ground(400, 375, 75, 75);
 
   for (let i = 0; i < numavatars; i++) {
     // Avatar X and Y spawn.
-    let x = 750;
+    let x = 800;
     let y = -100;
 
     let avatar = new Avatar(x, y);
@@ -148,7 +133,7 @@ function windowResized() {
 
 // Draw function.
 function draw() {
-  createCanvas(1500, 650);
+  createCanvas(1300, 650);
   background(0);
 
   if (state === "titlemenu") {
@@ -166,14 +151,14 @@ function global() {
   // Light Overlay.
   push();
   imageMode(CENTER);
-  image(lightoverlayimage, width / 2, height / 2, 1500, 650);
+  image(lightoverlayimage, width / 2, height / 2, 1300, 650);
   pop();
 
-  // // Global Header.
-  // push();
-  // imageMode(CENTER);
-  // image(headerimage, width / 2, height / 2, 1500, 650);
-  // pop();
+  // Global Header.
+  push();
+  imageMode(CENTER);
+  image(headerimage, width / 2, height / 2, 1300, 650);
+  pop();
 
   if (state === "titlemenu") {
     if (counter >= 30) {
@@ -183,7 +168,7 @@ function global() {
       textFont(blockfont);
       textSize(15);
       fill(255, 255, 255);
-      text("PRESS ENTER TO PLAY", width / 2, 600);
+      text("PRESS ENTER TO PLAY", 650, 600);
       pop();
     }
     if (counter == 60) {
@@ -204,7 +189,7 @@ function global() {
     textFont(blockfont);
     textSize(15);
     fill(255, 255, 255);
-    text("USE THE WASD KEYS TO MOVE, JUMP, AND CROUCH.", width / 2, 600);
+    text("USE THE WASD KEYS TO MOVE, JUMP, AND CROUCH.", 650, 600);
     pop();
   }
 }
@@ -234,16 +219,14 @@ function game() {
   // Game Distance Shadow.
   push();
   imageMode(CENTER);
-  image(gamedistanceshadowimage, width / 2, height / 2, 1800, 650);
+  image(gamedistanceshadowimage, width / 2, height / 2, 1300, 650);
   pop();
 }
 
 // Avatar function.
 function avatar() {
   ground.display();
-  cube.display();
-  cubewide.display();
-  rectangle.display();
+  ground2.display();
 
   for (let i = 0; i < avatars.length; i++) {
     let avatar = avatars[i];
@@ -253,7 +236,6 @@ function avatar() {
       avatar.move();
       avatar.collide(ground);
       avatar.display();
-      avatar.keyReleased();
     }
   }
 }
