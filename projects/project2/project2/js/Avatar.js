@@ -245,7 +245,7 @@ class Avatar {
       this.crouched == 1 &&
       this.jump == 2
     ) {
-      image(avatarcrouchedrightimage, this.x, this.y, this.width, this.heigh);
+      image(avatarcrouchedrightimage, this.x, this.y, this.width, this.height);
     } else if (
       this.vx < 0 &&
       this.face == 1 &&

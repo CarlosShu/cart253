@@ -17,6 +17,7 @@ let lightoverlayimage;
 
 // Title Menu Visuals variables.
 let titlemenulogoimage;
+let titlemenubackgroundimage;
 
 // Game Visuals variables.
 let gamebackgroundimage;
@@ -53,6 +54,9 @@ let counter = 0;
 // Gravity variable.
 let gravityForce = 0.025;
 
+// Level variable.
+var level = 0;
+
 // Ground variable.
 let ground;
 
@@ -69,7 +73,7 @@ let numavatars = 1;
 // Preload Function.
 function preload() {
   // Fonts.
-  blockfont = loadFont("assets/block.ttf"); // Practically the Nintendo Logo Font.
+  blockfont = loadFont("assets/block.otf"); // Practically the Nintendo Logo Font.
 
   // Global Visuals.
   headerimage = loadImage("assets/images/global/header.png");
@@ -77,6 +81,9 @@ function preload() {
 
   // Title Menu Visuals.
   titlemenulogoimage = loadImage("assets/images/titlemenu/titlemenulogo.png");
+  titlemenubackgroundimage = loadImage(
+    "assets/images/titlemenu/titlemenubackground.png"
+  );
 
   // Game Visuals.
   gamebackgroundimage = loadImage("assets/images/game/gamebackground.png");
@@ -154,10 +161,11 @@ function draw() {
   if (state === "titlemenu") {
     titlemenu();
     global();
-  } else if (state === "game") {
+  } else if (state === "level01") {
     game();
     avatar();
     global();
+    level01();
   }
 }
 
@@ -168,12 +176,6 @@ function global() {
   imageMode(CENTER);
   image(lightoverlayimage, width / 2, height / 2, 1500, 650);
   pop();
-
-  // // Global Header.
-  // push();
-  // imageMode(CENTER);
-  // image(headerimage, width / 2, height / 2, 1500, 650);
-  // pop();
 
   if (state === "titlemenu") {
     if (counter >= 30) {
@@ -197,7 +199,7 @@ function global() {
     imageMode(CENTER);
     image(titlemenulogoimage, width / 2, height / 2, 1300, 650);
     pop();
-  } else if (state === "game") {
+  } else if (state === "level01") {
     // Instructions.
     push();
     textAlign(CENTER, CENTER);
@@ -206,6 +208,15 @@ function global() {
     fill(255, 255, 255);
     text("USE THE WASD KEYS TO MOVE, JUMP, AND CROUCH.", width / 2, 600);
     pop();
+
+    // Level indicator.
+    push();
+    textAlign(CENTER, CENTER);
+    textFont(blockfont);
+    textSize(15);
+    fill(255, 255, 255);
+    text("LEVEL: " + level, 1450, 20);
+    pop();
   }
 }
 
@@ -213,7 +224,7 @@ function titlemenu() {
   // Game Background.
   push();
   imageMode(CENTER);
-  image(gamebackgroundimage, width / 2, height / 2, 2600, 1300);
+  image(titlemenubackgroundimage, width / 2, height / 2, 2600, 1300);
   pop();
 }
 
@@ -236,6 +247,10 @@ function game() {
   imageMode(CENTER);
   image(gamedistanceshadowimage, width / 2, height / 2, 1800, 650);
   pop();
+}
+
+function level01() {
+  level = 1;
 }
 
 // Avatar function.
@@ -263,7 +278,7 @@ function keyPressed() {
   // Switch from titlemenu to game.
   if (state === "titlemenu") {
     if (keyCode == 13) {
-      state = "game";
+      state = "level01";
     }
   }
 }
