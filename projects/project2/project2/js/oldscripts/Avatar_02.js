@@ -16,8 +16,6 @@ class Avatar {
     this.crouched = 0;
     this.jump = 0;
     this.run = 0;
-    this.bounce = false;
-    this.bouncecounter = 0;
   }
 
   gravity(force) {
@@ -69,8 +67,6 @@ class Avatar {
       this.ay = 0;
       gravityForce = 0.0;
       this.jump = 0;
-      this.bounce = false;
-      this.speed = 4;
 
       // Jump.
       if (keyIsDown(87)) {
@@ -81,7 +77,7 @@ class Avatar {
       }
     }
     // If avatar leaves the ground the gravity goes back to normal.
-    else if (this.bounce == false) {
+    else {
       gravityForce = 0.025;
       this.jump = 2;
 
@@ -119,8 +115,6 @@ class Avatar {
       this.ay = 0;
       gravityForce = 0.0;
       this.jump = 0;
-      this.bounce = false;
-      this.speed = 4;
 
       // Jump.
       if (keyIsDown(87)) {
@@ -159,8 +153,6 @@ class Avatar {
       this.ay = 0;
       gravityForce = 0.0;
       this.jump = 0;
-      this.bounce = false;
-      this.speed = 4;
 
       // Jump.
       if (keyIsDown(87)) {
@@ -199,7 +191,6 @@ class Avatar {
       this.ay = 0;
       gravityForce = 0.0;
       this.jump = 0;
-      this.bounce = false;
 
       // Jump.
       if (keyIsDown(87)) {
@@ -229,17 +220,18 @@ class Avatar {
     ) {
       this.vx = 0;
     } else if (
-      this.x > platform.x - platform.width / 1.75 &&
-      this.x < platform.x + platform.width / 1.75 &&
+      this.x > platform.x - platform.width / 2 &&
+      this.x < platform.x + platform.width / 2 &&
       this.y < platform.y - platform.height / 2 &&
       this.y > platform.y - platform.height / 1
+
+      // this.y + this.height / 2.25 > platform.y - platform.height / 2.25 &&
+      // this.y - this.height / 2.25 < platform.y + platform.height / 2.25
     ) {
       this.vy = 0;
       this.ay = 0;
       gravityForce = 0.0;
       this.jump = 0;
-      this.bounce = false;
-      this.speed = 4;
 
       //  Jump.
       if (keyIsDown(87)) {
@@ -249,193 +241,12 @@ class Avatar {
         this.jump = 2;
       }
     } else if (
-      this.x > platform.x - platform.width / 1.75 &&
-      this.x < platform.x + platform.width / 1.75 &&
+      this.x > platform.x - platform.width / 2 &&
+      this.x < platform.x + platform.width / 2 &&
       this.y < platform.y + platform.height &&
       this.y > platform.y
     ) {
       this.vy = this.jumpheight;
-    }
-
-    // Collides with movingplatform.
-    let dmovingplatform = dist(
-      this.x,
-      this.y,
-      movingplatform.x,
-      movingplatform.y
-    );
-    if (
-      this.x < movingplatform.x - movingplatform.width / 2 &&
-      this.x < movingplatform.x + movingplatform.width / 2 &&
-      dmovingplatform < this.width / 2 + movingplatform.width / 2 &&
-      dmovingplatform < this.height + movingplatform.height &&
-      this.vx == this.speed
-    ) {
-      this.vx = 0;
-    } else if (
-      this.x > movingplatform.x - movingplatform.width / 2 &&
-      this.x > movingplatform.x + movingplatform.width / 2 &&
-      dmovingplatform < this.width / 2 + movingplatform.width / 2 &&
-      dmovingplatform < this.height + movingplatform.height &&
-      this.vx == -this.speed
-    ) {
-      this.vx = 0;
-    } else if (
-      this.x > movingplatform.x - movingplatform.width / 1.75 &&
-      this.x < movingplatform.x + movingplatform.width / 1.75 &&
-      this.y < movingplatform.y - movingplatform.height / 2 &&
-      this.y > movingplatform.y - movingplatform.height / 1
-    ) {
-      this.vy = 0;
-      this.ay = 0;
-      gravityForce = 0.0;
-      this.jump = 0;
-      this.bounce = false;
-      this.x = this.x + movingplatform.vx;
-      this.speed = 4;
-
-      //  Jump.
-      if (keyIsDown(87)) {
-        this.vy = -this.jumpheight;
-        this.ay = 0;
-        gravityForce = 0;
-        this.jump = 2;
-      }
-    } else if (
-      this.x > movingplatform.x - movingplatform.width / 1.75 &&
-      this.x < movingplatform.x + movingplatform.width / 1.75 &&
-      this.y < movingplatform.y + movingplatform.height &&
-      this.y > movingplatform.y
-    ) {
-      this.vy = this.jumpheight;
-    }
-
-    // Collides with button.
-    let dbutton = dist(this.x, this.y, button.x, button.y);
-    if (
-      this.x < button.x - button.width / 2 &&
-      this.x < button.x + button.width / 2 &&
-      dbutton < this.width / 2 + button.width / 2 &&
-      dbutton < this.height + button.height &&
-      this.vx == this.speed
-    ) {
-      this.vx = 0;
-    } else if (
-      this.x > button.x - button.width / 2 &&
-      this.x > button.x + button.width / 2 &&
-      dbutton < this.width / 2 + button.width / 2 &&
-      dbutton < this.height + button.height &&
-      this.vx == -this.speed
-    ) {
-      this.vx = 0;
-    } else if (
-      this.x > button.x - button.width / 2 &&
-      this.x < button.x + button.width / 2 &&
-      this.y > button.y - button.height / 1.05 &&
-      this.y < button.y + button.height / 0.85
-    ) {
-      this.vy = 0;
-      this.ay = 0;
-      gravityForce = 0.0;
-      this.jump = 0;
-      button.activated = true;
-      this.bounce = false;
-      this.speed = 4;
-
-      //  Jump.
-      if (keyIsDown(87)) {
-        this.vy = -this.jumpheight;
-        this.ay = 0;
-        gravityForce = 0;
-        this.jump = 2;
-      } else if (
-        this.x > button.x - button.width / 1.75 &&
-        this.x < button.x + button.width / 1.75 &&
-        this.y < button.y + button.height &&
-        this.y > button.y
-      ) {
-        this.vy = this.jumpheight;
-      }
-    }
-
-    // Collides with Trampoline.
-    let dtrampoline = dist(this.x, this.y, trampoline.x, trampoline.y);
-    if (
-      this.x < trampoline.x - trampoline.width / 2 &&
-      this.x < trampoline.x + trampoline.width / 2 &&
-      dtrampoline < this.width / 2 + trampoline.width / 2 &&
-      dtrampoline < this.height + trampoline.height &&
-      this.vx == this.speed
-    ) {
-      this.vx = 0;
-    } else if (
-      this.x > trampoline.x - trampoline.width / 2 &&
-      this.x > trampoline.x + trampoline.width / 2 &&
-      dtrampoline < this.width / 2 + trampoline.width / 2 &&
-      dtrampoline < this.height + trampoline.height &&
-      this.vx == -this.speed
-    ) {
-      this.vx = 0;
-    } else if (
-      this.x > trampoline.x - trampoline.width / 1.75 &&
-      this.x < trampoline.x + trampoline.width / 1.75 &&
-      this.y < trampoline.y - trampoline.height / 1.5 &&
-      this.y > trampoline.y - trampoline.height / 1.2
-    ) {
-      this.vy = -this.vy;
-      this.ay = 0;
-      gravityForce = 0;
-      this.jump = 2;
-      this.bounce = true;
-      this.speed = 4;
-    }
-
-    if (this.bounce == true) {
-      gravityForce = 0.01;
-      this.jump = 2;
-    }
-
-    // Collides with boostplatform.
-    let dboostplatform = dist(this.x, this.y, boostplatform.x, boostplatform.y);
-    if (
-      this.x < boostplatform.x - boostplatform.width / 1.9 &&
-      this.x < boostplatform.x + boostplatform.width / 1.9 &&
-      dboostplatform < this.width / 1.9 + boostplatform.width / 1.9 &&
-      dboostplatform < this.height + boostplatform.height &&
-      this.vx == this.speed
-    ) {
-      this.vx = 0;
-    } else if (
-      this.x > boostplatform.x - boostplatform.width / 1.9 &&
-      this.x > boostplatform.x + boostplatform.width / 1.9 &&
-      dboostplatform < this.width / 1.9 + boostplatform.width / 1.9 &&
-      dboostplatform < this.height + boostplatform.height &&
-      this.vx == -this.speed
-    ) {
-      this.vx = 0;
-    } else if (
-      this.x > boostplatform.x - boostplatform.width / 1.9 &&
-      this.x < boostplatform.x + boostplatform.width / 1.9 &&
-      this.y + this.height / 2.25 >
-        boostplatform.y - boostplatform.height / 2.25 &&
-      this.y - this.height / 2.25 <
-        boostplatform.y + boostplatform.height / 2.25
-    ) {
-      this.vy = 0;
-      this.vx = this.vx + 4;
-      this.speed = 8;
-      this.ay = 0;
-      gravityForce = 0.0;
-      this.jump = 0;
-      this.bounce = false;
-
-      // Jump.
-      if (keyIsDown(87)) {
-        this.vy = -this.jumpheight;
-        this.ay = 0;
-        gravityForce = 0;
-        this.jump = 2;
-      }
     }
   }
 
@@ -455,14 +266,7 @@ class Avatar {
     } else if (this.run == 2 && this.jump == 0) {
       image(avatarrunningrightimage, this.x, this.y, this.width, this.height);
     } else if (
-      this.run == 0 &&
-      this.face == 0 &&
-      this.crouched == 0 &&
-      this.jump == 0
-    ) {
-      image(avataridlerightimage, this.x, this.y, this.width, this.height);
-    } else if (
-      this.run == 0 &&
+      this.vx == 0 &&
       this.face == 0 &&
       this.crouched == 0 &&
       this.jump == 0
@@ -477,41 +281,27 @@ class Avatar {
       image(avataridleleftimage, this.x, this.y, this.width, this.height);
     } else if (this.run == 0 && this.face == 0 && this.crouched == 1) {
       image(avatarcrouchedrightimage, this.x, this.y, this.width, this.height);
-    } else if (this.run == 0 && this.face == 1 && this.crouched == 1) {
+    } else if (this.vx == 0 && this.face == 1 && this.crouched == 1) {
       image(avatarcrouchedleftimage, this.x, this.y, this.width, this.height);
     } else if (this.face == 0 && this.crouched == 0 && this.jump == 2) {
       image(avatarjumpright2image, this.x, this.y, this.width, this.height);
     } else if (this.face == 1 && this.crouched == 0 && this.jump == 2) {
       image(avatarjumpleft2image, this.x, this.y, this.width, this.height);
     } else if (
-      this.run > 0 &&
+      this.vx > 0 &&
       this.face == 0 &&
       this.crouched == 1 &&
       this.jump == 2
     ) {
       image(avatarcrouchedrightimage, this.x, this.y, this.width, this.height);
     } else if (
-      this.run > 0 &&
+      this.vx < 0 &&
       this.face == 1 &&
       this.crouched == 1 &&
       this.jump == 2
     ) {
       image(avatarcrouchedleftimage, this.x, this.y, this.width, this.height);
-    } else if (
-      this.run < 0 &&
-      this.face == 1 &&
-      this.crouched == 1 &&
-      this.jump == 2
-    ) {
-      image(avatarcrouchedleftimage, this.x, this.y, this.width, this.height);
-    } else if (
-      this.run > 0 &&
-      this.face == 1 &&
-      this.crouched == 1 &&
-      this.jump == 2
-    ) {
-      image(avatarcrouchedleftimage, this.x, this.y, this.width, this.height);
+      pop();
     }
-    pop();
   }
 }

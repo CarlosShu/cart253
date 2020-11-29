@@ -28,7 +28,15 @@ let gamegroundimage;
 let gamecubeimage;
 let gamecubewideimage;
 let gamerectangleimage;
+let gameplatformimage;
+let gamemovingplatformimage;
 let gametrianglewideimage;
+
+// Game Elements.
+let gamebuttonimage;
+let gamebuttonactivatedimage;
+let gametrampolineimage;
+let gameboostplatformimage;
 
 // Avatar Visuals variables.
 let avataridlerightimage;
@@ -51,6 +59,9 @@ let fr = 60;
 // Number Variables.
 let counter = 0;
 
+// Moving platform timer.
+let movingplatformtimer = 0;
+
 // Gravity variable.
 let gravityForce = 0.025;
 
@@ -64,7 +75,14 @@ let ground;
 let cube;
 let cubewide;
 let rectangle;
+let platform;
+let movingplatform;
 let trianglewide;
+
+// Game Elements.
+let button;
+let trampoline;
+let boostplatform;
 
 // Avatar variables.
 let avatars = [];
@@ -92,13 +110,24 @@ function preload() {
   );
   gamegroundimage = loadImage("assets/images/game/gameground.png");
 
-  // Game Shape Elements.
+  // Game Shapes.
   gamecubeimage = loadImage("assets/images/shapes3d/gamecube.png");
   gamecubewideimage = loadImage("assets/images/shapes3d/gamecubewide.png");
   gamerectangleimage = loadImage("assets/images/shapes3d/gamerectangle.png");
+  gameplatformimage = loadImage(
+    "assets/images/shapes3d/gamemovingplatform.png"
+  );
   gametrianglewideimage = loadImage(
     "assets/images/shapes3d/gametrianglewide.png"
   );
+
+  // Game elements.
+  gamebuttonimage = loadImage("assets/images/elements/gamebutton.png");
+  gamebuttonactivatedimage = loadImage(
+    "assets/images/elements/gamebuttonactivated.png"
+  );
+  gametrampolineimage = loadImage("assets/images/elements/gametrampoline.png");
+  gameboostplatformimage = loadImage("assets/images/shapes3d/gamecubewide.png");
 
   // Avatar Visuals.
   avataridlerightimage = loadImage(
@@ -133,19 +162,28 @@ function setup() {
   frameRate(fr);
   // Audio.
   userStartAudio();
-  ground = new Ground(650, 425, 1500, 0);
-  cube = new Cube(400, 379, 100, 125);
-  cubewide = new Cubewide(200, 404, 200, 75);
-  rectangle = new Rectangle(1300, 331, 100, 220);
+  ground = new Ground(800, 425, 2000, 0);
 
   for (let i = 0; i < numavatars; i++) {
     // Avatar X and Y spawn.
-    let x = 750;
+    let x = 400;
     let y = -100;
 
     let avatar = new Avatar(x, y);
     avatars.push(avatar);
   }
+
+  // Shapes.
+  cube = new Cube(400, 379, 100, 125);
+  cubewide = new Cubewide(200, 404, 200, 75);
+  rectangle = new Rectangle(600, 331, 100, 220);
+  platform = new Platform(800, 250, 100, 55);
+  movingplatform = new Movingplatform(1000, 250, 100, 55, 0, 2);
+
+  // Elements.
+  button = new Button(50, 410, 75, 50, false);
+  trampoline = new Trampoline(1000, 404, 150, 75);
+  boostplatform = new Boostplatform(1300, 404, 300, 75);
 }
 
 // Canvas Resize function.
@@ -155,7 +193,7 @@ function windowResized() {
 
 // Draw function.
 function draw() {
-  createCanvas(1500, 650);
+  createCanvas(1600, 650);
   background(0);
 
   if (state === "titlemenu") {
@@ -163,6 +201,8 @@ function draw() {
     global();
   } else if (state === "level01") {
     game();
+    shapes();
+    elements();
     avatar();
     global();
     level01();
@@ -174,7 +214,7 @@ function global() {
   // Light Overlay.
   push();
   imageMode(CENTER);
-  image(lightoverlayimage, width / 2, height / 2, 1500, 650);
+  image(lightoverlayimage, width / 2, height / 2, 1600, 650);
   pop();
 
   if (state === "titlemenu") {
@@ -215,7 +255,7 @@ function global() {
     textFont(blockfont);
     textSize(15);
     fill(255, 255, 255);
-    text("LEVEL: " + level, 1450, 20);
+    text("LEVEL: " + level, 1550, 20);
     pop();
   }
 }
@@ -256,9 +296,6 @@ function level01() {
 // Avatar function.
 function avatar() {
   ground.display();
-  cube.display();
-  cubewide.display();
-  rectangle.display();
 
   for (let i = 0; i < avatars.length; i++) {
     let avatar = avatars[i];
@@ -271,6 +308,21 @@ function avatar() {
       avatar.keyReleased();
     }
   }
+}
+
+function shapes() {
+  cube.display();
+  cubewide.display();
+  rectangle.display();
+  platform.display();
+  movingplatform.display();
+  movingplatform.move();
+}
+
+function elements() {
+  button.display(Avatar);
+  trampoline.display();
+  boostplatform.display();
 }
 
 // Keypress function.
