@@ -1,4 +1,4 @@
-class Movingplatform {
+class Movingplatformhorizontal {
   constructor(x, y, w, h, vx, speed) {
     this.width = w;
     this.height = h;

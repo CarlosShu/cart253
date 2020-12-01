@@ -22,21 +22,35 @@ let titlemenubackgroundimage;
 // Game Visuals variables.
 let gamebackgroundimage;
 let gamedistanceshadowimage;
+let gameforegroundlightimage;
 let gamegroundimage;
 
-// Game Shapes varaiables;
+// Game Shapes visuals;
 let gamecubeimage;
 let gamecubewideimage;
 let gamerectangleimage;
+let gamerectangle02image;
 let gameplatformimage;
 let gamemovingplatformimage;
 let gametrianglewideimage;
+let gamebigblockimage;
+let gamebigblock02image;
+
+// Ground blocks visuals.
+let gamegroundblock1image;
+let gamegroundblock2image;
 
 // Game Elements.
 let gamebuttonimage;
 let gamebuttonactivatedimage;
 let gametrampolineimage;
 let gameboostplatformimage;
+let gamerollerimage;
+let gamecanonimage;
+let gamepipeimage;
+let gamecanonballimage;
+let gamedoorimage;
+let gamespawnimage;
 
 // Avatar Visuals variables.
 let avataridlerightimage;
@@ -61,9 +75,13 @@ let counter = 0;
 
 // Moving platform timer.
 let movingplatformtimer = 0;
+let movingplatformverticaltimer = 0;
 
 // Gravity variable.
 let gravityForce = 0.025;
+
+// Exiting the level.
+let exit = false;
 
 // Level variable.
 var level = 0;
@@ -75,14 +93,28 @@ let ground;
 let cube;
 let cubewide;
 let rectangle;
+let rectangle02;
 let platform;
 let movingplatform;
+let movingplatformvertical;
 let trianglewide;
+let bigblock;
+let bigblock02;
+
+// Ground blocks.
+let groundblock01;
+let groundblock02;
 
 // Game Elements.
 let button;
 let trampoline;
 let boostplatform;
+let roller;
+let pipe;
+let canon;
+let canonball;
+let door;
+let spawn;
 
 // Avatar variables.
 let avatars = [];
@@ -108,17 +140,33 @@ function preload() {
   gamedistanceshadowimage = loadImage(
     "assets/images/game/gamedistanceshadow.png"
   );
+  gameforegroundlightimage = loadImage(
+    "assets/images/game/gameforegroundlight.png"
+  );
   gamegroundimage = loadImage("assets/images/game/gameground.png");
 
   // Game Shapes.
   gamecubeimage = loadImage("assets/images/shapes3d/gamecube.png");
   gamecubewideimage = loadImage("assets/images/shapes3d/gamecubewide.png");
   gamerectangleimage = loadImage("assets/images/shapes3d/gamerectangle.png");
+  gamerectangle02image = loadImage(
+    "assets/images/shapes3d/gamerectangle02.png"
+  );
   gameplatformimage = loadImage(
     "assets/images/shapes3d/gamemovingplatform.png"
   );
   gametrianglewideimage = loadImage(
     "assets/images/shapes3d/gametrianglewide.png"
+  );
+  gamebigblockimage = loadImage("assets/images/shapes3d/gamebigblock.png");
+  gamebigblock02image = loadImage("assets/images/shapes3d/gamebigblock02.png");
+
+  // Ground blocks.
+  gamegroundblock1image = loadImage(
+    "assets/images/shapes3d/gamegroundblock1.png"
+  );
+  gamegroundblock2image = loadImage(
+    "assets/images/shapes3d/gamegroundblock2.png"
   );
 
   // Game elements.
@@ -127,7 +175,13 @@ function preload() {
     "assets/images/elements/gamebuttonactivated.png"
   );
   gametrampolineimage = loadImage("assets/images/elements/gametrampoline.png");
-  gameboostplatformimage = loadImage("assets/images/shapes3d/gamecubewide.png");
+  gameboostplatformimage = loadImage("assets/images/elements/gamebelt.gif");
+  gamerollerimage = loadImage("assets/images/elements/gameroller.gif");
+  gamepipeimage = loadImage("assets/images/elements/gamepipe.png");
+  gamecanonimage = loadImage("assets/images/elements/gamecanon.png");
+  gamecanonballimage = loadImage("assets/images/elements/gamecanonball.png");
+  gamedoorimage = loadImage("assets/images/elements/gamedoor.png");
+  gamespawnimage = loadImage("assets/images/elements/gamespawn.png");
 
   // Avatar Visuals.
   avataridlerightimage = loadImage(
@@ -162,28 +216,41 @@ function setup() {
   frameRate(fr);
   // Audio.
   userStartAudio();
-  ground = new Ground(800, 425, 2000, 0);
+  // No cursor.
+  noCursor();
 
   for (let i = 0; i < numavatars; i++) {
     // Avatar X and Y spawn.
-    let x = 400;
+    let x = 200;
     let y = -100;
+    let xspawn = 400;
+    let yspawn = -100;
 
-    let avatar = new Avatar(x, y);
+    let avatar = new Avatar(x, y, xspawn, yspawn);
     avatars.push(avatar);
   }
+  // Ground blocks.
+  // groundblock01 = new Groundblock01(1300, 500, 400, 125);
+  // groundblock02 = new Groundblock02(1000, 500, 150, 125);
 
   // Shapes.
-  cube = new Cube(400, 379, 100, 125);
-  cubewide = new Cubewide(200, 404, 200, 75);
-  rectangle = new Rectangle(600, 331, 100, 220);
-  platform = new Platform(800, 250, 100, 55);
-  movingplatform = new Movingplatform(1000, 250, 100, 55, 0, 2);
+  // cube = new Cube(400, 579, 100, 125);
+  // cubewide = new Cubewide(200, 604, 200, 75);
+  // rectangle = new Rectangle(600, 531, 100, 220);
+  // platform = new Platform(800, 250, 100, 55);
+  // movingplatform = new Movingplatformhorizontal(1000, 450, 100, 55, 0, 2);
+  // movingplatformvertical = new Movingplatformvertical(200, 250, 100, 55, 0, 2);
 
   // Elements.
-  button = new Button(50, 410, 75, 50, false);
-  trampoline = new Trampoline(1000, 404, 150, 75);
-  boostplatform = new Boostplatform(1300, 404, 300, 75);
+  // button = new Button(50, 610, 75, 50, false);
+  // trampoline = new Trampoline(100, 604, 150, 75);
+  // boostplatform = new Boostplatform(100, 620, 400, 40);
+  // roller = new Roller(1000, 600, 60, 120, 0, 4, 0, 1800);
+  // pipe = new Pipe(1133, 850, 60, 360);
+  // canon = new Canon(1100, 620, 140, 140);
+  //  canonball = new Canonball(1060, 590, 50, 50, 0, 12, 0, 1060);
+  // door = new Door(1300, 390, 150, 150);
+  //  spawn = new Spawn(400, 300, 75, 25);
 }
 
 // Canvas Resize function.
@@ -193,7 +260,7 @@ function windowResized() {
 
 // Draw function.
 function draw() {
-  createCanvas(1600, 650);
+  createCanvas(1600, 800);
   background(0);
 
   if (state === "titlemenu") {
@@ -201,11 +268,10 @@ function draw() {
     global();
   } else if (state === "level01") {
     game();
-    shapes();
-    elements();
+    overlays();
+    level01();
     avatar();
     global();
-    level01();
   }
 }
 
@@ -214,7 +280,7 @@ function global() {
   // Light Overlay.
   push();
   imageMode(CENTER);
-  image(lightoverlayimage, width / 2, height / 2, 1600, 650);
+  image(lightoverlayimage, width / 2, height / 2, 1600, 800);
   pop();
 
   if (state === "titlemenu") {
@@ -225,7 +291,7 @@ function global() {
       textFont(blockfont);
       textSize(15);
       fill(255, 255, 255);
-      text("PRESS ENTER TO PLAY", width / 2, 600);
+      text("PRESS SHIFT TO PLAY", width / 2, 750);
       pop();
     }
     if (counter == 60) {
@@ -240,15 +306,6 @@ function global() {
     image(titlemenulogoimage, width / 2, height / 2, 1300, 650);
     pop();
   } else if (state === "level01") {
-    // Instructions.
-    push();
-    textAlign(CENTER, CENTER);
-    textFont(blockfont);
-    textSize(15);
-    fill(255, 255, 255);
-    text("USE THE WASD KEYS TO MOVE, JUMP, AND CROUCH.", width / 2, 600);
-    pop();
-
     // Level indicator.
     push();
     textAlign(CENTER, CENTER);
@@ -256,6 +313,16 @@ function global() {
     textSize(15);
     fill(255, 255, 255);
     text("LEVEL: " + level, 1550, 20);
+    pop();
+  }
+
+  if (exit == true) {
+    push();
+    textAlign(CENTER, CENTER);
+    textFont(blockfont);
+    textSize(15);
+    fill(255, 255, 255);
+    text("PRESS SHIFT TO ENTER", width / 2, 750);
     pop();
   }
 }
@@ -281,16 +348,47 @@ function game() {
   imageMode(CENTER);
   image(gamegroundimage, width / 2, height / 2, 2600, 1300);
   pop();
+}
 
+function level01() {
+  level = 1;
+  ground = new Ground(800, 625, 2000, 0);
+
+  cube = new Cube(200, 579, 100, 125);
+  cube.display();
+
+  rectangle = new Rectangle(400, 531, 100, 220);
+  rectangle.display();
+
+  bigblock = new Bigblock(700, 531, 300, 220);
+  bigblock.display();
+
+  bigblock02 = new Bigblock02(1300, 531, 300, 220);
+  bigblock02.display();
+
+  rectangle02 = new Rectangle02(1000, 531, 100, 220);
+  rectangle02.display();
+
+  door = new Door(1300, 350, 150, 155);
+  door.display();
+
+  // spawn = new Spawn(200, 300, 75, 25);
+  // spawn.display();
+}
+
+function overlays() {
   // Game Distance Shadow.
   push();
   imageMode(CENTER);
   image(gamedistanceshadowimage, width / 2, height / 2, 1800, 650);
   pop();
-}
 
-function level01() {
-  level = 1;
+  // Game Ground.
+  push();
+  imageMode(CENTER);
+  blendMode(OVERLAY);
+  image(gameforegroundlightimage, width / 2, height / 2, 2600, 1300);
+  pop();
 }
 
 // Avatar function.
@@ -310,26 +408,41 @@ function avatar() {
   }
 }
 
-function shapes() {
-  cube.display();
-  cubewide.display();
-  rectangle.display();
-  platform.display();
-  movingplatform.display();
-  movingplatform.move();
-}
+// function groundblocks() {
+//   groundblock01.display();
+//   groundblock02.display();
+// }
 
-function elements() {
-  button.display(Avatar);
-  trampoline.display();
-  boostplatform.display();
-}
+// function shapes() {
+//   cube.display();
+//   cubewide.display();
+//   rectangle.display();
+//   platform.display();
+//   movingplatform.display();
+//   movingplatform.move();
+//   movingplatformvertical.display();
+//   movingplatformvertical.move();
+// }
+
+// function elements() {
+//   button.display(Avatar);
+//   trampoline.display();
+//   boostplatform.display();
+//   roller.display();
+//   roller.move();
+//   pipe.display();
+//   canonball.display();
+//   canonball.move();
+//   canon.display();
+//   door.display();
+//   spawn.display();
+// }
 
 // Keypress function.
 function keyPressed() {
   // Switch from titlemenu to game.
   if (state === "titlemenu") {
-    if (keyCode == 13) {
+    if (keyCode == 16) {
       state = "level01";
     }
   }
