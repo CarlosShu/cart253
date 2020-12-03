@@ -1,17 +1,19 @@
 class Movingplatformhorizontal {
-  constructor(x, y, w, h, vx, speed) {
+  constructor(x, y, w, h, vx, speed, xspawn) {
     this.width = w;
     this.height = h;
     this.x = x;
     this.y = y;
     this.vx = vx;
     this.speed = speed;
+    this.xspawn = xspawn;
   }
 
   move() {
     this.x = this.x + this.vx;
     if (movingplatformtimer == 0) {
       this.vx = this.speed;
+      this.x = this.xspawn;
     }
     if (movingplatformtimer == 120) {
       this.vx = -this.speed;
@@ -19,6 +21,7 @@ class Movingplatformhorizontal {
     if (movingplatformtimer == 239) {
       // Only happens every second.
       this.vx = this.speed;
+      this.x = this.xspawn;
       movingplatformtimer = 0;
     }
     movingplatformtimer++;
@@ -27,7 +30,7 @@ class Movingplatformhorizontal {
   display() {
     push();
     imageMode(CENTER);
-    image(gameplatformimage, this.x, this.y, this.width, this.height);
+    image(gameplatformyellowimage, this.x, this.y, this.width, this.height);
     pop();
   }
 }
