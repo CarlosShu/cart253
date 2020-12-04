@@ -429,7 +429,7 @@ function preload() {
   avatarjumpleft1image = loadImage("assets/images/avatar3d/avatarjumpleft.png");
   avatarjumpleft2image = loadImage("assets/images/avatar3d/avatarjumpleft.png");
 }
-// Test 1
+// Test 2
 
 // Setup function.
 function setup() {
