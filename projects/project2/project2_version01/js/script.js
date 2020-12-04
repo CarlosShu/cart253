@@ -82,7 +82,10 @@ let gamegroundblock04image;
 let gamebuttonimage;
 let gamebuttonactivatedimage;
 
-let gametrampolineimage;
+let gametrampolineblueimage;
+let gametrampolineyellowimage;
+let gametrampolinegreenimage;
+let gametrampolineredimage;
 
 let gameboostplatformimage;
 let gameboostplatformleftimage;
@@ -383,7 +386,20 @@ function preload() {
   gamebuttonactivatedimage = loadImage(
     "assets/images/elements/gamebuttonactivated.png"
   );
-  gametrampolineimage = loadImage("assets/images/elements/gametrampoline.png");
+
+  // Trampolines.
+  gametrampolineblueimage = loadImage(
+    "assets/images/elements/gametrampolineblue.png"
+  );
+  gametrampolineyellowimage = loadImage(
+    "assets/images/elements/gametrampolineyellow.png"
+  );
+  gametrampolinegreenimage = loadImage(
+    "assets/images/elements/gametrampolinegreen.png"
+  );
+  gametrampolineredimage = loadImage(
+    "assets/images/elements/gametrampolinered.png"
+  );
 
   gameboostplatformimage = loadImage("assets/images/elements/gamebelt.gif");
   gameboostplatformleftimage = loadImage(
@@ -939,16 +955,16 @@ function level06() {
   cubewide02 = new Cubewide(1400, 229, 200, 75);
   cubewide02.display();
 
-  trampoline = new Trampoline(650, 554, 150, 75);
+  trampoline = new TrampolineRed(650, 554, 110, 80);
   trampoline.display();
 
-  trampoline02 = new Trampoline(400, 354, 150, 75);
+  trampoline02 = new TrampolineBlue(400, 354, 110, 80);
   trampoline02.display();
 
-  trampoline03 = new Trampoline(900, 554, 150, 75);
+  trampoline03 = new TrampolineYellow(900, 554, 110, 80);
   trampoline03.display();
 
-  trampoline04 = new Trampoline(1150, 354, 150, 75);
+  trampoline04 = new TrampolineGreen(1150, 354, 110, 80);
   trampoline04.display();
 
   platform = new PlatformRed(150, 250, 100, 55);
@@ -957,7 +973,7 @@ function level06() {
   key = new Key(150, 185, 20, 40);
   key.display();
 
-  door = new Door(1400, 127, 150, 155);
+  door = new Door(1400, 114, 150, 155);
   door.display();
 }
 
@@ -978,34 +994,37 @@ function level07() {
   image(gamedistanceshadowimage, width / 2, height / 2, 1800, 650);
   pop();
 
-  key = new Key(1025, 300, 20, 40);
+  key = new Key(1025, 325, 20, 40);
   key.display();
 
-  boostplatform = new Boostplatform(700, 442, 400, 40);
+  boostplatform = new Boostplatform(700, 449, 400, 45);
   boostplatform.display();
 
-  boostplatform02 = new Boostplatform02(850, 212, 400, 40);
+  boostplatform02 = new Boostplatform02(700, 227, 400, 45);
   boostplatform02.display();
 
   rectangle = new Rectangle03(150, 531, 100, 220);
   rectangle.display();
 
-  rectangle02 = new Rectangle03(1200, 531, 100, 220);
+  rectangle02 = new Rectangle03(1250, 531, 100, 220);
   rectangle02.display();
 
   movingplatformvertical03.display();
   movingplatformvertical03.move();
 
-  platform = new PlatformBlue(1200, 220, 100, 55);
+  platform = new PlatformBlue(1250, 220, 100, 55);
   platform.display();
 
   platform02 = new PlatformYellow(350, 445, 100, 55);
   platform02.display();
 
-  groundblock03 = new Groundblock03(300, 218, 150, 80);
+  platform03 = new PlatformYellow(1050, 220, 100, 55);
+  platform03.display();
+
+  groundblock03 = new Groundblock03(175, 218, 150, 80);
   groundblock03.display();
 
-  door = new Door(300, 127, 150, 155);
+  door = new Door(175, 127, 150, 155);
   door.display();
 }
 
@@ -1270,7 +1289,7 @@ function keyPressed() {
   // Switch from titlemenu to game.
   if (state === "titlemenu") {
     if (keyCode == 16) {
-      state = "level04";
+      state = "level01";
     }
   }
 }

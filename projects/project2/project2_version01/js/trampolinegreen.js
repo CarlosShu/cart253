@@ -1,4 +1,4 @@
-class Trampoline {
+class TrampolineGreen {
   constructor(x, y, w, h) {
     this.width = w;
     this.height = h;
@@ -9,7 +9,7 @@ class Trampoline {
   display() {
     push();
     imageMode(CENTER);
-    image(gametrampolineimage, this.x, this.y, this.width, this.height);
+    image(gametrampolinegreenimage, this.x, this.y, this.width, this.height);
     pop();
   }
 }

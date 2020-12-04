@@ -340,8 +340,8 @@ class Avatar {
     // Collides with key.
     if (state == "level06" || state == "level07" || state == "level09") {
       if (
-        this.x > key.x - key.width / 3 &&
-        this.x < key.x + key.width / 3 &&
+        this.x > key.x - key.width / 1 &&
+        this.x < key.x + key.width / 1 &&
         this.y > key.y - key.height / 1 &&
         this.y < key.y + key.height / 1
       ) {
@@ -1924,7 +1924,7 @@ class Avatar {
       }
     }
 
-    if (state == "level05") {
+    if (state == "level05" || state == "level07") {
       // Collides with platform03.
       let dplatform03 = dist(this.x, this.y, platform03.x, platform03.y);
       if (
@@ -2545,6 +2545,13 @@ class Avatar {
       if (this.bounce == true) {
         gravityForce = 0.01;
         this.jump = 2;
+      } else if (
+        this.x > trampoline.x - trampoline.width / 1.75 &&
+        this.x < trampoline.x + trampoline.width / 1.75 &&
+        this.y < trampoline.y + trampoline.height &&
+        this.y > trampoline.y
+      ) {
+        this.vy = this.jumpheight;
       }
     }
 
@@ -2584,6 +2591,13 @@ class Avatar {
       if (this.bounce == true) {
         gravityForce = 0.01;
         this.jump = 2;
+      } else if (
+        this.x > trampoline02.x - trampoline02.width / 1.75 &&
+        this.x < trampoline02.x + trampoline02.width / 1.75 &&
+        this.y < trampoline02.y + trampoline02.height &&
+        this.y > trampoline02.y
+      ) {
+        this.vy = this.jumpheight;
       }
     }
 
@@ -2674,26 +2688,24 @@ class Avatar {
         boostplatform.y
       );
       if (
-        this.x < boostplatform.x - boostplatform.width / 2 &&
-        this.x < boostplatform.x + boostplatform.width / 2 &&
-        dboostplatform < this.width / 2 + boostplatform.width / 2 &&
+        this.x < boostplatform.x - boostplatform.width / 1.9 &&
+        this.x < boostplatform.x + boostplatform.width / 1.9 &&
+        dboostplatform < this.width / 1.9 + boostplatform.width / 1.9 &&
         this.vx == this.speed
       ) {
         this.vx = 0;
       } else if (
-        this.x > boostplatform.x - boostplatform.width / 2 &&
-        this.x > boostplatform.x + boostplatform.width / 2 &&
-        dboostplatform < this.width / 2 + boostplatform.width / 2 &&
+        this.x > boostplatform.x - boostplatform.width / 1.9 &&
+        this.x > boostplatform.x + boostplatform.width / 1.9 &&
+        dboostplatform < this.width / 1.9 + boostplatform.width / 1.9 &&
         this.vx == -this.speed
       ) {
         this.vx = 0;
       } else if (
-        this.x > boostplatform.x - boostplatform.width / 2 &&
-        this.x < boostplatform.x + boostplatform.width / 2 &&
-        this.y + this.height / 2.25 >
-          boostplatform.y - boostplatform.height / 2.25 &&
-        this.y - this.height / 2.25 <
-          boostplatform.y + boostplatform.height / 2.25
+        this.x > boostplatform.x - boostplatform.width / 1.9 &&
+        this.x < boostplatform.x + boostplatform.width / 1.9 &&
+        this.y > boostplatform.y - boostplatform.height / 1 &&
+        this.y < boostplatform.y + boostplatform.height / 1
       ) {
         this.vy = 0;
         this.vx = this.vx + 4;
@@ -2710,6 +2722,13 @@ class Avatar {
           gravityForce = 0;
           this.jump = 2;
         }
+      } else if (
+        this.x > boostplatform.x - boostplatform.width / 1.9 &&
+        this.x < boostplatform.x + boostplatform.width / 1.9 &&
+        this.y < boostplatform.y + boostplatform.height / 0.9 &&
+        this.y > boostplatform.y
+      ) {
+        this.vy = this.jumpheight;
       }
     }
 
@@ -2758,6 +2777,13 @@ class Avatar {
           gravityForce = 0;
           this.jump = 2;
         }
+      } else if (
+        this.x > boostplatform02.x - boostplatform02.width / 1.9 &&
+        this.x < boostplatform02.x + boostplatform02.width / 1.9 &&
+        this.y < boostplatform02.y + boostplatform02.height / 0.9 &&
+        this.y > boostplatform02.y
+      ) {
+        this.vy = this.jumpheight;
       }
     }
 
