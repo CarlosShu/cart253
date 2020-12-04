@@ -87,7 +87,10 @@ let gametrampolineimage;
 let gameboostplatformimage;
 let gameboostplatformleftimage;
 
-let gamerollerimage;
+let gamerolleryellowimage;
+let gamerollerblueimage;
+let gamerollergreenimage;
+let gamerollerredimage;
 
 let gamecanonimage;
 let gamecanonrightimage;
@@ -387,7 +390,14 @@ function preload() {
     "assets/images/elements/gamebeltleft.gif"
   );
 
-  gamerollerimage = loadImage("assets/images/elements/gameroller.gif");
+  gamerolleryellowimage = loadImage(
+    "assets/images/elements/gamerolleryellow.gif"
+  );
+  gamerollerblueimage = loadImage("assets/images/elements/gamerollerblue.gif");
+  gamerollergreenimage = loadImage(
+    "assets/images/elements/gamerollergreen.gif"
+  );
+  gamerollerredimage = loadImage("assets/images/elements/gamerollerred.gif");
 
   gamepipeimage = loadImage("assets/images/elements/gamepipe.png");
 
@@ -472,9 +482,9 @@ function setup() {
 
   // Level 04.
 
-  roller = new RollerYellow(1700, 380, 60, 120, 0, 6, -100, 1700);
-  roller02 = new RollerBlue(1250, 380, 60, 120, 0, 6, -100, 1700);
-  roller03 = new RollerGreen(800, 380, 60, 120, 0, 6, -100, 1700);
+  roller = new RollerBlue(1700, 380, 60, 120, 0, 6, -100, 1700);
+  roller02 = new RollerRed(1250, 380, 60, 120, 0, 6, -100, 1700);
+  roller03 = new RollerBlue(800, 380, 60, 120, 0, 6, -100, 1700);
   roller04 = new RollerRed(350, 380, 60, 120, 0, 6, -100, 1700);
 
   // Level 05.
@@ -537,29 +547,6 @@ function setup() {
 
   canonball = new Canonball(1400, 480, 50, 50, 0, 10, -100, 1400);
   canonball02 = new CanonballRight(200, 280, 50, 50, 0, 10, 1700, 200);
-
-  // Ground blocks.
-  // groundblock01 = new Groundblock01(1300, 500, 400, 125);
-  // groundblock02 = new Groundblock02(1000, 500, 150, 125);
-
-  // Shapes.
-  // cube = new Cube(400, 579, 100, 125);
-  // cubewide = new Cubewide(200, 604, 200, 75);
-  // rectangle = new Rectangle(600, 531, 100, 220);
-  // platform = new Platform(800, 250, 100, 55);
-  // movingplatform = new Movingplatformhorizontal(1000, 450, 100, 55, 0, 2);
-  // movingplatformvertical = new Movingplatformvertical(200, 250, 100, 55, 0, 2);
-
-  // Elements.
-  // button = new Button(50, 610, 75, 50, false);
-  // trampoline = new Trampoline(100, 604, 150, 75);
-  // boostplatform = new Boostplatform(100, 620, 400, 40);
-  // roller = new Roller(1000, 600, 60, 120, 0, 4, 0, 1800);
-  // pipe = new Pipe(1133, 850, 60, 360);
-  // canon = new Canon(1100, 620, 140, 140);
-  //  canonball = new Canonball(1060, 590, 50, 50, 0, 12, 0, 1060);
-  // door = new Door(1300, 390, 150, 150);
-  //  spawn = new Spawn(400, 300, 75, 25);
 }
 
 // Canvas Resize function.
@@ -1283,7 +1270,7 @@ function keyPressed() {
   // Switch from titlemenu to game.
   if (state === "titlemenu") {
     if (keyCode == 16) {
-      state = "level01";
+      state = "level04";
     }
   }
 }

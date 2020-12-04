@@ -21,7 +21,7 @@ class RollerBlue {
   display() {
     push();
     imageMode(CENTER);
-    image(gamerollerimage, this.x, this.y, this.width, this.height);
+    image(gamerollerblueimage, this.x, this.y, this.width, this.height);
     pop();
   }
 }
