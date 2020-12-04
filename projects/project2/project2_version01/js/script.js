@@ -472,10 +472,10 @@ function setup() {
 
   // Level 04.
 
-  roller = new Roller(1700, 380, 60, 120, 0, 6, -100, 1700);
-  roller02 = new Roller02(1250, 380, 60, 120, 0, 6, -100, 1700);
-  roller03 = new Roller02(800, 380, 60, 120, 0, 6, -100, 1700);
-  roller04 = new Roller02(350, 380, 60, 120, 0, 6, -100, 1700);
+  roller = new RollerYellow(1700, 380, 60, 120, 0, 6, -100, 1700);
+  roller02 = new RollerBlue(1250, 380, 60, 120, 0, 6, -100, 1700);
+  roller03 = new RollerGreen(800, 380, 60, 120, 0, 6, -100, 1700);
+  roller04 = new RollerRed(350, 380, 60, 120, 0, 6, -100, 1700);
 
   // Level 05.
 
