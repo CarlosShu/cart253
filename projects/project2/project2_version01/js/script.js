@@ -19,6 +19,10 @@ let lightoverlayimage;
 let titlemenulogoimage;
 let titlemenubackgroundimage;
 
+// End Menu Visuals variables.
+let endmenulogoimage;
+let endmenubackgroundimage;
+
 // Game Visuals variables.
 
 // Game backround image.
@@ -305,6 +309,12 @@ function preload() {
     "assets/images/titlemenu/titlemenubackground.png"
   );
 
+  // Title Menu Visuals.
+  endmenulogoimage = loadImage("assets/images/endmenu/endmenulogo.png");
+  endmenubackgroundimage = loadImage(
+    "assets/images/endmenu/endmenubackground.png"
+  );
+
   // Game Visuals.
   gamebackgroundimage = loadImage("assets/images/game/gamebackground.png");
   gamedistanceshadowimage = loadImage(
@@ -561,8 +571,8 @@ function setup() {
     560
   );
 
-  canonball = new Canonball(1400, 480, 50, 50, 0, 10, -100, 1400);
-  canonball02 = new CanonballRight(200, 280, 50, 50, 0, 10, 1700, 200);
+  canonball = new Canonball(1400, 480, 50, 50, 0, 6, -100, 1400);
+  canonball02 = new CanonballRight(200, 280, 50, 50, 0, 6, 1700, 200);
 }
 
 // Canvas Resize function.
@@ -638,6 +648,9 @@ function draw() {
     level10();
     avatar();
     global();
+  } else if (state === "endmenu") {
+    endmenu();
+    global();
   }
 }
 
@@ -670,6 +683,28 @@ function global() {
     push();
     imageMode(CENTER);
     image(titlemenulogoimage, width / 2, height / 2, 1300, 650);
+    pop();
+  } else if (state === "endmenu") {
+    if (counter >= 30) {
+      // Press Enter.
+      push();
+      textAlign(CENTER, CENTER);
+      textFont(blockfont);
+      textSize(15);
+      fill(255, 255, 255);
+      text("PRESS SHIFT TO PLAY AGAIN", width / 2, 750);
+      pop();
+    }
+    if (counter == 60) {
+      // This only happens every second.
+      counter = 0;
+    }
+    counter++;
+
+    // Title Menu Logo.
+    push();
+    imageMode(CENTER);
+    image(endmenulogoimage, width / 2, height / 2, 1300, 650);
     pop();
   } else if (
     state === "level01" ||
@@ -853,7 +888,7 @@ function level03() {
   rectangle03 = new Rectangle03(350, 531, 100, 220);
   rectangle03.display();
 
-  cube02 = new Cube02(350, 384, 100, 125);
+  cube02 = new Cube02(350, 385, 100, 125);
   cube02.display();
 
   cubewide = new Cubewide(1400, 359, 200, 75);
@@ -1100,31 +1135,31 @@ function level09() {
   image(gamedistanceshadowimage, width / 2, height / 2, 1800, 650);
   pop();
 
-  cube = new Cube(150, 579, 100, 125);
+  cube = new Cube03(150, 579, 100, 125);
   cube.display();
 
-  cube02 = new Cube03(350, 579, 100, 125);
+  cube02 = new Cube04(350, 579, 100, 125);
   cube02.display();
 
-  cube03 = new Cube04(550, 579, 100, 125);
+  cube03 = new Cube(550, 579, 100, 125);
   cube03.display();
 
   cube04 = new Cube02(750, 579, 100, 125);
   cube04.display();
 
-  cube05 = new Cube(950, 579, 100, 125);
+  cube05 = new Cube03(950, 579, 100, 125);
   cube05.display();
 
-  cube06 = new Cube03(950, 379, 100, 125);
+  cube06 = new Cube(950, 379, 100, 125);
   cube06.display();
 
-  cube07 = new Cube(750, 379, 100, 125);
+  cube07 = new Cube04(750, 379, 100, 125);
   cube07.display();
 
   cube08 = new Cube03(550, 379, 100, 125);
   cube08.display();
 
-  cube09 = new Cube03(350, 379, 100, 125);
+  cube09 = new Cube02(350, 379, 100, 125);
   cube09.display();
 
   movingplatformvertical04.display();
@@ -1259,6 +1294,14 @@ function level10() {
   door.display();
 }
 
+function endmenu() {
+  // Ending background..
+  push();
+  imageMode(CENTER);
+  image(endmenubackgroundimage, width / 2, height / 2, 2600, 1300);
+  pop();
+}
+
 function overlays() {
   // Game Ground.
   push();
@@ -1288,6 +1331,12 @@ function avatar() {
 function keyPressed() {
   // Switch from titlemenu to game.
   if (state === "titlemenu") {
+    if (keyCode == 16) {
+      state = "level01";
+    }
+  }
+  // Switch from titlemenu to game.
+  if (state === "endmenu") {
     if (keyCode == 16) {
       state = "level01";
     }

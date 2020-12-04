@@ -3973,6 +3973,28 @@ class Avatar {
       }
     }
 
+    // Hop from level 10 to ending.
+    if (state == "level10") {
+      if (keyCode == 16) {
+        if (exit == true) {
+          this.x = 150;
+          this.y = 500;
+          gravityForce = 0.025;
+          exit = false;
+          reset = false;
+          keynumber = 0;
+          doorlock = false;
+          movingplatformtimer = 0;
+          movingplatform02timer = 0;
+          movingplatformverticaltimer = 0;
+          movingplatformvertical02timer = 0;
+          timeleft = 5;
+          buttonactivated = false;
+          state = "endmenu";
+        }
+      }
+    }
+
     if (this.y > 800) {
       reset = true;
     }
