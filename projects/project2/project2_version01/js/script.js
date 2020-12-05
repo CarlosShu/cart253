@@ -11,6 +11,9 @@ Project 2.
 // Fonts variables.
 let blockfont;
 
+// Sounds variables.
+let jump;
+
 // Global Visuals variables.
 let headerimage;
 let lightoverlayimage;
@@ -125,14 +128,14 @@ let avatarjumpright2image;
 let avatarjumpleft1image;
 let avatarjumpleft2image;
 
-// Starting State Variable.
-let state = "titlemenu";
-
 // FPS variable.
 let fr = 60;
 
 // Number Variables.
 let counter = 0;
+
+// Starting State Variable.
+let state = "titlemenu";
 
 // Moving platform timer.
 let movingplatformtimer = 0;
@@ -298,6 +301,9 @@ let numavatars = 1;
 function preload() {
   // Fonts.
   blockfont = loadFont("assets/block.otf"); // Practically the Nintendo Logo Font.
+
+  // Sounds.
+  jump = loadSound("assets/sounds/jump.wav");
 
   // Global Visuals.
   headerimage = loadImage("assets/images/global/header.png");

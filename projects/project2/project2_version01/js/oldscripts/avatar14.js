@@ -79,8 +79,6 @@ class Avatar {
 
       // Jump.
       if (keyIsDown(87)) {
-        jump.stop();
-        jump.play();
         this.vy = -this.jumpheight;
         this.ay = 0;
         gravityForce = 0;
@@ -142,8 +140,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -191,8 +187,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -238,8 +232,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -278,8 +270,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -318,8 +308,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -401,8 +389,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -453,8 +439,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -505,8 +489,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -557,8 +539,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -601,8 +581,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -653,8 +631,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -705,8 +681,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -757,8 +731,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -809,8 +781,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -861,8 +831,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -905,8 +873,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -949,8 +915,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -993,8 +957,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1037,8 +999,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1091,8 +1051,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1145,8 +1103,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1199,8 +1155,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1253,8 +1207,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1304,8 +1256,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1355,8 +1305,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1406,8 +1354,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1457,8 +1403,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1506,8 +1450,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1555,8 +1497,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1599,8 +1539,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1644,8 +1582,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1688,8 +1624,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1732,8 +1666,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1783,8 +1715,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1834,8 +1764,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1885,8 +1813,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1934,8 +1860,6 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1985,8 +1909,6 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2036,8 +1958,6 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2087,8 +2007,6 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2145,8 +2063,6 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2202,8 +2118,6 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2259,8 +2173,6 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2320,8 +2232,6 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2391,8 +2301,6 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2462,8 +2370,6 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2533,8 +2439,6 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2590,8 +2494,6 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2815,8 +2717,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2872,8 +2772,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2922,8 +2820,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2964,8 +2860,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -3006,8 +2900,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -3048,8 +2940,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -3092,8 +2982,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -3143,8 +3031,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -3197,8 +3083,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -3245,8 +3129,6 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
-          jump.stop();
-          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -3314,8 +3196,6 @@ class Avatar {
 
           //  Jump.
           if (keyIsDown(87)) {
-            jump.stop();
-            jump.play();
             this.vy = -this.jumpheight;
             this.ay = 0;
             gravityForce = 0;
@@ -3397,8 +3277,6 @@ class Avatar {
 
           //  Jump.
           if (keyIsDown(87)) {
-            jump.stop();
-            jump.play();
             this.vy = -this.jumpheight;
             this.ay = 0;
             gravityForce = 0;
@@ -3481,8 +3359,6 @@ class Avatar {
 
           //  Jump.
           if (keyIsDown(87)) {
-            jump.stop();
-            jump.play();
             this.vy = -this.jumpheight;
             this.ay = 0;
             gravityForce = 0;
@@ -3560,8 +3436,6 @@ class Avatar {
 
           //  Jump.
           if (keyIsDown(87)) {
-            jump.stop();
-            jump.play();
             this.vy = -this.jumpheight;
             this.ay = 0;
             gravityForce = 0;
@@ -3641,8 +3515,6 @@ class Avatar {
 
           //  Jump.
           if (keyIsDown(87)) {
-            jump.stop();
-            jump.play();
             this.vy = -this.jumpheight;
             this.ay = 0;
             gravityForce = 0;
@@ -3724,8 +3596,6 @@ class Avatar {
 
           //  Jump.
           if (keyIsDown(87)) {
-            jump.stop();
-            jump.play();
             this.vy = -this.jumpheight;
             this.ay = 0;
             gravityForce = 0;
@@ -3808,8 +3678,6 @@ class Avatar {
 
           //  Jump.
           if (keyIsDown(87)) {
-            jump.stop();
-            jump.play();
             this.vy = -this.jumpheight;
             this.ay = 0;
             gravityForce = 0;
@@ -3887,8 +3755,6 @@ class Avatar {
 
           //  Jump.
           if (keyIsDown(87)) {
-            jump.stop();
-            jump.play();
             this.vy = -this.jumpheight;
             this.ay = 0;
             gravityForce = 0;
@@ -3933,7 +3799,6 @@ class Avatar {
         }
       }
     }
-
     // Hop from level 02 to level 03.
     if (state == "level02") {
       if (keyCode == 16) {
