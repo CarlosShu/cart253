@@ -12,7 +12,11 @@ Project 2.
 let blockfont;
 
 // Sounds variables.
+let enter;
 let jump;
+let blockhit01;
+let bounce;
+let crouch;
 
 // Global Visuals variables.
 let headerimage;
@@ -44,17 +48,17 @@ let gameforegroundlightimage;
 let gamegroundimage;
 
 // Game Shapes visuals;
-let gamecubeimage;
-let gamecube02image;
-let gamecube03image;
-let gamecube04image;
+let gamecubegreenimage;
+let gamecubeblueimage;
+let gamecuberedimage;
+let gamecubeyellowimage;
 
 let gamecubewideimage;
 
-let gamerectangleimage;
-let gamerectangle02image;
-let gamerectangle03image;
-let gamerectangle04image;
+let gamerectangleredimage;
+let gamerectangleyellowimage;
+let gamerectangleblueimage;
+let gamerectanglegreenimage;
 
 let gamerectangletallimage;
 
@@ -73,16 +77,17 @@ let gamedisappearingplatformredimage;
 let gamemovingplatformimage;
 
 let gametrianglewideimage;
-let gamebigblockimage;
-let gamebigblock02image;
+let gamebigblockgreenimage;
+let gamebigblockblueimage;
 let gamegiantblockimage;
 let gamegiantcubeblockimage;
 let gamegiantrectangleblockimage;
 
 // Ground blocks visuals.
-let gamegroundblock1image;
-let gamegroundblock2image;
-let gamegroundblock3image;
+let gamelargeplatformwideimage;
+let gamelargeplatformwidetallimage;
+let gamelargeplatformimage;
+let gamelargeplatformsemiwideimage;
 let gamegroundblock04image;
 
 // Game Elements.
@@ -102,7 +107,7 @@ let gamerollerblueimage;
 let gamerollergreenimage;
 let gamerollerredimage;
 
-let gamecanonimage;
+let gamecanonleftimage;
 let gamecanonrightimage;
 
 let gamecanonballimage;
@@ -111,6 +116,7 @@ let gamepipeimage;
 
 let gamedoorimage;
 let gamedoorlockedimage;
+let gamebigdoorimage;
 
 let gamekeyimage;
 
@@ -146,6 +152,9 @@ let movingplatformvertical02timer = 0;
 // Gravity variable.
 let gravityForce = 0.025;
 
+// Enter the tutorial.
+let tutorialend = false;
+
 // Exiting the level.
 let exit = false;
 
@@ -154,6 +163,9 @@ let doorlock = false;
 
 // Key number.
 let keynumber = 0;
+
+// Tutorial timer.
+let tutorialtimer = 0;
 
 // Timer.
 let timer = 0;
@@ -187,6 +199,7 @@ var level = 0;
 let ground;
 
 // Shapes variables.
+
 let cube;
 let cube02;
 let cube03;
@@ -260,8 +273,10 @@ let groundblock02;
 let groundblock03;
 let groundblock04;
 let groundblock05;
+let largeplatformwidetall01;
 
 // Game Elements.
+
 let button;
 
 let trampoline;
@@ -288,12 +303,14 @@ let canonball03;
 let canonball04;
 
 let door;
+let doorbig;
 
 let key;
 
 let spawn;
 
 // Avatar variables.
+
 let avatars = [];
 let numavatars = 1;
 
@@ -303,7 +320,11 @@ function preload() {
   blockfont = loadFont("assets/block.otf"); // Practically the Nintendo Logo Font.
 
   // Sounds.
+  enter = loadSound("assets/sounds/enter.wav");
   jump = loadSound("assets/sounds/jump.wav");
+  bounce = loadSound("assets/sounds/bounce.wav");
+  blockhit01 = loadSound("assets/sounds/blockhit01.wav");
+  crouch = loadSound("assets/sounds/crouch.wav");
 
   // Global Visuals.
   headerimage = loadImage("assets/images/global/header.png");
@@ -330,34 +351,46 @@ function preload() {
   gameforegroundlightimage = loadImage(
     "assets/images/game/gameforegroundlight.png"
   );
+
+  // Ground.
   gamegroundimage = loadImage("assets/images/game/gameground.png");
 
   // Game Shapes.
-  gamecubeimage = loadImage("assets/images/shapes3d/gamecube.png");
-  gamecube02image = loadImage("assets/images/shapes3d/gamecube02.png");
-  gamecube03image = loadImage("assets/images/shapes3d/gamecube03.png");
-  gamecube04image = loadImage("assets/images/shapes3d/gamecube04.png");
 
+  // Cubes.
+  gamecubegreenimage = loadImage("assets/images/shapes3d/gamecubegreen.png");
+  gamecubeblueimage = loadImage("assets/images/shapes3d/gamecubeblue.png");
+  gamecuberedimage = loadImage("assets/images/shapes3d/gamecubered.png");
+  gamecubeyellowimage = loadImage("assets/images/shapes3d/gamecubeyellow.png");
+
+  // Cube wide.
   gamecubewideimage = loadImage("assets/images/shapes3d/gamecubewide.png");
 
-  gamerectangleimage = loadImage("assets/images/shapes3d/gamerectangle.png");
-  gamerectangle02image = loadImage(
-    "assets/images/shapes3d/gamerectangle02.png"
+  // Rectangles.
+  gamerectangleredimage = loadImage(
+    "assets/images/shapes3d/gamerectanglered.png"
   );
-  gamerectangle03image = loadImage(
-    "assets/images/shapes3d/gamerectangle03.png"
+  gamerectangleyellowimage = loadImage(
+    "assets/images/shapes3d/gamerectangleyellow.png"
   );
-  gamerectangle04image = loadImage(
-    "assets/images/shapes3d/gamerectangle04.png"
+  gamerectangleblueimage = loadImage(
+    "assets/images/shapes3d/gamerectangleblue.png"
+  );
+  gamerectanglegreenimage = loadImage(
+    "assets/images/shapes3d/gamerectanglegreen.png"
   );
 
+  // Rectangle tall.
   gamerectangletallimage = loadImage(
     "assets/images/shapes3d/gamerectangletall.png"
   );
 
+  // Rectangle wide.
   gamerectanglewideimage = loadImage(
     "assets/images/shapes3d/gamerectanglewide.png"
   );
+
+  // Platforms.
   gameplatformyellowimage = loadImage(
     "assets/images/shapes3d/gameplatformyellow.png"
   );
@@ -370,31 +403,45 @@ function preload() {
   gameplatformredimage = loadImage(
     "assets/images/shapes3d/gameplatformred.png"
   );
+
+  // Unused triangle.
   gametrianglewideimage = loadImage(
     "assets/images/shapes3d/gametrianglewide.png"
   );
-  gamebigblockimage = loadImage("assets/images/shapes3d/gamebigblock.png");
-  gamebigblock02image = loadImage("assets/images/shapes3d/gamebigblock02.png");
 
+  // Big blocks.
+  gamebigblockgreenimage = loadImage(
+    "assets/images/shapes3d/gamebigblockgreen.png"
+  );
+  gamebigblockblueimage = loadImage(
+    "assets/images/shapes3d/gamebigblockblue.png"
+  );
+
+  // Giant block.
   gamegiantblockimage = loadImage("assets/images/shapes3d/gamegiantblock.png");
 
+  // Giant cube block.
   gamegiantcubeblockimage = loadImage(
     "assets/images/shapes3d/gamegiantcubeblock.png"
   );
 
+  // Giant rectangle block.
   gamegiantrectangleblockimage = loadImage(
     "assets/images/shapes3d/gamegiantrectangleblock.png"
   );
 
-  // Ground blocks.
-  gamegroundblock1image = loadImage(
-    "assets/images/shapes3d/gamegroundblock1.png"
+  // Large platforms.
+  gamelargeplatformwideimage = loadImage(
+    "assets/images/shapes3d/gamelargeplatformwide.png"
   );
-  gamegroundblock2image = loadImage(
-    "assets/images/shapes3d/gamegroundblock2.png"
+  gamelargeplatformwidetallimage = loadImage(
+    "assets/images/shapes3d/gamelargeplatformwidetall.png"
   );
-  gamegroundblock3image = loadImage(
-    "assets/images/shapes3d/gamegroundblock3.png"
+  gamelargeplatformimage = loadImage(
+    "assets/images/shapes3d/gamelargeplatform.png"
+  );
+  gamelargeplatformsemiwideimage = loadImage(
+    "assets/images/shapes3d/gamelargeplatformsemiwide.png"
   );
 
   // Game elements.
@@ -417,11 +464,13 @@ function preload() {
     "assets/images/elements/gametrampolinered.png"
   );
 
+  // Boost platforms.
   gameboostplatformimage = loadImage("assets/images/elements/gamebelt.gif");
   gameboostplatformleftimage = loadImage(
     "assets/images/elements/gamebeltleft.gif"
   );
 
+  // Rollers.
   gamerolleryellowimage = loadImage(
     "assets/images/elements/gamerolleryellow.gif"
   );
@@ -431,18 +480,25 @@ function preload() {
   );
   gamerollerredimage = loadImage("assets/images/elements/gamerollerred.gif");
 
+  // Pipe.
   gamepipeimage = loadImage("assets/images/elements/gamepipe.png");
 
-  gamecanonimage = loadImage("assets/images/elements/gamecanon.png");
+  // Canons.
+  gamecanonleftimage = loadImage("assets/images/elements/gamecanonleft.png");
   gamecanonrightimage = loadImage("assets/images/elements/gamecanonright.png");
 
+  // Canonball.
   gamecanonballimage = loadImage("assets/images/elements/gamecanonball.png");
 
+  // Doors.
   gamedoorimage = loadImage("assets/images/elements/gamedoor.png");
   gamedoorlockedimage = loadImage("assets/images/elements/gamedoorlocked.png");
+  gamebigdoorimage = loadImage("assets/images/elements/gamebigdoor.png");
 
+  // Key.
   gamekeyimage = loadImage("assets/images/elements/gamekey.png");
 
+  // Unused spawn.
   gamespawnimage = loadImage("assets/images/elements/gamespawn.png");
 
   // Avatar Visuals.
@@ -471,7 +527,6 @@ function preload() {
   avatarjumpleft1image = loadImage("assets/images/avatar3d/avatarjumpleft.png");
   avatarjumpleft2image = loadImage("assets/images/avatar3d/avatarjumpleft.png");
 }
-// Test 1
 
 // Setup function.
 function setup() {
@@ -482,16 +537,20 @@ function setup() {
   // No cursor.
   noCursor();
 
+  // Avatar Spawn.
+
   for (let i = 0; i < numavatars; i++) {
     // Avatar X and Y spawn.
-    let x = 150;
-    let y = 500;
+    let x = 800;
+    let y = -100;
     let xspawn = 150;
     let yspawn = 500;
 
     let avatar = new Avatar(x, y, xspawn, yspawn);
     avatars.push(avatar);
   }
+
+  // Level 03.
 
   movingplatform = new Movingplatformhorizontal(
     550,
@@ -577,7 +636,7 @@ function setup() {
     560
   );
 
-  canonball = new Canonball(1400, 480, 50, 50, 0, 6, -100, 1400);
+  canonball = new CanonballLeft(1400, 480, 50, 50, 0, 6, -100, 1400);
   canonball02 = new CanonballRight(200, 280, 50, 50, 0, 6, 1700, 200);
 }
 
@@ -593,6 +652,12 @@ function draw() {
 
   if (state === "titlemenu") {
     titlemenu();
+    global();
+  } else if (state === "tutorial") {
+    game();
+    overlays();
+    tutorial();
+    avatar();
     global();
   } else if (state === "level01") {
     game();
@@ -712,6 +777,15 @@ function global() {
     imageMode(CENTER);
     image(endmenulogoimage, width / 2, height / 2, 1300, 650);
     pop();
+  } else if (state === "tutorial") {
+    // Level indicator.
+    push();
+    textAlign(CENTER, CENTER);
+    textFont(blockfont);
+    textSize(15);
+    fill(255, 255, 255);
+    text("TUTORIAL", 1550, 20);
+    pop();
   } else if (
     state === "level01" ||
     state === "level02" ||
@@ -756,14 +830,81 @@ function global() {
     pop();
   }
 
-  if (reset == true) {
-    push();
-    textAlign(CENTER, CENTER);
-    textFont(blockfont);
-    textSize(15);
-    fill(255, 255, 255);
-    text("PRESS R TO RESET", width / 2, 750);
-    pop();
+  if (
+    state === "level01" ||
+    state === "level02" ||
+    state === "level03" ||
+    state === "level04" ||
+    state === "level05" ||
+    state === "level06" ||
+    state === "level07" ||
+    state === "level08" ||
+    state === "level10"
+  ) {
+    if (reset == true) {
+      push();
+      textAlign(CENTER, CENTER);
+      textFont(blockfont);
+      textSize(15);
+      fill(255, 255, 255);
+      text("PRESS R TO RESET", width / 2, 750);
+      pop();
+    }
+  }
+
+  if (state === "tutorial") {
+    if (tutorialtimer >= 90 && tutorialtimer < 240) {
+      push();
+      textAlign(CENTER, CENTER);
+      textFont(blockfont);
+      textSize(15);
+      fill(255, 255, 255);
+      text("WELCOME TO BLOCK MANIA", width / 2, 750);
+      pop();
+    } else if (tutorialtimer >= 240 && tutorialtimer < 480) {
+      push();
+      textAlign(CENTER, CENTER);
+      textFont(blockfont);
+      textSize(15);
+      fill(255, 255, 255);
+      text(
+        "THE OBJECTIVE OF THE GAME IS TO COMPLETE ALL 10 LEVELS",
+        width / 2,
+        750
+      );
+      pop();
+    } else if (tutorialtimer >= 480 && tutorialtimer < 780) {
+      push();
+      textAlign(CENTER, CENTER);
+      textFont(blockfont);
+      textSize(15);
+      fill(255, 255, 255);
+      text("USE WASD TO MOVE, JUMP, AND CROUCH", width / 2, 750);
+      pop();
+    } else if (tutorialtimer >= 780) {
+      push();
+      textAlign(CENTER, CENTER);
+      textFont(blockfont);
+      textSize(15);
+      fill(255, 255, 255);
+      text(
+        "PRESS SHIFT TO PROCEED AND END THE TUTORIAL, OR PRESS R TO HEAR IT AGAIN",
+        width / 2,
+        750
+      );
+      pop();
+    }
+    if (tutorialtimer < 780) {
+      tutorialend = false;
+    } else if (tutorialtimer > 780) {
+      if (keyIsDown(16)) {
+        tutorialend = true;
+      }
+      if (keyIsDown(82)) {
+        tutorialtimer = 90;
+      }
+    }
+    tutorialtimer++;
   }
 }
 
@@ -784,6 +925,24 @@ function game() {
   pop();
 }
 
+function tutorial() {
+  level = 0;
+
+  ground = new Ground(800, 625, 2000, 0);
+
+  // Game Ground.
+  push();
+  imageMode(CENTER);
+  image(gamegroundimage, width / 2, height / 2, 2600, 1300);
+  pop();
+
+  // Game Distance Shadow.
+  push();
+  imageMode(CENTER);
+  image(gamedistanceshadowimage, width / 2, height / 2, 1800, 650);
+  pop();
+}
+
 function level01() {
   level = 1;
 
@@ -801,19 +960,19 @@ function level01() {
   image(gamedistanceshadowimage, width / 2, height / 2, 1800, 650);
   pop();
 
-  cube = new Cube(150, 579, 100, 125);
+  cube = new CubeGreen(150, 579, 100, 125);
   cube.display();
 
-  rectangle = new Rectangle(350, 531, 100, 220);
+  rectangle = new RectangleRed(350, 531, 100, 220);
   rectangle.display();
 
-  bigblock = new Bigblock(650, 531, 300, 220);
+  bigblock = new BigblockBlue(650, 531, 300, 220);
   bigblock.display();
 
   rectanglewide = new Rectanglewide(1000, 531, 150, 220);
   rectanglewide.display();
 
-  bigblock02 = new Bigblock02(1350, 531, 300, 220);
+  bigblock02 = new BigblockGreen(1350, 531, 300, 220);
   bigblock02.display();
 
   door = new Door(1350, 350, 150, 155);
@@ -843,10 +1002,10 @@ function level02() {
   rectanglewide = new Rectanglewide(150, 531, 150, 220);
   rectanglewide.display();
 
-  rectangle02 = new Rectangle02(950, 531, 100, 220);
+  rectangle02 = new RectangleYellow(950, 531, 100, 220);
   rectangle02.display();
 
-  rectangle04 = new Rectangle04(550, 531, 100, 220);
+  rectangle04 = new RectangleGreen(550, 531, 100, 220);
   rectangle04.display();
 
   rectangletall = new RectangleTall(350, 477, 100, 330);
@@ -855,7 +1014,7 @@ function level02() {
   rectangletall02 = new RectangleTall(1150, 477, 100, 330);
   rectangletall02.display();
 
-  cube03 = new Cube03(750, 579, 100, 125);
+  cube03 = new CubeRed(750, 579, 100, 125);
   cube03.display();
 
   cubewide = new Cubewide(1400, 349, 200, 75);
@@ -888,13 +1047,13 @@ function level03() {
   image(gamedistanceshadowimage, width / 2, height / 2, 1800, 650);
   pop();
 
-  rectangle = new Rectangle(150, 531, 100, 220);
+  rectangle = new RectangleRed(150, 531, 100, 220);
   rectangle.display();
 
-  rectangle03 = new Rectangle03(350, 531, 100, 220);
+  rectangle03 = new RectangleBlue(350, 531, 100, 220);
   rectangle03.display();
 
-  cube02 = new Cube02(350, 385, 100, 125);
+  cube02 = new CubeBlue(350, 385, 100, 125);
   cube02.display();
 
   cubewide = new Cubewide(1400, 359, 200, 75);
@@ -975,7 +1134,7 @@ function level05() {
   movingplatform03.display();
   movingplatform03.move();
 
-  groundblock03 = new Groundblock03(1400, 275, 150, 80);
+  groundblock03 = new LargePlatformSemiWide(1400, 275, 150, 80);
   groundblock03.display();
 
   door = new Door(1400, 165, 150, 155);
@@ -987,7 +1146,7 @@ function level06() {
 
   ground = new Ground(800, 1000, 2000, 0);
 
-  cube = new Cube(150, 579, 100, 125);
+  cube = new CubeGreen(150, 579, 100, 125);
   cube.display();
 
   cubewide = new Cubewide(400, 554, 200, 75);
@@ -1038,16 +1197,16 @@ function level07() {
   key = new Key(1025, 325, 20, 40);
   key.display();
 
-  boostplatform = new Boostplatform(700, 449, 400, 45);
+  boostplatform = new BoostplatformRight(700, 449, 400, 45);
   boostplatform.display();
 
-  boostplatform02 = new Boostplatform02(700, 227, 400, 45);
+  boostplatform02 = new BoostplatformLeft(700, 227, 400, 45);
   boostplatform02.display();
 
-  rectangle = new Rectangle03(150, 531, 100, 220);
+  rectangle = new RectangleBlue(150, 531, 100, 220);
   rectangle.display();
 
-  rectangle02 = new Rectangle03(1250, 531, 100, 220);
+  rectangle02 = new RectangleBlue(1250, 531, 100, 220);
   rectangle02.display();
 
   movingplatformvertical03.display();
@@ -1062,7 +1221,7 @@ function level07() {
   platform03 = new PlatformYellow(1050, 220, 100, 55);
   platform03.display();
 
-  groundblock03 = new Groundblock03(175, 218, 150, 80);
+  groundblock03 = new LargePlatformSemiWide(175, 218, 150, 80);
   groundblock03.display();
 
   door = new Door(175, 127, 150, 155);
@@ -1141,40 +1300,40 @@ function level09() {
   image(gamedistanceshadowimage, width / 2, height / 2, 1800, 650);
   pop();
 
-  cube = new Cube03(150, 579, 100, 125);
+  cube = new CubeRed(150, 579, 100, 125);
   cube.display();
 
-  cube02 = new Cube04(350, 579, 100, 125);
+  cube02 = new CubeYellow(350, 579, 100, 125);
   cube02.display();
 
-  cube03 = new Cube(550, 579, 100, 125);
+  cube03 = new CubeGreen(550, 579, 100, 125);
   cube03.display();
 
-  cube04 = new Cube02(750, 579, 100, 125);
+  cube04 = new CubeBlue(750, 579, 100, 125);
   cube04.display();
 
-  cube05 = new Cube03(950, 579, 100, 125);
+  cube05 = new CubeRed(950, 579, 100, 125);
   cube05.display();
 
-  cube06 = new Cube(950, 379, 100, 125);
+  cube06 = new CubeGreen(950, 379, 100, 125);
   cube06.display();
 
-  cube07 = new Cube04(750, 379, 100, 125);
+  cube07 = new CubeYellow(750, 379, 100, 125);
   cube07.display();
 
-  cube08 = new Cube03(550, 379, 100, 125);
+  cube08 = new CubeRed(550, 379, 100, 125);
   cube08.display();
 
-  cube09 = new Cube02(350, 379, 100, 125);
+  cube09 = new CubeBlue(350, 379, 100, 125);
   cube09.display();
 
   movingplatformvertical04.display();
   movingplatformvertical04.move();
 
-  groundblock04 = new Groundblock03(1375, 328, 150, 80);
+  groundblock04 = new LargePlatformSemiWide(1375, 328, 150, 80);
   groundblock04.display();
 
-  groundblock05 = new Groundblock03(1525, 328, 150, 80);
+  groundblock05 = new LargePlatformSemiWide(1525, 328, 150, 80);
   groundblock05.display();
 
   door = new Door(1450, 225, 150, 155);
@@ -1189,7 +1348,7 @@ function level09() {
   canonball02.display();
   canonball02.move();
 
-  canon = new Canon(1525, 480, 450, 90);
+  canon = new CanonLeft(1525, 480, 450, 90);
   canon.display();
 
   canonright = new CanonRight(0, 280, 450, 90);
@@ -1201,7 +1360,7 @@ function level10() {
 
   ground = new Ground(800, 1000, 2000, 0);
 
-  cube = new Cube03(150, 479, 100, 125);
+  cube = new CubeRed(150, 479, 100, 125);
   cube.display();
 
   if (disappearingplatformcounter >= 0 && disappearingplatformcounter < 60) {
@@ -1293,7 +1452,7 @@ function level10() {
   }
   disappearingplatformcounter++;
 
-  groundblock03 = new Groundblock03(1400, 428, 150, 80);
+  groundblock03 = new LargePlatformSemiWide(1400, 428, 150, 80);
   groundblock03.display();
 
   door = new Door(1400, 325, 150, 155);
@@ -1335,13 +1494,13 @@ function avatar() {
 
 // Keypress function.
 function keyPressed() {
-  // Switch from titlemenu to game.
+  // Switch from titlemenu to level 01.
   if (state === "titlemenu") {
     if (keyCode == 16) {
-      state = "level01";
+      state = "tutorial";
     }
   }
-  // Switch from titlemenu to game.
+  // Switch from endmenu to level 01.
   if (state === "endmenu") {
     if (keyCode == 16) {
       state = "level01";

@@ -37,6 +37,8 @@ class Avatar {
     this.x = this.x + this.vx;
     this.y = this.y + this.vy;
 
+    this.x = constrain(this.x, 0, width);
+
     // this moves.
     if (keyIsDown(65)) {
       this.vx = -this.speed;
@@ -103,6 +105,46 @@ class Avatar {
       }
     }
 
+    // Collides with Door.
+    if (
+      state == "level01" ||
+      state == "level02" ||
+      state == "level03" ||
+      state == "level04" ||
+      state == "level05" ||
+      state == "level06" ||
+      state == "level07" ||
+      state == "level08" ||
+      state == "level09" ||
+      state == "level10"
+    ) {
+      if (
+        this.x > door.x - door.width / 3 &&
+        this.x < door.x + door.width / 3 &&
+        this.y > door.y - door.height / 1 &&
+        this.y < door.y + door.height / 1.5
+      ) {
+        if (doorlock == false) {
+          exit = true;
+        }
+      } else {
+        exit = false;
+      }
+    }
+
+    // Collides with key.
+    if (state == "level06" || state == "level07" || state == "level09") {
+      if (
+        this.x > key.x - key.width / 1 &&
+        this.x < key.x + key.width / 1 &&
+        this.y > key.y - key.height / 1 &&
+        this.y < key.y + key.height / 1
+      ) {
+        keynumber = 1;
+        doorlock = false;
+      }
+    }
+
     if (state == "level30") {
       // Collides with Groundblock01.
       let dgroundblock01 = dist(
@@ -130,8 +172,8 @@ class Avatar {
       } else if (
         this.x > groundblock01.x - groundblock01.width / 1.9 &&
         this.x < groundblock01.x + groundblock01.width / 1.9 &&
-        this.y < groundblock01.y - groundblock01.height / 3 &&
-        this.y > groundblock01.y - groundblock01.height / 2.5
+        this.y < groundblock01.y - groundblock01.height / 2 &&
+        this.y > groundblock01.y - groundblock01.height / 2
       ) {
         this.vy = 0;
         this.ay = 0;
@@ -332,33 +374,6 @@ class Avatar {
         this.y > groundblock05.y
       ) {
         this.vy = this.jumpheight;
-      }
-    }
-
-    // Collides with Door.
-    if (
-      this.x > door.x - door.width / 3 &&
-      this.x < door.x + door.width / 3 &&
-      this.y > door.y - door.height / 1 &&
-      this.y < door.y + door.height / 1.5
-    ) {
-      if (doorlock == false) {
-        exit = true;
-      }
-    } else {
-      exit = false;
-    }
-
-    // Collides with key.
-    if (state == "level06" || state == "level07" || state == "level09") {
-      if (
-        this.x > key.x - key.width / 1 &&
-        this.x < key.x + key.width / 1 &&
-        this.y > key.y - key.height / 1 &&
-        this.y < key.y + key.height / 1
-      ) {
-        keynumber = 1;
-        doorlock = false;
       }
     }
 
@@ -2574,8 +2589,9 @@ class Avatar {
       } else if (
         this.x > button.x - button.width / 2 &&
         this.x < button.x + button.width / 2 &&
-        this.y > button.y - button.height / 1.05 &&
-        this.y < button.y + button.height / 0.85
+        this.y > button.y - button.height / 0.9 &&
+        this.y < button.y + button.height / 0.7 &&
+        buttonactivated == false
       ) {
         this.vy = 0;
         this.ay = 0;
@@ -2596,13 +2612,29 @@ class Avatar {
           this.ay = 0;
           gravityForce = 0;
           this.jump = 2;
-        } else if (
-          this.x > button.x - button.width / 1.75 &&
-          this.x < button.x + button.width / 1.75 &&
-          this.y < button.y + button.height &&
-          this.y > button.y
-        ) {
-          this.vy = this.jumpheight;
+        }
+      } else if (
+        this.x > button.x - button.width / 2 &&
+        this.x < button.x + button.width / 2 &&
+        this.y > button.y - button.height / 1.2 &&
+        this.y < button.y + button.height / 1.1 &&
+        buttonactivated == true
+      ) {
+        this.vy = 0;
+        this.ay = 0;
+        gravityForce = 0.0;
+        this.jump = 0;
+        this.bounce = false;
+        this.speed = 4;
+
+        //  Jump.
+        if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
+          this.vy = -this.jumpheight;
+          this.ay = 0;
+          gravityForce = 0;
+          this.jump = 2;
         }
       }
     }
@@ -2638,6 +2670,8 @@ class Avatar {
         this.jump = 2;
         this.bounce = true;
         this.speed = 4;
+        bounce.stop();
+        bounce.play();
       }
 
       if (this.bounce == true) {
@@ -2684,6 +2718,8 @@ class Avatar {
         this.jump = 2;
         this.bounce = true;
         this.speed = 4;
+        bounce.stop();
+        bounce.play();
       }
 
       if (this.bounce == true) {
@@ -2730,6 +2766,8 @@ class Avatar {
         this.jump = 2;
         this.bounce = true;
         this.speed = 4;
+        bounce.stop();
+        bounce.play();
       }
 
       if (this.bounce == true) {
@@ -2769,6 +2807,8 @@ class Avatar {
         this.jump = 2;
         this.bounce = true;
         this.speed = 4;
+        bounce.stop();
+        bounce.play();
       }
 
       if (this.bounce == true) {
@@ -3912,6 +3952,28 @@ class Avatar {
   }
 
   keyPressed() {
+    // Hop from Tutorial to level 01.
+    if (state == "tutorial") {
+      if (tutorialend == true) {
+        if (keyCode == 16) {
+          this.x = 150;
+          this.y = 500;
+          gravityForce = 0.025;
+          exit = false;
+          reset = false;
+          keynumber = 0;
+          doorlock = false;
+          movingplatformtimer = 0;
+          movingplatform02timer = 0;
+          movingplatformverticaltimer = 0;
+          movingplatformvertical02timer = 0;
+          timeleft = 5;
+          buttonactivated = false;
+          state = "level01";
+        }
+      }
+    }
+
     // Hop from level 01 to level 02.
     if (state == "level01") {
       if (keyCode == 16) {
