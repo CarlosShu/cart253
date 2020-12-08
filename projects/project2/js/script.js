@@ -21,6 +21,7 @@ let text01;
 let text02;
 let jump;
 let blockhit01;
+let keygrab;
 let bounce;
 let crouch;
 
@@ -337,6 +338,7 @@ function preload() {
   bounce = loadSound("assets/sounds/bounce.wav");
   blockhit01 = loadSound("assets/sounds/blockhit01.wav");
   crouch = loadSound("assets/sounds/crouch.wav");
+  keygrab = loadSound("assets/sounds/keygrab.wav");
 
   // Global Visuals.
   headerimage = loadImage("assets/images/global/header.png");
@@ -909,7 +911,7 @@ function global() {
       textSize(15);
       fill(255, 255, 255);
       text(
-        "PRESS R IN THE EVENT THAT YOU ARE STUCK TO RESET THE LEVEL",
+        "PRESS R IN THE EVENT THAT YOU GET STUCK TO RESET THE LEVEL",
         width / 2,
         750
       );
@@ -924,7 +926,7 @@ function global() {
       textSize(15);
       fill(255, 255, 255);
       text(
-        "PRESS SHIFT TO PROCEED AND END THE TUTORIAL, OR PRESS R TO HEAR IT AGAIN",
+        "PRESS SHIFT TO PROCEED AND END THE TUTORIAL OR PRESS R TO HEAR IT AGAIN",
         width / 2,
         750
       );

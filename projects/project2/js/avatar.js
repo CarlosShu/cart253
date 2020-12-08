@@ -140,8 +140,8 @@ class Avatar {
         this.y > key.y - key.height / 1 &&
         this.y < key.y + key.height / 1
       ) {
-        keynumber = 1;
         doorlock = false;
+        keynumber = 1;
       }
     }
 
