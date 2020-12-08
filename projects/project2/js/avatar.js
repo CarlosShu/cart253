@@ -3971,6 +3971,11 @@ class Avatar {
           buttonactivated = false;
           levelenter01.play();
           state = "level01";
+
+          // Plays and loops the Theme.
+          if (!theme.isPlaying()) {
+            theme.loop();
+          }
         }
       }
     }

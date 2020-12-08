@@ -11,6 +11,9 @@ Project 2.
 // Fonts variables.
 let blockfont;
 
+// Theme.
+let theme;
+
 // Sounds variables.
 let tutorialenter;
 let levelenter01;
@@ -326,6 +329,9 @@ function preload() {
   // Fonts.
   blockfont = loadFont("assets/block.otf"); // Practically the Nintendo Logo Font.
 
+  // Theme.
+  theme = loadSound("assets/sounds/theme.wav");
+
   // Sounds.
   tutorialenter = loadSound("assets/sounds/entertutorial.wav");
   levelenter01 = loadSound("assets/sounds/levelenter01.wav");
@@ -546,13 +552,14 @@ function preload() {
 function setup() {
   // FPS.
   frameRate(fr);
+
   // Audio.
   userStartAudio();
+
   // No cursor.
   noCursor();
 
   // Avatar Spawn.
-
   for (let i = 0; i < numavatars; i++) {
     // Avatar X and Y spawn.
     let x = 800;
@@ -755,7 +762,7 @@ function global() {
       textFont(blockfont);
       textSize(15);
       fill(255, 255, 255);
-      text("PRESS SHIFT TO PLAY", width / 2, 750);
+      text("PRESS ENTER TO PLAY", width / 2, 750);
       pop();
     }
     if (counter == 60) {
@@ -1535,7 +1542,7 @@ function avatar() {
 function keyPressed() {
   // Switch from titlemenu to level 01.
   if (state === "titlemenu") {
-    if (keyCode == 16) {
+    if (keyCode == 13) {
       state = "tutorial";
       tutorialenter.play();
     }
