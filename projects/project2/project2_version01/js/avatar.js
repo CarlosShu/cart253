@@ -3969,6 +3969,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelenter01.play();
           state = "level01";
         }
       }
@@ -3991,6 +3992,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelenter02.play();
           state = "level02";
         }
       }
@@ -4013,6 +4015,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelenter01.play();
           state = "level03";
         }
       }
@@ -4034,6 +4037,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelenter02.play();
           state = "level04";
         }
       }
@@ -4055,6 +4059,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelenter01.play();
           state = "level05";
         }
       }
@@ -4077,6 +4082,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelenter02.play();
           state = "level06";
         }
       }
@@ -4099,6 +4105,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelenter01.play();
           state = "level07";
         }
       }
@@ -4121,6 +4128,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelenter02.play();
           state = "level08";
         }
       }
@@ -4143,6 +4151,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelenter01.play();
           state = "level09";
         }
       }
@@ -4165,6 +4174,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelenter02.play();
           state = "level10";
         }
       }
@@ -4187,6 +4197,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelexit.play();
           state = "endmenu";
         }
       }
@@ -4212,6 +4223,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     } else if (state == "level02") {
@@ -4230,6 +4242,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     } else if (state == "level03") {
@@ -4248,6 +4261,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     } else if (state == "level04") {
@@ -4266,6 +4280,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     } else if (state == "level05") {
@@ -4284,6 +4299,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     } else if (state == "level06") {
@@ -4302,6 +4318,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     } else if (state == "level07") {
@@ -4320,6 +4337,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     } else if (state == "level08") {
@@ -4338,6 +4356,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     } else if (state == "level09") {
@@ -4356,6 +4375,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     } else if (state == "level10") {
@@ -4374,6 +4394,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     }

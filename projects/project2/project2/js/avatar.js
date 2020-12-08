@@ -37,6 +37,8 @@ class Avatar {
     this.x = this.x + this.vx;
     this.y = this.y + this.vy;
 
+    this.x = constrain(this.x, 0, width);
+
     // this moves.
     if (keyIsDown(65)) {
       this.vx = -this.speed;
@@ -79,6 +81,8 @@ class Avatar {
 
       // Jump.
       if (keyIsDown(87)) {
+        jump.stop();
+        jump.play();
         this.vy = -this.jumpheight;
         this.ay = 0;
         gravityForce = 0;
@@ -98,6 +102,46 @@ class Avatar {
         this.force = true;
       } else {
         this.force = false;
+      }
+    }
+
+    // Collides with Door.
+    if (
+      state == "level01" ||
+      state == "level02" ||
+      state == "level03" ||
+      state == "level04" ||
+      state == "level05" ||
+      state == "level06" ||
+      state == "level07" ||
+      state == "level08" ||
+      state == "level09" ||
+      state == "level10"
+    ) {
+      if (
+        this.x > door.x - door.width / 3 &&
+        this.x < door.x + door.width / 3 &&
+        this.y > door.y - door.height / 1 &&
+        this.y < door.y + door.height / 1.5
+      ) {
+        if (doorlock == false) {
+          exit = true;
+        }
+      } else {
+        exit = false;
+      }
+    }
+
+    // Collides with key.
+    if (state == "level06" || state == "level07" || state == "level09") {
+      if (
+        this.x > key.x - key.width / 1 &&
+        this.x < key.x + key.width / 1 &&
+        this.y > key.y - key.height / 1 &&
+        this.y < key.y + key.height / 1
+      ) {
+        keynumber = 1;
+        doorlock = false;
       }
     }
 
@@ -128,8 +172,8 @@ class Avatar {
       } else if (
         this.x > groundblock01.x - groundblock01.width / 1.9 &&
         this.x < groundblock01.x + groundblock01.width / 1.9 &&
-        this.y < groundblock01.y - groundblock01.height / 3 &&
-        this.y > groundblock01.y - groundblock01.height / 2.5
+        this.y < groundblock01.y - groundblock01.height / 2 &&
+        this.y > groundblock01.y - groundblock01.height / 2
       ) {
         this.vy = 0;
         this.ay = 0;
@@ -140,6 +184,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -187,6 +233,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -232,6 +280,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -270,6 +320,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -308,6 +360,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -320,33 +374,6 @@ class Avatar {
         this.y > groundblock05.y
       ) {
         this.vy = this.jumpheight;
-      }
-    }
-
-    // Collides with Door.
-    if (
-      this.x > door.x - door.width / 3 &&
-      this.x < door.x + door.width / 3 &&
-      this.y > door.y - door.height / 1 &&
-      this.y < door.y + door.height / 1.5
-    ) {
-      if (doorlock == false) {
-        exit = true;
-      }
-    } else {
-      exit = false;
-    }
-
-    // Collides with key.
-    if (state == "level06" || state == "level07" || state == "level09") {
-      if (
-        this.x > key.x - key.width / 3 &&
-        this.x < key.x + key.width / 3 &&
-        this.y > key.y - key.height / 1 &&
-        this.y < key.y + key.height / 1
-      ) {
-        keynumber = 1;
-        doorlock = false;
       }
     }
 
@@ -389,6 +416,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -439,6 +468,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -489,6 +520,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -539,6 +572,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -581,6 +616,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -631,6 +668,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -681,6 +720,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -731,6 +772,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -781,6 +824,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -831,6 +876,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -873,6 +920,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -915,6 +964,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -957,6 +1008,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -999,6 +1052,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1051,6 +1106,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1103,6 +1160,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1155,6 +1214,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1207,6 +1268,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1256,6 +1319,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1305,6 +1370,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1354,6 +1421,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1403,6 +1472,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1450,6 +1521,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1497,6 +1570,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1539,6 +1614,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1582,6 +1659,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1624,6 +1703,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1666,6 +1747,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1715,6 +1798,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1764,6 +1849,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1813,6 +1900,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1860,6 +1949,8 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1909,6 +2000,8 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -1924,7 +2017,7 @@ class Avatar {
       }
     }
 
-    if (state == "level05") {
+    if (state == "level05" || state == "level07") {
       // Collides with platform03.
       let dplatform03 = dist(this.x, this.y, platform03.x, platform03.y);
       if (
@@ -1958,6 +2051,8 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2007,6 +2102,8 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2063,6 +2160,8 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2118,6 +2217,8 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2173,6 +2274,8 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2232,6 +2335,8 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2301,6 +2406,8 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2370,6 +2477,8 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2439,6 +2548,8 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2478,8 +2589,9 @@ class Avatar {
       } else if (
         this.x > button.x - button.width / 2 &&
         this.x < button.x + button.width / 2 &&
-        this.y > button.y - button.height / 1.05 &&
-        this.y < button.y + button.height / 0.85
+        this.y > button.y - button.height / 0.9 &&
+        this.y < button.y + button.height / 0.7 &&
+        buttonactivated == false
       ) {
         this.vy = 0;
         this.ay = 0;
@@ -2494,17 +2606,35 @@ class Avatar {
 
         //  Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
           this.jump = 2;
-        } else if (
-          this.x > button.x - button.width / 1.75 &&
-          this.x < button.x + button.width / 1.75 &&
-          this.y < button.y + button.height &&
-          this.y > button.y
-        ) {
-          this.vy = this.jumpheight;
+        }
+      } else if (
+        this.x > button.x - button.width / 2 &&
+        this.x < button.x + button.width / 2 &&
+        this.y > button.y - button.height / 1.2 &&
+        this.y < button.y + button.height / 1.1 &&
+        buttonactivated == true
+      ) {
+        this.vy = 0;
+        this.ay = 0;
+        gravityForce = 0.0;
+        this.jump = 0;
+        this.bounce = false;
+        this.speed = 4;
+
+        //  Jump.
+        if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
+          this.vy = -this.jumpheight;
+          this.ay = 0;
+          gravityForce = 0;
+          this.jump = 2;
         }
       }
     }
@@ -2540,11 +2670,20 @@ class Avatar {
         this.jump = 2;
         this.bounce = true;
         this.speed = 4;
+        bounce.stop();
+        bounce.play();
       }
 
       if (this.bounce == true) {
         gravityForce = 0.01;
         this.jump = 2;
+      } else if (
+        this.x > trampoline.x - trampoline.width / 1.75 &&
+        this.x < trampoline.x + trampoline.width / 1.75 &&
+        this.y < trampoline.y + trampoline.height &&
+        this.y > trampoline.y
+      ) {
+        this.vy = this.jumpheight;
       }
     }
 
@@ -2579,11 +2718,20 @@ class Avatar {
         this.jump = 2;
         this.bounce = true;
         this.speed = 4;
+        bounce.stop();
+        bounce.play();
       }
 
       if (this.bounce == true) {
         gravityForce = 0.01;
         this.jump = 2;
+      } else if (
+        this.x > trampoline02.x - trampoline02.width / 1.75 &&
+        this.x < trampoline02.x + trampoline02.width / 1.75 &&
+        this.y < trampoline02.y + trampoline02.height &&
+        this.y > trampoline02.y
+      ) {
+        this.vy = this.jumpheight;
       }
     }
 
@@ -2618,6 +2766,8 @@ class Avatar {
         this.jump = 2;
         this.bounce = true;
         this.speed = 4;
+        bounce.stop();
+        bounce.play();
       }
 
       if (this.bounce == true) {
@@ -2657,6 +2807,8 @@ class Avatar {
         this.jump = 2;
         this.bounce = true;
         this.speed = 4;
+        bounce.stop();
+        bounce.play();
       }
 
       if (this.bounce == true) {
@@ -2674,26 +2826,24 @@ class Avatar {
         boostplatform.y
       );
       if (
-        this.x < boostplatform.x - boostplatform.width / 2 &&
-        this.x < boostplatform.x + boostplatform.width / 2 &&
-        dboostplatform < this.width / 2 + boostplatform.width / 2 &&
+        this.x < boostplatform.x - boostplatform.width / 1.9 &&
+        this.x < boostplatform.x + boostplatform.width / 1.9 &&
+        dboostplatform < this.width / 1.9 + boostplatform.width / 1.9 &&
         this.vx == this.speed
       ) {
         this.vx = 0;
       } else if (
-        this.x > boostplatform.x - boostplatform.width / 2 &&
-        this.x > boostplatform.x + boostplatform.width / 2 &&
-        dboostplatform < this.width / 2 + boostplatform.width / 2 &&
+        this.x > boostplatform.x - boostplatform.width / 1.9 &&
+        this.x > boostplatform.x + boostplatform.width / 1.9 &&
+        dboostplatform < this.width / 1.9 + boostplatform.width / 1.9 &&
         this.vx == -this.speed
       ) {
         this.vx = 0;
       } else if (
-        this.x > boostplatform.x - boostplatform.width / 2 &&
-        this.x < boostplatform.x + boostplatform.width / 2 &&
-        this.y + this.height / 2.25 >
-          boostplatform.y - boostplatform.height / 2.25 &&
-        this.y - this.height / 2.25 <
-          boostplatform.y + boostplatform.height / 2.25
+        this.x > boostplatform.x - boostplatform.width / 1.9 &&
+        this.x < boostplatform.x + boostplatform.width / 1.9 &&
+        this.y > boostplatform.y - boostplatform.height / 1 &&
+        this.y < boostplatform.y + boostplatform.height / 1
       ) {
         this.vy = 0;
         this.vx = this.vx + 4;
@@ -2705,11 +2855,20 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
           this.jump = 2;
         }
+      } else if (
+        this.x > boostplatform.x - boostplatform.width / 1.9 &&
+        this.x < boostplatform.x + boostplatform.width / 1.9 &&
+        this.y < boostplatform.y + boostplatform.height / 0.9 &&
+        this.y > boostplatform.y
+      ) {
+        this.vy = this.jumpheight;
       }
     }
 
@@ -2753,11 +2912,20 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
           this.jump = 2;
         }
+      } else if (
+        this.x > boostplatform02.x - boostplatform02.width / 1.9 &&
+        this.x < boostplatform02.x + boostplatform02.width / 1.9 &&
+        this.y < boostplatform02.y + boostplatform02.height / 0.9 &&
+        this.y > boostplatform02.y
+      ) {
+        this.vy = this.jumpheight;
       }
     }
 
@@ -2794,6 +2962,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2834,6 +3004,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2874,6 +3046,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2914,6 +3088,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -2956,6 +3132,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -3005,6 +3183,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -3057,6 +3237,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -3103,6 +3285,8 @@ class Avatar {
 
         // Jump.
         if (keyIsDown(87)) {
+          jump.stop();
+          jump.play();
           this.vy = -this.jumpheight;
           this.ay = 0;
           gravityForce = 0;
@@ -3170,6 +3354,8 @@ class Avatar {
 
           //  Jump.
           if (keyIsDown(87)) {
+            jump.stop();
+            jump.play();
             this.vy = -this.jumpheight;
             this.ay = 0;
             gravityForce = 0;
@@ -3251,6 +3437,8 @@ class Avatar {
 
           //  Jump.
           if (keyIsDown(87)) {
+            jump.stop();
+            jump.play();
             this.vy = -this.jumpheight;
             this.ay = 0;
             gravityForce = 0;
@@ -3333,6 +3521,8 @@ class Avatar {
 
           //  Jump.
           if (keyIsDown(87)) {
+            jump.stop();
+            jump.play();
             this.vy = -this.jumpheight;
             this.ay = 0;
             gravityForce = 0;
@@ -3410,6 +3600,8 @@ class Avatar {
 
           //  Jump.
           if (keyIsDown(87)) {
+            jump.stop();
+            jump.play();
             this.vy = -this.jumpheight;
             this.ay = 0;
             gravityForce = 0;
@@ -3489,6 +3681,8 @@ class Avatar {
 
           //  Jump.
           if (keyIsDown(87)) {
+            jump.stop();
+            jump.play();
             this.vy = -this.jumpheight;
             this.ay = 0;
             gravityForce = 0;
@@ -3570,6 +3764,8 @@ class Avatar {
 
           //  Jump.
           if (keyIsDown(87)) {
+            jump.stop();
+            jump.play();
             this.vy = -this.jumpheight;
             this.ay = 0;
             gravityForce = 0;
@@ -3652,6 +3848,8 @@ class Avatar {
 
           //  Jump.
           if (keyIsDown(87)) {
+            jump.stop();
+            jump.play();
             this.vy = -this.jumpheight;
             this.ay = 0;
             gravityForce = 0;
@@ -3729,6 +3927,8 @@ class Avatar {
 
           //  Jump.
           if (keyIsDown(87)) {
+            jump.stop();
+            jump.play();
             this.vy = -this.jumpheight;
             this.ay = 0;
             gravityForce = 0;
@@ -3752,6 +3952,29 @@ class Avatar {
   }
 
   keyPressed() {
+    // Hop from Tutorial to level 01.
+    if (state == "tutorial") {
+      if (tutorialend == true) {
+        if (keyCode == 16) {
+          this.x = 150;
+          this.y = 500;
+          gravityForce = 0.025;
+          exit = false;
+          reset = false;
+          keynumber = 0;
+          doorlock = false;
+          movingplatformtimer = 0;
+          movingplatform02timer = 0;
+          movingplatformverticaltimer = 0;
+          movingplatformvertical02timer = 0;
+          timeleft = 5;
+          buttonactivated = false;
+          levelenter01.play();
+          state = "level01";
+        }
+      }
+    }
+
     // Hop from level 01 to level 02.
     if (state == "level01") {
       if (keyCode == 16) {
@@ -3769,10 +3992,12 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelenter02.play();
           state = "level02";
         }
       }
     }
+
     // Hop from level 02 to level 03.
     if (state == "level02") {
       if (keyCode == 16) {
@@ -3790,6 +4015,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelenter01.play();
           state = "level03";
         }
       }
@@ -3811,6 +4037,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelenter02.play();
           state = "level04";
         }
       }
@@ -3832,6 +4059,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelenter01.play();
           state = "level05";
         }
       }
@@ -3854,6 +4082,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelenter02.play();
           state = "level06";
         }
       }
@@ -3876,6 +4105,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelenter01.play();
           state = "level07";
         }
       }
@@ -3898,6 +4128,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelenter02.play();
           state = "level08";
         }
       }
@@ -3920,6 +4151,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelenter01.play();
           state = "level09";
         }
       }
@@ -3942,7 +4174,31 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelenter02.play();
           state = "level10";
+        }
+      }
+    }
+
+    // Hop from level 10 to ending.
+    if (state == "level10") {
+      if (keyCode == 16) {
+        if (exit == true) {
+          this.x = 150;
+          this.y = 500;
+          gravityForce = 0.025;
+          exit = false;
+          reset = false;
+          keynumber = 0;
+          doorlock = false;
+          movingplatformtimer = 0;
+          movingplatform02timer = 0;
+          movingplatformverticaltimer = 0;
+          movingplatformvertical02timer = 0;
+          timeleft = 5;
+          buttonactivated = false;
+          levelexit.play();
+          state = "endmenu";
         }
       }
     }
@@ -3967,6 +4223,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     } else if (state == "level02") {
@@ -3985,6 +4242,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     } else if (state == "level03") {
@@ -4003,6 +4261,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     } else if (state == "level04") {
@@ -4021,6 +4280,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     } else if (state == "level05") {
@@ -4039,6 +4299,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     } else if (state == "level06") {
@@ -4057,6 +4318,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     } else if (state == "level07") {
@@ -4075,6 +4337,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     } else if (state == "level08") {
@@ -4093,6 +4356,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     } else if (state == "level09") {
@@ -4111,6 +4375,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     } else if (state == "level10") {
@@ -4129,6 +4394,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
+          levelreset.play();
         }
       }
     }

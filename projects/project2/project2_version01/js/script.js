@@ -12,7 +12,13 @@ Project 2.
 let blockfont;
 
 // Sounds variables.
-let enter;
+let tutorialenter;
+let levelenter01;
+let levelenter02;
+let levelexit;
+let levelreset;
+let text01;
+let text02;
 let jump;
 let blockhit01;
 let bounce;
@@ -320,7 +326,13 @@ function preload() {
   blockfont = loadFont("assets/block.otf"); // Practically the Nintendo Logo Font.
 
   // Sounds.
-  enter = loadSound("assets/sounds/enter.wav");
+  tutorialenter = loadSound("assets/sounds/entertutorial.wav");
+  levelenter01 = loadSound("assets/sounds/levelenter01.wav");
+  levelenter02 = loadSound("assets/sounds/levelenter02.wav");
+  levelexit = loadSound("assets/sounds/exit.wav");
+  levelreset = loadSound("assets/sounds/reset.wav");
+  text01 = loadSound("assets/sounds/text01.wav");
+  text02 = loadSound("assets/sounds/text02.wav");
   jump = loadSound("assets/sounds/jump.wav");
   bounce = loadSound("assets/sounds/bounce.wav");
   blockhit01 = loadSound("assets/sounds/blockhit01.wav");
@@ -861,7 +873,10 @@ function global() {
       fill(255, 255, 255);
       text("WELCOME TO BLOCK MANIA", width / 2, 750);
       pop();
-    } else if (tutorialtimer >= 240 && tutorialtimer < 480) {
+      if (tutorialtimer >= 90 && tutorialtimer < 91) {
+        text01.play();
+      }
+    } else if (tutorialtimer >= 240 && tutorialtimer < 420) {
       push();
       textAlign(CENTER, CENTER);
       textFont(blockfont);
@@ -873,7 +888,10 @@ function global() {
         750
       );
       pop();
-    } else if (tutorialtimer >= 480 && tutorialtimer < 780) {
+      if (tutorialtimer >= 240 && tutorialtimer < 241) {
+        text02.play();
+      }
+    } else if (tutorialtimer >= 420 && tutorialtimer < 660) {
       push();
       textAlign(CENTER, CENTER);
       textFont(blockfont);
@@ -881,7 +899,25 @@ function global() {
       fill(255, 255, 255);
       text("USE WASD TO MOVE, JUMP, AND CROUCH", width / 2, 750);
       pop();
-    } else if (tutorialtimer >= 780) {
+      if (tutorialtimer >= 420 && tutorialtimer < 421) {
+        text02.play();
+      }
+    } else if (tutorialtimer >= 660 && tutorialtimer < 840) {
+      push();
+      textAlign(CENTER, CENTER);
+      textFont(blockfont);
+      textSize(15);
+      fill(255, 255, 255);
+      text(
+        "PRESS R IN THE EVENT THAT YOU ARE STUCK TO RESET THE LEVEL",
+        width / 2,
+        750
+      );
+      pop();
+      if (tutorialtimer >= 660 && tutorialtimer < 661) {
+        text02.play();
+      }
+    } else if (tutorialtimer >= 840) {
       push();
       textAlign(CENTER, CENTER);
       textFont(blockfont);
@@ -893,10 +929,13 @@ function global() {
         750
       );
       pop();
+      if (tutorialtimer >= 840 && tutorialtimer < 841) {
+        text01.play();
+      }
     }
-    if (tutorialtimer < 780) {
+    if (tutorialtimer < 840) {
       tutorialend = false;
-    } else if (tutorialtimer > 780) {
+    } else if (tutorialtimer > 840) {
       if (keyIsDown(16)) {
         tutorialend = true;
       }
@@ -1498,12 +1537,14 @@ function keyPressed() {
   if (state === "titlemenu") {
     if (keyCode == 16) {
       state = "tutorial";
+      tutorialenter.play();
     }
   }
   // Switch from endmenu to level 01.
   if (state === "endmenu") {
     if (keyCode == 16) {
       state = "level01";
+      levelenter01.play();
     }
   }
 }
