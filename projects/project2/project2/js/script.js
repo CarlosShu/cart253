@@ -941,6 +941,7 @@ function global() {
       }
       if (keyIsDown(82)) {
         tutorialtimer = 90;
+        text01.play();
       }
     }
     tutorialtimer++;
@@ -1016,9 +1017,6 @@ function level01() {
 
   door = new Door(1350, 350, 150, 155);
   door.display();
-
-  // spawn = new Spawn(200, 300, 75, 25);
-  // spawn.display();
 }
 
 function level02() {
