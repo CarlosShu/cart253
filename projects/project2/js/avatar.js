@@ -3997,7 +3997,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
-          levelenter02.play();
+          levelenter01.play();
           state = "level02";
         }
       }
@@ -4042,7 +4042,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
-          levelenter02.play();
+          levelenter01.play();
           state = "level04";
         }
       }
@@ -4087,7 +4087,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
-          levelenter02.play();
+          levelenter01.play();
           state = "level06";
         }
       }
@@ -4133,7 +4133,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
-          levelenter02.play();
+          levelenter01.play();
           state = "level08";
         }
       }
@@ -4179,7 +4179,7 @@ class Avatar {
           movingplatformvertical02timer = 0;
           timeleft = 5;
           buttonactivated = false;
-          levelenter02.play();
+          levelenter01.play();
           state = "level10";
         }
       }
